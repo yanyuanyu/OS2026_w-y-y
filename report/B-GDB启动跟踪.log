@@ -1,0 +1,39 @@
+The target architecture is set to "riscv:rv64".
+0x0000000000001000 in ?? ()
+=== GDB attach: firmware reset state ===
+pc             0x1000	0x1000
+sp             0x0	0x0
+Breakpoint 1 at 0x80200000: file kern/init/entry.S, line 7.
+
+Breakpoint 1, kern_entry () at kern/init/entry.S:7
+7	    la sp, bootstacktop
+=== hit kern_entry ===
+pc             0x80200000	0x80200000 <kern_entry>
+sp             0x80017ee0	0x80017ee0
+=> 0x80200000 <kern_entry>:	auipc	sp,0x3
+   0x80200004 <kern_entry+4>:	mv	sp,sp
+   0x80200008 <kern_entry+8>:	j	0x8020000a <kern_init>
+   0x8020000a <kern_init>:	auipc	a0,0x3
+0x0000000080200004 in kern_entry () at kern/init/entry.S:7
+7	    la sp, bootstacktop
+=== after first entry instruction ===
+pc             0x80200004	0x80200004 <kern_entry+4>
+sp             0x80203000	0x80203000 <SBI_CONSOLE_PUTCHAR>
+9	    tail kern_init
+=== after stack setup ===
+pc             0x80200008	0x80200008 <kern_entry+8>
+sp             0x80203000	0x80203000 <SBI_CONSOLE_PUTCHAR>
+$1 = 0x80201000
+$2 = 0x80203000
+Breakpoint 2 at 0x8020000a: file kern/init/init.c, line 8.
+
+Breakpoint 2, kern_init () at kern/init/init.c:8
+8	    memset(edata, 0, end - edata);
+=== hit kern_init ===
+pc             0x8020000a	0x8020000a <kern_init>
+sp             0x80203000	0x80203000 <SBI_CONSOLE_PUTCHAR>
+=> 0x8020000a <kern_init>:	auipc	a0,0x3
+   0x8020000e <kern_init+4>:	addi	a0,a0,-2
+   0x80200012 <kern_init+8>:	auipc	a2,0x3
+   0x80200016 <kern_init+12>:	addi	a2,a2,-10
+[Inferior 1 (process 1) detached]
