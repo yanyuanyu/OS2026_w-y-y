@@ -44,7 +44,9 @@ A、C 提供了编译、运行和 GDB 记录；B 提供了独立的清理构建�
 |---|---|---|---|---|---|
 | A：严苑毓-2413682（A 的报告与截图） | WSL2 Ubuntu 22.04 | `riscv64-unknown-elf-gcc 15.1.0` | GNU GDB `16.3.90.20250610-git` | `qemu-system-riscv64 7.0.0` | GNU Make 4.3 |
 | C：王优-2413681（当前工作区实测） | WSL2 Ubuntu 22.04.5 | `riscv64-unknown-elf-gcc 10.2.0` | 多架构 GDB 12.1，通过 `riscv64-unknown-elf-gdb` 调用 | `qemu-system-riscv64 6.2.0` | GNU Make 4.3 |
-| B：杨思远-2413636（交付记录） | WSL2 Ubuntu 22.04.5 | `riscv64-unknown-elf-gcc 10.2.0` | 未在交付记录中注明 | QEMU 6.2.0 | 未在交付记录中注明 |
+| B：杨思远-2413636（交付记录与成员补充） | WSL2 Ubuntu 22.04.5 | `riscv64-unknown-elf-gcc 10.2.0` | GNU GDB `16.3.90.20250610-git`（成员修订稿补充） | QEMU 6.2.0 | GNU Make 4.3（成员修订稿补充） |
+
+注：B 的 GDB 与 Make 版本取自成员本次修订稿；B 原始压缩包中的报告和运行日志没有记录这两项版本。其余 B 环境信息来自交付材料。
 
 A 环境中的 `cprintf` 符号记录为 `0x80200054`；C 当前工作区的 GCC 10.2 构建中该符号为 `0x80200056`。这是不同编译环境生成的符号布局差异，报告中涉及具体地址时以对应成员的实测为准。两边共同验证的内核入口、`kern_init` 和 `bootstacktop` 地址分别为 `0x80200000`、`0x8020000a` 和 `0x80203000`。
 ### 2.2 AI 工具
