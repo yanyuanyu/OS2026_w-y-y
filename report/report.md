@@ -5,20 +5,20 @@
 | 项目 | 内容 |
 |---|---|
 | **实验名称** | Lab 1：比麻雀更小的麻雀（最小可执行内核） |
-| **小组成员** | 严苑毓-2413682；成员B：[学号-姓名]；成员C：[学号-姓名] |
-| **完成日期** | 2026-10-04 |
+| **小组成员** | 严苑毓-2413682；杨思远-2413636；王优-2413681 |
+| **完成日期** | 2026-10-07（整合更新） |
 
 ### 小组分工
 
 | 成员 | 负责的练习/模块 |
 |---|---|
 | 严苑毓 | 阅读 `entry.S`、`init.c` 和链接脚本；分析内核入口、启动栈、`kern_init()` 与 `0x80200000`；完成练习1 |
-| 成员B | 阅读 `Makefile`、`function.mk` 和 SBI 输出相关代码；分析编译、链接、镜像生成和字符输出链路 |
-| 成员C | 配置 QEMU 与 GDB，跟踪复位地址、OpenSBI 入口和内核入口；完成练习2的调试记录 |
+| 杨思远-2413636 | 阅读 `Makefile`、`function.mk` 和 SBI 输出相关代码；分析编译、链接、镜像生成和字符输出链路 |
+| 王优-2413681 | 配置 QEMU 与 GDB，跟踪复位地址、OpenSBI 入口和内核入口；完成练习2的调试记录 |
 
-A、C 已有本地编译、运行和 GDB 记录；B 的操作状态待确认。提交前全组应各自完成一次编译与运行，并能说明两道练习和完整启动链。
+A、C 提供了编译、运行和 GDB 记录；B 提供了独立的清理构建、镜像检查与 QEMU 运行日志。B 的交付材料未包含 GDB 会话截图；答辩前三位成员均应亲自走读 GDB 启动链并能解释关键寄存器。
 
-> **报告范围说明：** 本文是小组共用的合并稿，已合入成员 A 的练习 1 分析和成员 C 的 GDB 实测；成员 B 的构建、SBI 与 `cprintf` 专项位置已预留，待 B 补充。A 与 C 使用的工具链版本不同，正文按成员分别记录，避免把两台机器的版本和符号值混为一谈。
+> **报告范围说明：** 本文合并了 A 的练习 1 分析与截图、B 的构建和 SBI/`cprintf` 交付记录，以及 C 的 GDB 实测。各成员环境与命令按实际材料分别记录；成员姓名和学号已按组长提供的信息补齐。B 的 GDB 独立复测未在其交付材料中记录；C 的 GDB 实测见报告正文。
 
 ---
 
@@ -43,8 +43,8 @@ A、C 已有本地编译、运行和 GDB 记录；B 的操作状态待确认。�
 | 成员/记录来源 | Linux 环境 | GCC | GDB | QEMU | Make |
 |---|---|---|---|---|---|
 | A：严苑毓-2413682（A 的报告与截图） | WSL2 Ubuntu 22.04 | `riscv64-unknown-elf-gcc 15.1.0` | GNU GDB `16.3.90.20250610-git` | `qemu-system-riscv64 7.0.0` | GNU Make 4.3 |
-| C：当前工作区实测 | WSL2 Ubuntu 22.04.5 | `riscv64-unknown-elf-gcc 10.2.0` | 多架构 GDB 12.1，通过 `riscv64-unknown-elf-gdb` 调用 | `qemu-system-riscv64 6.2.0` | GNU Make 4.3 |
-| B | 待 B 填写 | 待 B 填写 | 待 B 填写 | 待 B 填写 | 待 B 填写 |
+| C：王优-2413681（当前工作区实测） | WSL2 Ubuntu 22.04.5 | `riscv64-unknown-elf-gcc 10.2.0` | 多架构 GDB 12.1，通过 `riscv64-unknown-elf-gdb` 调用 | `qemu-system-riscv64 6.2.0` | GNU Make 4.3 |
+| B：杨思远-2413636（交付记录） | WSL2 Ubuntu 22.04.5 | `riscv64-unknown-elf-gcc 10.2.0` | 未在交付记录中注明 | QEMU 6.2.0 | 未在交付记录中注明 |
 
 A 环境中的 `cprintf` 符号记录为 `0x80200054`；C 当前工作区的 GCC 10.2 构建中该符号为 `0x80200056`。这是不同编译环境生成的符号布局差异，报告中涉及具体地址时以对应成员的实测为准。两边共同验证的内核入口、`kern_init` 和 `bootstacktop` 地址分别为 `0x80200000`、`0x8020000a` 和 `0x80203000`。
 ### 2.2 AI 工具
@@ -52,12 +52,12 @@ A 环境中的 `cprintf` 符号记录为 `0x80200054`；C 当前工作区的 GCC
 | 成员 | AI 编程工具 | 底层模型 | 备注 |
 |---|---|---|---|
 | 严苑毓-2413682 | Codex 桌面应用 | GPT-5.6-sol（按 A 提供记录，提交前核对客户端版本） | 用于阅读本地材料、解释启动原理、生成调试计划、分析命令输出和整理报告 |
-| 成员B：[待填写] | 待填写 | 待填写 | 按实际使用情况补充 |
-| 成员C：[待填写] | Codex（本次报告整理/调试说明辅助） | 版本请按客户端核对 | 协助整理报告和调试步骤；实验操作由成员实际完成 |
+| 杨思远-2413636 | Codex Desktop（B 交付报告记载） | GPT-6（交付报告记载；具体版本未注明） | 用于构建链路/SBI 分析与记录整理；本次未修改内核源代码 |
+| 王优-2413681 | Codex（按本次报告整理记录） | 未在交付材料中注明 | 报告整理/调试说明辅助；实验操作以本人记录为准 |
 
 ### 2.3 QEMU 版本兼容说明
 
-课程代码的 `Makefile` 使用 `-device loader,file=...,addr=0x80200000`。在 A 使用的 QEMU 7.0.0 和 C 使用的 QEMU 6.2.0 中均观察到：该方式虽然把镜像字节放入内存，但 OpenSBI 显示 `Domain0 Next Address = 0x0`，不会自动跳转到内核。为保持源码不变并完成实验，运行和调试时使用 QEMU 的 `-kernel bin/ucore.img` 参数；实测 OpenSBI 随后以 `0x80200000` 为下一阶段地址。本兼容处理不改变内核代码和链接地址。
+课程代码的 `Makefile` 使用 `-device loader,file=...,addr=0x80200000`。A（QEMU 7.0.0）、B 与 C（QEMU 6.2.0）的记录都显示：该启动方式下 OpenSBI 的 `Domain0 Next Address` 为 `0x0`，没有进入内核。A/C 通过 `-kernel bin/ucore.img`、B 通过 `-kernel bin/kernel` 让 QEMU 识别内核入口；对应记录中 OpenSBI 的下一阶段地址为 `0x80200000`，随后出现内核启动字符串。两种显式加载方式分别来自各成员实际记录，报告保留原始差异。QEMU 先把镜像/ELF 装载到客体内存，再把下一阶段地址交给 OpenSBI；OpenSBI 负责固件初始化和控制权移交，并不从磁盘读取本实验镜像。该兼容处理未修改内核源代码。
 
 ---
 
@@ -73,7 +73,7 @@ C/汇编源代码
 bin/kernel（ELF，包含符号和调试信息）
     ↓ objcopy --strip-all -O binary
 bin/ucore.img（裸内核镜像）
-    ↓ QEMU加载并启动虚拟RISC-V计算机
+    ↓ QEMU -kernel 加载 ELF 或裸镜像并启动虚拟RISC-V计算机
 0x1000（QEMU virt复位ROM）
     ↓ 读取OpenSBI入口并执行jr t0
 0x80000000（OpenSBI固件入口）
@@ -87,7 +87,7 @@ bin/ucore.img（裸内核镜像）
 ### 3.2 功能的逐步实现与验证
 
 1. **编译和链接内核**：Makefile 调用 RISC-V 工具链编译 `entry.S`、`init.c`、控制台、格式化输出和 SBI 相关代码，再使用链接脚本生成 `bin/kernel`。
-2. **生成裸镜像**：`objcopy` 去除 ELF 符号和调试信息，生成 QEMU 实际加载的 `bin/ucore.img`。
+2. **生成裸镜像**：`objcopy` 去除 ELF 容器信息，生成可供 QEMU `-kernel` 加载的 `bin/ucore.img`；B 的记录也验证了通过 `-kernel bin/kernel` 加载 ELF 的启动路径。
 3. **确认静态入口和内存布局**：`readelf` 验证 ELF 入口为 `0x80200000`；`nm` 验证 `kern_entry`、`kern_init`、`bootstacktop`、`edata` 和 `end` 的地址。
 4. **正常启动验证**：QEMU 启动 OpenSBI，OpenSBI 显示下一阶段地址为 `0x80200000`，随后内核输出 `(THU.CST) os is loading ...`。
 5. **动态调试验证**：使用 `-s -S` 暂停虚拟 CPU 并开放 GDB 端口，依次在 `0x80000000`、`0x80200000`、`kern_init` 和 `cprintf` 设置断点，验证实际控制流和寄存器状态。
@@ -281,23 +281,74 @@ while (1)
 
 ![进入kern_init并检查BSS边界](./images/08_kern_init.png)
 
-### 功能模块：构建流程、SBI 输出与 `cprintf`（待 B 合并）
+### 功能模块：构建流程、SBI 输出与 `cprintf`
 
-**负责人：** 成员 B：学号/姓名待填写
+**负责人：** 杨思远-2413636
 
-请 B 补充本节后再提交最终版：
+#### 模块目标与代码范围
 
-- Makefile 如何编译源文件、链接 `bin/kernel` 并生成 `bin/ucore.img`；说明 ELF 与裸镜像的用途区别。
-- SBI 输出调用链：从 `kern_init()` 的 `cprintf()` 到控制台字符输出和 OpenSBI 服务。
-- 在 B 自己的环境中执行的命令、实际构建结果和 QEMU 输出；截图应标注对应的成员及工具版本。
-- 如 B 实际使用 AI 辅助，请补充使用工具、模型和关键提示词；没有使用则注明“未使用”。
+本模块阅读 `Makefile`、`tools/function.mk`、`tools/kernel.ld` 和 SBI/console/stdio 代码，说明源文件如何生成 RISC-V 内核及镜像，并追踪 `cprintf` 字符如何经 SBI 到达 QEMU 串口。B 提交的源码与本组当前代码逐文件校验一致；本次是阅读、构建和运行验证，没有修改内核源代码。
 
-**本节正文：** 待 B 填写。
+涉及函数包括：
+
+```c
+int kern_init(void);
+int cprintf(const char *fmt, ...);
+int vcprintf(const char *fmt, va_list ap);
+void cons_putc(int c);
+void sbi_console_putchar(unsigned char ch);
+uint64_t sbi_call(uint64_t sbi_type, uint64_t arg0,
+                  uint64_t arg1, uint64_t arg2);
+```
+
+#### Makefile、依赖规则与构建产物
+
+`Makefile` 选择 `riscv64-unknown-elf-` 交叉工具链，并收集 `libs/` 与内核目录中的 `.c`、`.S` 文件。宿主机虽然是 x86-64 Ubuntu/WSL，编译目标仍是 RV64；`-nostdinc`、`-nostdlib` 避免错误依赖宿主机 C 运行库，`-mcmodel=medany` 适合链接到较高地址的内核代码，`-g` 保留 GDB 所需调试信息。`-ffunction-sections`、`-fdata-sections` 与链接选项 `--gc-sections` 配合，可按段丢弃未引用内容。
+
+`tools/function.mk` 把源文件映射到 `obj/` 下的 `.o` 与 `.d`：依赖生成规则通过编译器 `-MM` 记录头文件依赖，编译规则通过 `-c` 生成对象文件；后续头文件变化会触发相应对象重编译。对象文件汇总后交给链接器。`tools/kernel.ld` 使用 `OUTPUT_ARCH(riscv)`、`ENTRY(kern_entry)` 和 `BASE_ADDRESS = 0x80200000` 布置 `.text`、只读数据、可写数据和 BSS 等段。
+
+```text
+.c/.S → obj/**/*.o（及头文件依赖 .d）
+      → ld + tools/kernel.ld → bin/kernel（ELF64 RISC-V，可供符号检查/GDB）
+      → objcopy --strip-all -O binary → bin/ucore.img（裸二进制镜像）
+```
+
+`bin/kernel` 是带 ELF 头、段表和调试符号的可执行文件；`bin/ucore.img` 是去除 ELF 容器信息后的裸字节镜像。B 的构建日志明确显示 `ld bin/kernel` 和 `riscv64-unknown-elf-objcopy ... bin/ucore.img` 均执行成功，`readelf` 检查得到 ELF64、Machine 为 RISC-V，入口地址为 `0x80200000`。
+
+#### SBI 与 `cprintf` 字符输出链路
+
+```text
+kern_init()
+  → cprintf()
+  → vcprintf()
+  → vprintfmt()
+  → cputch()
+  → cons_putc()
+  → sbi_console_putchar()
+  → sbi_call()
+  → ecall
+  → OpenSBI 提供的控制台服务
+  → QEMU 虚拟串口 / -nographic 终端
+```
+
+`cprintf` 管理可变参数并调用 `vcprintf`；`vcprintf` 将格式串交给 `vprintfmt`，再由 `cputch` 逐字符输出。`cons_putc` 转发到 `sbi_console_putchar`。本代码使用 legacy SBI console putchar 调用号 1：`sbi_call` 把调用号放入 `a7/x17`、字符参数放入 `a0/x10`，执行 `ecall`。运行在 S-mode 的内核因此请求 M-mode 固件提供控制台服务，而不是直接调用宿主机的 `printf`。QEMU 的 `-nographic` 把虚拟串口连接到当前终端，所以可以看到 `(THU.CST) os is loading ...`。
+
+#### 构建与运行记录
+
+B 的交付环境为 WSL2 Ubuntu 22.04.5、`riscv64-unknown-elf-gcc 10.2.0`、QEMU 6.2.0、OpenSBI v0.9（运行时 SBI 0.2）。执行 `make clean && make` 后返回码为 0，生成 48,712 字节的 `bin/kernel` 和 12,296 字节的 `bin/ucore.img`。构建过程中出现 WSL 文件时间轻微超前的 `Clock skew detected` 警告，但没有编译或链接失败；ELF 入口为 `0x80200000`。
+
+B 也验证了启动参数差异：压缩包的 `make qemu` 使用 `-device loader`，本机记录的 OpenSBI `Next Address` 为 `0x0`，观察不到内核输出；改用 `qemu-system-riscv64 -machine virt -nographic -bios default -kernel bin/kernel` 后，OpenSBI 报告 `Next Address = 0x80200000`，并输出内核字符串。内核随后按设计进入 `while (1)` 空转，因此 5 秒观察命令由 `timeout` 终止、返回码 124；这是观察时限结束，不是构建失败或内核崩溃。
+
+B 的逐条命令和终端原始输出见 [B 部分运行记录](./B部分-完整运行记录.log)。该交付包未包含 B 的独立截图；本报告的编译、QEMU 和 GDB 截图分别来自团队已提交的 A/C 实测记录，不将其标为 B 的个人截图。
+
+#### 提示词与实现迭代
+
+B 报告说明本模块未修改内核代码，因此不存在代码生成与代码修复迭代。B 的原始 AI 对话提示词没有随压缩包提供；`prompt.md` 中另列了依据 B 交付内容整理的任务摘要，并明确标注为归纳稿而非原始逐字记录。B 交付报告记载使用 Codex Desktop/GPT-6 辅助分析和整理，具体子版本未注明。
 
 ---
 ### 共同实操：练习2——使用GDB验证启动流程
 
-以下启动链由 A 的 GDB 记录和 C 的本机复测共同验证；B 的个人复测状态待补充。
+以下启动链由 A 的 GDB 记录和 C 的本机复测共同验证。B 提供了构建与 QEMU 启动日志，但未提供个人 GDB 会话；全组答辩前应能共同讲解这些断点和寄存器结果。
 
 #### 1. QEMU调试服务器
 
@@ -344,7 +395,7 @@ GDB执行 `detach` 后，虚拟CPU继续运行，QEMU终端成功输出启动字
 
 ### 成员 C 的本机复测与证据
 
-**负责人：** 成员 C：学号/姓名待填写
+**负责人：** 王优-2413681
 
 C 在本机 WSL2 Ubuntu 22.04.5、GCC 10.2.0、QEMU 6.2.0 和 GDB 12.1 环境中重复验证。调试时使用 `-kernel bin/ucore.img -S -s` 启动 QEMU，并在另一个终端加载 `bin/kernel` 的符号。
 
@@ -369,6 +420,8 @@ C 环境的 `cprintf` 符号为 `0x80200056`，与 A 环境记录的 `0x80200054
 
 ### 5.1 编译与镜像生成
 
+A、B、C 的记录均显示构建成功。B 的完整命令输出见 [B 部分运行记录](./B部分-完整运行记录.log)；A 的构建截图如下。成员日志中的文件大小和符号布局有差异，报告按各自日志分别记录，不将差异简单归因于单一工具版本。
+
 执行：
 
 ```bash
@@ -388,7 +441,7 @@ bin/ucore.img  13K
 
 ### 5.2 正常启动验证
 
-A 的 QEMU 7.0.0 运行截图和 C 的 QEMU 6.2.0 复测均使用：
+A 的 QEMU 7.0.0 运行截图和 C 的 QEMU 6.2.0 复测均使用裸镜像启动：
 
 ```bash
 qemu-system-riscv64 \
@@ -412,23 +465,27 @@ Domain0 Next Mode    : S-mode
 (THU.CST) os is loading ...
 ```
 
+B 的 QEMU 6.2.0 日志则使用 `-kernel bin/kernel` 加载 ELF，同样观察到 `Next Address=0x80200000` 和内核输出，命令与原始输出见 B 部分运行记录。
+
 ![OpenSBI将控制权交给内核](./images/03_boot.png)
 
 ### 5.3 关键检查点汇总
 
 | 检查项 | 预期结果 | 实测结果 | 状态 |
 |---|---|---|---|
-| 编译和链接 | 生成 `bin/kernel` | 生成44K ELF内核 | 通过 |
-| 镜像生成 | 生成 `bin/ucore.img` | 生成13K裸镜像 | 通过 |
+| 编译和链接 | 生成 `bin/kernel` | A：约44K；B：48,712字节；B日志返回码0 | 通过 |
+| 镜像生成 | 生成 `bin/ucore.img` | A：约13K；B：12,296字节；B日志返回码0 | 通过 |
 | ELF架构 | RISC-V 64位 | `Machine: RISC-V` | 通过 |
-| ELF入口 | `0x80200000` | `Entry point address: 0x80200000` | 通过 |
+| ELF入口 | `0x80200000` | A/B/C 的构建/检查记录均为 `0x80200000` | 通过 |
 | CPU复位入口 | `0x1000` | `pc=0x1000` | 通过 |
 | OpenSBI入口 | `0x80000000` | `pc=0x80000000` | 通过 |
 | uCore入口 | `0x80200000` | `pc=0x80200000 <kern_entry>` | 通过 |
 | 内核启动栈 | `sp=bootstacktop` | 均为 `0x80203000` | 通过 |
 | C语言入口 | 进入 `kern_init` | `pc=0x8020000a` | 通过 |
 | BSS边界 | 可由链接符号确定 | `edata=end=0x80203008` | 通过 |
-| 格式化输出 | 命中 `cprintf` | `pc=0x80200054` | 通过 |
+| 格式化输出 | 命中 `cprintf` / 确认 SBI 输出 | A：`cprintf=0x80200054`；C：`0x80200056`；B：QEMU 串口出现启动字符串 | 通过 |
+| `make qemu` 原始目标 | OpenSBI 下一跳为内核入口 | B 日志 `Next Address=0x0`，未出现内核输出 | 需兼容参数 |
+| 显式 `-kernel` 启动 | OpenSBI 下一跳 `0x80200000` 并出现内核输出 | A/C 加载裸镜像；B 加载 ELF；日志/截图均见报告 | 通过 |
 | 启动信息 | 输出指定字符串 | `(THU.CST) os is loading ...` | 通过 |
 
 当前代码包未提供 `tools/grade.sh`，因此通用报告模板中的 `make grade` 在本实验目录不可用。本实验以编译成功、ELF/符号检查、QEMU启动输出和GDB关键地址链作为验收证据。
@@ -467,6 +524,6 @@ Domain0 Next Mode    : S-mode
 3. AI可以解释伪指令和反汇编，但最终应由GDB的寄存器结果验证。例如 `sp=bootstacktop=0x80203000` 比单纯复述 `la` 的定义更有说服力。
 4. 报告中的每个结论都应对应实际截图或源码证据，不引用其他年份Lab1中断实验、不同地址布局或未执行的测试结果。
 
-通过本实验，我们完成了从源代码到内核镜像、从CPU复位到C语言入口的完整观察，建立了后续操作系统实验所需的编译、运行和调试基础。
+通过本实验，我们完成了从源代码到内核镜像、从CPU复位到C语言入口及 SBI 字符输出的观察，建立了后续操作系统实验所需的编译、运行和调试基础。B 是否还需补充个人 GDB 复测，组长可按课程要求核对。
 
 
