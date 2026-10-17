@@ -1,0 +1,21 @@
+Final merged A+B+C source audit
+acceptance_run_id=498ef138-c501-4c5b-8c41-1ccb9ef12637
+A_page_init_preserved: PASS
+B_final_file_preserved: PASS
+teacher_bestfit_basic_check: PASS
+teacher_bestfit_best_fit_check: PASS
+teacher_firstfit_basic_check: PASS
+teacher_firstfit_default_check: PASS
+firstfit_only_two_breaks: PASS
+C_buddy_pmm.c: PASS
+C_buddy_pmm.h: PASS
+C_buddy_test.c: PASS
+C_c_debug_probe.c: PASS
+framework_tools/test_lab2.c: PASS
+framework_tools/test_lab2.h: PASS
+framework_kern/mm/pmm.h: PASS
+framework_kern/mm/memlayout.h: PASS
+framework_kern/mm/mmu.h: PASS
+framework_libs/list.h: PASS
+framework_kern/driver/dtb.c: PASS
+RESULT: PASS

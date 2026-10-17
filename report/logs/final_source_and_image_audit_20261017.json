@@ -1,0 +1,22 @@
+{
+  "source_provenance_checks": {
+    "A_page_init": true,
+    "B_accepted_file": true,
+    "teacher_best_fit_pmm.c_basic_check": true,
+    "teacher_best_fit_pmm.c_best_fit_check": true,
+    "teacher_default_pmm.c_basic_check": true,
+    "teacher_default_pmm.c_default_check": true,
+    "C_buddy_pmm.c": true,
+    "C_buddy_pmm.h": true,
+    "C_buddy_test.c": true,
+    "C_c_debug_probe.c": true,
+    "framework_tools/test_lab2.c": true,
+    "framework_tools/test_lab2.h": true,
+    "framework_kern/mm/pmm.h": true,
+    "framework_kern/mm/memlayout.h": true,
+    "framework_kern/mm/mmu.h": true,
+    "framework_libs/list.h": true,
+    "framework_kern/driver/dtb.c": true
+  },
+  "eight_original_screenshot_pixel_comparisons": "PASS"
+}

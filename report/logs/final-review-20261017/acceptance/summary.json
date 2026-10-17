@@ -1,0 +1,48 @@
+{
+  "run_id": "56379435-9f70-4ed1-a484-6a3c67a61ff4",
+  "started_utc": "2026-10-17T08:17:32.447371+00:00",
+  "status": "PASS",
+  "steps": [
+    {
+      "name": "bestfit-host",
+      "returncode": 0,
+      "log": "bestfit-host.log"
+    },
+    {
+      "name": "buddy-host",
+      "returncode": 0,
+      "log": "buddy-host.log"
+    },
+    {
+      "name": "firstfit-tail",
+      "returncode": 0,
+      "log": "firstfit-tail.log"
+    },
+    {
+      "name": "kernel-matrix",
+      "returncode": 0,
+      "log": "kernel-matrix.log"
+    },
+    {
+      "name": "page-init",
+      "returncode": 0,
+      "log": "page-init.log"
+    },
+    {
+      "name": "guest-gdb",
+      "returncode": 0,
+      "log": "guest-gdb.log"
+    },
+    {
+      "name": "evidence-state",
+      "returncode": 0,
+      "log": "evidence-state.log"
+    },
+    {
+      "name": "grade",
+      "returncode": 0,
+      "log": "grade.log"
+    }
+  ],
+  "finished_utc": "2026-10-17T08:18:25.769005+00:00"
+}

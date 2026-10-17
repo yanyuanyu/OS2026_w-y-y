@@ -1,0 +1,20 @@
+# run_id=d2067b12-2d6f-4bd7-9c89-0a79b1d2d785
+rm -f -r obj/firstfit bin/firstfit
++ cc kern/init/entry.S
++ cc kern/init/init.c
++ cc kern/libs/stdio.c
++ cc kern/debug/panic.c
++ cc kern/driver/console.c
++ cc kern/driver/dtb.c
++ cc kern/mm/best_fit_pmm.c
++ cc kern/mm/buddy_pmm.c
++ cc kern/mm/buddy_test.c
++ cc kern/mm/c_debug_probe.c
++ cc kern/mm/default_pmm.c
++ cc kern/mm/pmm.c
++ cc libs/printfmt.c
++ cc libs/readline.c
++ cc libs/sbi.c
++ cc libs/string.c
++ ld bin/firstfit/kernel
+riscv64-unknown-elf-objcopy bin/firstfit/kernel --strip-all -O binary bin/firstfit/ucore.img

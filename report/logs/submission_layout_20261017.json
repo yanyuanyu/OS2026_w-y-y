@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-17",
+  "result": "PASS",
+  "basis": "Teaching assistant submission layout supplied by user",
+  "branch": "lab2",
+  "root_directories": [
+    "code",
+    "report"
+  ],
+  "report_file": "report/report.md",
+  "prompt_file": "report/prompt.md",
+  "image_directory": "report/images",
+  "prompts_combined": 4,
+  "source_files_matched": 59,
+  "git_delivery": "Prepared for group repository lab2 branch"
+}

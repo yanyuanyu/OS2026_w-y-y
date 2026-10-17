@@ -1,0 +1,1 @@
+PANIC kern/mm/buddy_pmm.c:122: assertion failed: page_ref(base + i) == 0

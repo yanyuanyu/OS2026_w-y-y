@@ -1,0 +1,183 @@
+{
+  "result": "PASS",
+  "updated_date": "2026-10-16",
+  "count": 8,
+  "images": [
+    {
+      "image": "images/01-build.png",
+      "source_name": "848d61c42671548c9f525c702bca9e7d.png",
+      "source_sha256": "424994845b94b2e72e547ae26775a2039aee9bd17a0b6b1a01674b5f5097e1f6",
+      "original_size": [
+        1305,
+        923
+      ],
+      "crop_box": [
+        0,
+        0,
+        1305,
+        782
+      ],
+      "output_size": [
+        1305,
+        782
+      ],
+      "output_sha256": "c9f3b6de45b542c9353bcd485fe444bb1af382e01d84a2c452fa9047f219d94b",
+      "retained_pixels_identical": true,
+      "operation": "crop bottom margin only; no resize, redraw or text edit"
+    },
+    {
+      "image": "images/02-grade.png",
+      "source_name": "0a3f5d1193944bfe1071d806a99ada0a.png",
+      "source_sha256": "f991338db8af35ac4c9cdeed9659c73f9f4e59674744b1763450823ee0e96f30",
+      "original_size": [
+        1728,
+        923
+      ],
+      "crop_box": [
+        0,
+        0,
+        1728,
+        530
+      ],
+      "output_size": [
+        1728,
+        530
+      ],
+      "output_sha256": "d7da257f86ce49c28597d50183b43fc6fe0be319b37c0310371f1e05b15d621a",
+      "retained_pixels_identical": true,
+      "operation": "crop bottom margin only; no resize, redraw or text edit"
+    },
+    {
+      "image": "images/03-bestfit-host.png",
+      "source_name": "3d22de3018d24cdcda84e294abd4e7f1.png",
+      "source_sha256": "bc6ea14f6b5decbf015dbb9628ededc905c110c03315b7eda0555c8bf5d1247e",
+      "original_size": [
+        1188,
+        911
+      ],
+      "crop_box": [
+        0,
+        0,
+        1188,
+        772
+      ],
+      "output_size": [
+        1188,
+        772
+      ],
+      "output_sha256": "af532cb015f94d160deb9f53067b29f833461f808f7d8ea19cd75f7f7c6419c6",
+      "retained_pixels_identical": true,
+      "operation": "crop bottom margin only; no resize, redraw or text edit"
+    },
+    {
+      "image": "images/04-buddy-host.png",
+      "source_name": "7782f4ec1675717e05d385ef322d1887.png",
+      "source_sha256": "a934e5d02e4cbe3a597341f5459f225eea37cddbbf5287afbd78450642186be9",
+      "original_size": [
+        1260,
+        884
+      ],
+      "crop_box": [
+        0,
+        0,
+        1260,
+        750
+      ],
+      "output_size": [
+        1260,
+        750
+      ],
+      "output_sha256": "a6002ee3f63899645fed299c659bba91164f241e6d6c947e1b80649bc3e11fa2",
+      "retained_pixels_identical": true,
+      "operation": "crop bottom margin only; no resize, redraw or text edit"
+    },
+    {
+      "image": "images/05-buddy-qemu.png",
+      "source_name": "65531758ea07b7debc3685387e80c816.png",
+      "source_sha256": "0ee1dc15e5f4581fae493952489cae582498db87a03e154e9a8f15218463ceb9",
+      "original_size": [
+        1275,
+        1524
+      ],
+      "crop_box": [
+        0,
+        0,
+        1275,
+        1259
+      ],
+      "output_size": [
+        1275,
+        1259
+      ],
+      "output_sha256": "a7b21167dd9b281039797dad05d666ca47228f97b2e8b030e00489b3b2154423",
+      "retained_pixels_identical": true,
+      "operation": "crop bottom margin only; no resize, redraw or text edit"
+    },
+    {
+      "image": "images/06-boundaries.png",
+      "source_name": "7abe600829a52e3a412cf11a5ace7b27.png",
+      "source_sha256": "e381ab522afbf7f6ac86e809bd130fddd0282890a91fbadab3a7db211b55fb0c",
+      "original_size": [
+        1206,
+        711
+      ],
+      "crop_box": [
+        0,
+        0,
+        1206,
+        579
+      ],
+      "output_size": [
+        1206,
+        579
+      ],
+      "output_sha256": "5f9a18431be891ea702dfd51c649ad565f794a65abd484573bac546472a6e414",
+      "retained_pixels_identical": true,
+      "operation": "crop bottom margin only; no resize, redraw or text edit"
+    },
+    {
+      "image": "images/07-guest-gdb.png",
+      "source_name": "4540661efd8bd44471c9b07798f2152f.png",
+      "source_sha256": "09b40f95ab5a89d1d6b5f1a669b50f4ce1f6d6bc47b12e05117b68f5d4a6220a",
+      "original_size": [
+        1275,
+        1524
+      ],
+      "crop_box": [
+        0,
+        0,
+        1275,
+        1203
+      ],
+      "output_size": [
+        1275,
+        1203
+      ],
+      "output_sha256": "959d893a5e69011117a0a3c4d2287b3b8c1e73a636960949659b9a8ef6454679",
+      "retained_pixels_identical": true,
+      "operation": "crop bottom margin only; no resize, redraw or text edit"
+    },
+    {
+      "image": "images/09-bestfit-qemu.png",
+      "source_name": "46c394869f43202edf71cc3e14e82b7a.png",
+      "source_sha256": "b823cf82f0e6f1616b0995c79c78bb3a4e5eb2a343dff434028e390eb9066eca",
+      "original_size": [
+        1284,
+        1089
+      ],
+      "crop_box": [
+        0,
+        0,
+        1284,
+        952
+      ],
+      "output_size": [
+        1284,
+        952
+      ],
+      "output_sha256": "fcd63a3ad7043a9de4982928408cf6458f0a7b6b7b2173e01a6853286f850f68",
+      "retained_pixels_identical": true,
+      "operation": "crop bottom margin only; no resize, redraw or text edit"
+    }
+  ]
+}

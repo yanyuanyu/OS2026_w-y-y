@@ -1,0 +1,9 @@
+$ python3 tools/test_page_init.py
+make: Nothing to be done for 'TARGETS'.
+PAGE_INIT partial-tail: complete pages only PASS
+PAGE_INIT zero-base: expected protective panic PASS
+PAGE_INIT zero-size: expected protective panic PASS
+PAGE_INIT overflow: expected protective panic PASS
+PAGE_INIT outside-boot-map: expected protective panic PASS
+PAGE_INIT wrong-base: expected protective panic PASS
+PAGE_INIT no-free-pages: expected protective panic PASS

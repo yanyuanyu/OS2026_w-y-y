@@ -1,0 +1,1995 @@
+Install prefix    /usr/local
+BIOS directory    /usr/local/share/qemu
+firmware path     /usr/local/share/qemu-firmware
+binary directory  /usr/local/bin
+library directory /usr/local/lib
+module directory  /usr/local/lib/qemu
+libexec directory /usr/local/libexec
+include directory /usr/local/include
+config directory  /usr/local/etc
+local state directory   /usr/local/var
+Manual directory  /usr/local/share/man
+ELF interp prefix /usr/gnemul/qemu-%M
+Source path       /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1
+GIT binary        git
+GIT submodules    
+C compiler        cc
+Host C compiler   cc
+C++ compiler      c++
+Objective-C compiler clang
+ARFLAGS           rv
+CFLAGS            -g 
+QEMU_CFLAGS       -I/usr/include/pixman-1 -I$(SRC_PATH)/dtc/libfdt  -pthread -I/usr/include/glib-2.0 -I/usr/lib/x86_64-linux-gnu/glib-2.0/include -fPIE -DPIE -m64 -mcx16 -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -Wstrict-prototypes -Wredundant-decls -Wall -Wundef -Wwrite-strings -Wmissing-prototypes -fno-strict-aliasing -fno-common -fwrapv -std=gnu99  -O0 -Wexpansion-to-defined -Wendif-labels -Wno-shift-negative-value -Wno-missing-include-dirs -Wempty-body -Wnested-externs -Wformat-security -Wformat-y2k -Winit-self -Wignored-qualifiers -Wold-style-declaration -Wold-style-definition -Wtype-limits -fstack-protector-strong -I$(SRC_PATH)/capstone/include
+LDFLAGS           -Wl,--warn-common -Wl,-z,relro -Wl,-z,now -pie -m64 -g 
+QEMU_LDFLAGS      -L$(BUILD_DIR)/dtc/libfdt 
+make              make
+install           install
+python            python3 -B (3.10.12)
+slirp support     internal 
+smbd              /usr/sbin/smbd
+module support    no
+host CPU          x86_64
+host big endian   no
+target list       riscv64-softmmu
+gprof enabled     no
+sparse enabled    no
+strip binaries    no
+profiler          no
+static build      no
+SDL support       no 
+SDL image support no
+GTK support       no 
+GTK GL support    no
+VTE support       no 
+TLS priority      NORMAL
+GNUTLS support    no
+libgcrypt         no
+nettle            no 
+libtasn1          no
+PAM               no
+iconv support     yes
+curses support    no
+virgl support     no 
+curl support      no
+mingw32 support   no
+Audio drivers      oss
+Block whitelist (rw) 
+Block whitelist (ro) 
+VirtFS support    no
+Multipath support no
+VNC support       no
+xen support       no
+brlapi support    no
+bluez  support    no
+Documentation     no
+PIE               yes
+vde support       no
+netmap support    no
+Linux AIO support no
+ATTR/XATTR support yes
+Install blobs     yes
+KVM support       yes
+HAX support       no
+HVF support       no
+WHPX support      no
+TCG support       yes
+TCG debug enabled yes
+TCG interpreter   no
+malloc trim support yes
+RDMA support      no
+PVRDMA support    no
+fdt support       git
+membarrier        no
+preadv support    yes
+fdatasync         yes
+madvise           yes
+posix_madvise     yes
+posix_memalign    yes
+libcap-ng support no
+vhost-net support yes
+vhost-crypto support yes
+vhost-scsi support yes
+vhost-vsock support yes
+vhost-user support yes
+Trace backends    log
+spice support     no 
+rbd support       no
+xfsctl support    no
+smartcard support no
+libusb            no
+usb net redir     no
+OpenGL support    no
+OpenGL dmabufs    no
+libiscsi support  no
+libnfs support    no
+build guest agent yes
+QGA VSS support   no
+QGA w32 disk info no
+QGA MSI support   no
+seccomp support   no
+coroutine backend ucontext
+coroutine pool    yes
+debug stack usage no
+mutex debugging   yes
+crypto afalg      no
+GlusterFS support no
+gcov              gcov
+gcov enabled      no
+TPM support       yes
+libssh support    no
+QOM debugging     yes
+Live block migration yes
+lzo support       no
+snappy support    no
+bzip2 support     no
+lzfse support     no
+NUMA host support no
+libxml2           no
+tcmalloc support  no
+jemalloc support  no
+avx2 optimization yes
+replication support yes
+VxHS block device no
+bochs support     yes
+cloop support     yes
+dmg support       yes
+qcow v1 support   yes
+vdi support       yes
+vvfat support     yes
+qed support       yes
+parallels support yes
+sheepdog support  yes
+capstone          internal
+docker            no
+libpmem support   no
+libudev           no
+default devices   yes
+  GEN     riscv64-softmmu/config-devices.mak.tmp
+  GEN     config-host.h
+make[1]: Entering directory '/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/slirp'
+  GEN     /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/libslirp-version.h
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/arp_table.o
+  GEN     qemu-options.def
+  CC      cs.o
+  GEN     riscv64-softmmu/config-devices.mak
+  CC      utils.o
+  GEN     qapi-gen
+  CC      SStream.o
+  GEN     trace/generated-tcg-tracers.h
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/bootp.o
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/cksum.o
+  CC      MCInstrDesc.o
+  CC      MCRegisterInfo.o
+  CC      arch/ARM/ARMDisassembler.o
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/dhcpv6.o
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/dnssearch.o
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/if.o
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/ip6_icmp.o
+  CC      arch/ARM/ARMInstPrinter.o
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/ip6_input.o
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/ip6_output.o
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/ip_icmp.o
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/ip_input.o
+  GEN     trace/generated-helpers-wrappers.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     trace/generated-helpers.h
+  GEN     trace/generated-helpers.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/ip_output.o
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/mbuf.o
+  GEN     module_block.h
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/misc.o
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/ncsi.o
+  GEN     ui/input-keymap-atset1-to-qcode.c
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/ndp_table.o
+  GEN     ui/input-keymap-linux-to-qcode.c
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/sbuf.o
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/slirp.o
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/socket.o
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/state.o
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/stream.o
+  GEN     ui/input-keymap-qcode-to-atset1.c
+  GEN     ui/input-keymap-qcode-to-atset2.c
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/tcp_input.o
+  GEN     ui/input-keymap-qcode-to-atset3.c
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/tcp_output.o
+  CC      arch/ARM/ARMMapping.o
+  CC      arch/ARM/ARMModule.o
+  CC      arch/AArch64/AArch64BaseInfo.o
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/tcp_subr.o
+  CC      arch/AArch64/AArch64Disassembler.o
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/tcp_timer.o
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/tftp.o
+  CC      arch/AArch64/AArch64InstPrinter.o
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/udp.o
+  CC      arch/AArch64/AArch64Mapping.o
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/udp6.o
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/util.o
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/version.o
+  CC      arch/AArch64/AArch64Module.o
+  CC      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/src/vmstate.o
+  CC      arch/Mips/MipsDisassembler.o
+  CC      arch/Mips/MipsInstPrinter.o
+  CC      arch/Mips/MipsMapping.o
+  CC      arch/Mips/MipsModule.o
+  AR      /home/yangweb/lab2-c-qemu-4.1.1/build/slirp/libslirp.a
+  CC      arch/PowerPC/PPCDisassembler.o
+  CC      arch/PowerPC/PPCInstPrinter.o
+make[1]: Leaving directory '/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/slirp'
+  GEN     ui/input-keymap-qcode-to-linux.c
+  CC      arch/PowerPC/PPCMapping.o
+  GEN     ui/input-keymap-qcode-to-qnum.c
+  CC      arch/PowerPC/PPCModule.o
+  CC      arch/Sparc/SparcDisassembler.o
+  CC      arch/Sparc/SparcInstPrinter.o
+  CC      arch/Sparc/SparcMapping.o
+  CC      arch/Sparc/SparcModule.o
+  CC      arch/SystemZ/SystemZDisassembler.o
+  CC      arch/SystemZ/SystemZInstPrinter.o
+  CC      arch/SystemZ/SystemZMapping.o
+  CC      arch/SystemZ/SystemZModule.o
+  CC      arch/SystemZ/SystemZMCTargetDesc.o
+  CC      arch/X86/X86DisassemblerDecoder.o
+  CC      arch/X86/X86Disassembler.o
+  CC      arch/X86/X86IntelInstPrinter.o
+  CC      arch/X86/X86ATTInstPrinter.o
+  GEN     ui/input-keymap-qcode-to-sun.c
+  GEN     ui/input-keymap-qnum-to-qcode.c
+  CC      arch/X86/X86Mapping.o
+  GEN     ui/input-keymap-usb-to-qcode.c
+  GEN     ui/input-keymap-win32-to-qcode.c
+  GEN     ui/input-keymap-x11-to-qcode.c
+  GEN     ui/input-keymap-xorgevdev-to-qcode.c
+  GEN     ui/input-keymap-xorgkbd-to-qcode.c
+  CC      arch/X86/X86Module.o
+  GEN     ui/input-keymap-xorgxquartz-to-qcode.c
+  GEN     ui/input-keymap-xorgxwin-to-qcode.c
+  CC      arch/XCore/XCoreDisassembler.o
+  CC      arch/XCore/XCoreInstPrinter.o
+  CC      arch/XCore/XCoreMapping.o
+  CC      arch/XCore/XCoreModule.o
+  CC      MCInst.o
+  GEN     ui/input-keymap-osx-to-qcode.c
+  GEN     tests/test-qapi-gen
+  GEN     trace-root.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  AR      libcapstone.a
+ar: creating /home/yangweb/lab2-c-qemu-4.1.1/build/capstone/libcapstone.a
+  GEN     accel/kvm/trace.h
+  GEN     accel/tcg/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     crypto/trace.h
+  GEN     monitor/trace.h
+  GEN     authz/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     block/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     io/trace.h
+  GEN     nbd/trace.h
+  GEN     scsi/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     chardev/trace.h
+  GEN     audio/trace.h
+  GEN     hw/9pfs/trace.h
+  GEN     hw/acpi/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/alpha/trace.h
+  GEN     hw/arm/trace.h
+  GEN     hw/audio/trace.h
+  GEN     hw/block/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/block/dataplane/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/char/trace.h
+  GEN     hw/dma/trace.h
+  GEN     hw/hppa/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/i2c/trace.h
+  GEN     hw/i386/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/i386/xen/trace.h
+  GEN     hw/ide/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/input/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/intc/trace.h
+  GEN     hw/isa/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/mem/trace.h
+  GEN     hw/mips/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/misc/trace.h
+  GEN     hw/misc/macio/trace.h
+  GEN     hw/net/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/nvram/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/pci/trace.h
+  GEN     hw/pci-host/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/ppc/trace.h
+  GEN     hw/rdma/trace.h
+  GEN     hw/rdma/vmw/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/s390x/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/scsi/trace.h
+  GEN     hw/sd/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/sparc/trace.h
+  GEN     hw/sparc64/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/timer/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/tpm/trace.h
+  GEN     hw/usb/trace.h
+  GEN     hw/vfio/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/virtio/trace.h
+  GEN     hw/watchdog/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+  GEN     hw/xen/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/gpio/trace.h
+  GEN     hw/riscv/trace.h
+  GEN     migration/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     net/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     ui/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/display/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+  GEN     qapi/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     qom/trace.h
+  GEN     target/arm/trace.h
+  GEN     target/hppa/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     target/i386/trace.h
+  GEN     target/mips/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     target/ppc/trace.h
+  GEN     target/riscv/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     target/s390x/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     target/sparc/trace.h
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     util/trace.h
+  GEN     trace-root.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     accel/kvm/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     accel/tcg/trace.c
+  GEN     crypto/trace.c
+  GEN     monitor/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     authz/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     block/trace.c
+  GEN     io/trace.c
+  GEN     nbd/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     scsi/trace.c
+  GEN     chardev/trace.c
+  GEN     audio/trace.c
+  GEN     hw/9pfs/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/acpi/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+  GEN     hw/alpha/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/arm/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/audio/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/block/trace.c
+  GEN     hw/block/dataplane/trace.c
+  GEN     hw/char/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/dma/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/hppa/trace.c
+  GEN     hw/i2c/trace.c
+  GEN     hw/i386/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/i386/xen/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/ide/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/input/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/intc/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/isa/trace.c
+  GEN     hw/mem/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/mips/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/misc/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/misc/macio/trace.c
+  GEN     hw/net/trace.c
+  GEN     hw/nvram/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/pci/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/pci-host/trace.c
+  GEN     hw/ppc/trace.c
+  GEN     hw/rdma/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/rdma/vmw/trace.c
+  GEN     hw/s390x/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/sd/trace.c
+c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/sparc/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/sparc64/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/timer/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/tpm/trace.c
+  GEN     hw/usb/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/vfio/trace.c
+  GEN     hw/virtio/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/watchdog/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/xen/trace.c
+  GEN     hw/gpio/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/riscv/trace.c
+  GEN     migration/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     net/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     hw/display/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     qapi/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     qom/trace.c
+  GEN     target/arm/trace.c
+  GEN     target/hppa/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     target/i386/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     target/ppc/trace.c
+  GEN     target/riscv/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     target/s390x/trace.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  GEN     target/sparc/trace.c
+  GEN     util/trace.c
+  GEN     config-all-devices.mak
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/dumptrees.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/trees.S
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/testutils.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/value-labels.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/asm_tree_dump.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/truncated_memrsv.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/truncated_string.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/truncated_property.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/check_full.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/check_path.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/check_header.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/overlay_bad_fixup.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/overlay.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/subnode_iterate.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/property_iterate.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/utilfdt_test.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/integer-expressions.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/path_offset_aliases.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/add_subnode_with_nops.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/dtbs_equal_unordered.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/dtb_reverse.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/dtbs_equal_ordered.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/extra-terminating-null.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/incbin.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/boot-cpuid.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/phandle_format.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/path-references.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/references.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/string_escapes.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/propname_escapes.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/appendprop2.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/appendprop1.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/del_node.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/del_property.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/setprop.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/set_name.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/rw_tree1.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/open_pack.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/nopulate.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/mangle-layout.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/move_and_save.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/sw_states.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/sw_tree1.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/nop_node.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/nop_property.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/setprop_inplace.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/stringlist.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/addr_size_cells2.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/addr_size_cells.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/notfound.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/sized_cells.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/char_literal.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/get_alias.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/node_offset_by_compatible.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/node_check_compatible.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/node_offset_by_phandle.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/node_offset_by_prop_value.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/parent_offset.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/supernode_atdepth_offset.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/get_path.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/get_phandle.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/get_name.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/getprop.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/path_offset.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/subnode_offset.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/find_property.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/root_node.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/tests/get_mem_rsv.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/libfdt/fdt_overlay.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/libfdt/fdt_addresses.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/libfdt/fdt_empty_tree.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/libfdt/fdt_strerror.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/libfdt/fdt_rw.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/libfdt/fdt_sw.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/libfdt/fdt_wip.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/libfdt/fdt_ro.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/libfdt/fdt.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/util.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/fdtoverlay.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/fdtput.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/fdtget.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/fdtdump.c
+	 LEX convert-dtsv0-lexer.lex.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/srcpos.c
+	 BISON dtc-parser.tab.c
+	 LEX dtc-lexer.lex.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/treesource.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/livetree.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/fstree.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/flattree.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/dtc.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/data.c
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/checks.c
+	 DEP convert-dtsv0-lexer.lex.c
+	 DEP dtc-parser.tab.c
+	 DEP dtc-lexer.lex.c
+	CHK version_gen.h
+	UPD version_gen.h
+	 DEP /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/dtc/util.c
+	 CC libfdt/fdt.o
+	 CC libfdt/fdt_sw.o
+	 CC libfdt/fdt_ro.o
+	 CC libfdt/fdt_wip.o
+	 CC libfdt/fdt_rw.o
+	 CC libfdt/fdt_strerror.o
+	 CC libfdt/fdt_empty_tree.o
+	 CC libfdt/fdt_addresses.o
+	 CC libfdt/fdt_overlay.o
+	 AR libfdt/libfdt.a
+ar: creating libfdt/libfdt.a
+a - libfdt/fdt.o
+a - libfdt/fdt_ro.o
+a - libfdt/fdt_wip.o
+a - libfdt/fdt_sw.o
+a - libfdt/fdt_rw.o
+a - libfdt/fdt_strerror.o
+a - libfdt/fdt_empty_tree.o
+a - libfdt/fdt_addresses.o
+a - libfdt/fdt_overlay.o
+make[1]: Entering directory '/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/slirp'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/slirp'
+  CC      tests/qemu-iotests/socket_scm_helper.o
+  CC      qapi/qapi-visit-core.o
+  GEN     qga/qapi-generated/qapi-gen
+  CC      qapi/qapi-dealloc-visitor.o
+  CC      qapi/qobject-input-visitor.o
+  CC      qapi/qobject-output-visitor.o
+  CC      qapi/qmp-registry.o
+  CC      qapi/qmp-dispatch.o
+  CC      qapi/string-input-visitor.o
+  CC      qapi/string-output-visitor.o
+  CC      qapi/opts-visitor.o
+  CC      qapi/qapi-clone-visitor.o
+  CC      qapi/qmp-event.o
+  CC      qapi/qapi-util.o
+  CC      qapi/qapi-builtin-types.o
+  CC      qapi/qapi-types-audio.o
+  CC      qapi/qapi-types-authz.o
+  CC      qapi/qapi-types-block-core.o
+  CC      qapi/qapi-types-block.o
+  CC      qapi/qapi-types-char.o
+  CC      qapi/qapi-types-common.o
+  CC      qapi/qapi-types-crypto.o
+  CC      qapi/qapi-types-dump.o
+  CC      qapi/qapi-types-introspect.o
+  CC      qapi/qapi-types-job.o
+  CC      qapi/qapi-types-machine.o
+  CC      qapi/qapi-types-migration.o
+  CC      qapi/qapi-types-misc.o
+  CC      qapi/qapi-types-net.o
+  CC      qapi/qapi-types-qdev.o
+  CC      qapi/qapi-types-qom.o
+  CC      qapi/qapi-types-rdma.o
+  CC      qapi/qapi-types-rocker.o
+  CC      qapi/qapi-types-run-state.o
+  CC      qapi/qapi-types-sockets.o
+  CC      qapi/qapi-types-tpm.o
+  CC      qapi/qapi-types-trace.o
+  CC      qapi/qapi-types-transaction.o
+  CC      qapi/qapi-types-ui.o
+  CC      qapi/qapi-builtin-visit.o
+  CC      qapi/qapi-visit-audio.o
+  CC      qapi/qapi-visit-authz.o
+  CC      qapi/qapi-visit-block-core.o
+  CC      qapi/qapi-visit-block.o
+  CC      qapi/qapi-visit-char.o
+  CC      qapi/qapi-visit-common.o
+  CC      qapi/qapi-visit-crypto.o
+  CC      qapi/qapi-visit-dump.o
+  CC      qapi/qapi-visit-introspect.o
+  CC      qapi/qapi-visit-job.o
+  CC      qapi/qapi-visit-machine.o
+  CC      qapi/qapi-visit-migration.o
+  CC      qapi/qapi-visit-misc.o
+  CC      qapi/qapi-visit-net.o
+  CC      qapi/qapi-visit-qdev.o
+  CC      qapi/qapi-visit-qom.o
+  CC      qapi/qapi-visit-rdma.o
+  CC      qapi/qapi-visit-rocker.o
+  CC      qapi/qapi-visit-run-state.o
+  CC      qapi/qapi-visit-sockets.o
+  CC      qapi/qapi-visit-tpm.o
+  CC      qapi/qapi-visit-trace.o
+  CC      qapi/qapi-visit-transaction.o
+  CC      qapi/qapi-visit-ui.o
+  CC      qapi/qapi-emit-events.o
+  CC      qapi/qapi-events-audio.o
+  CC      qapi/qapi-events-authz.o
+  CC      qapi/qapi-events-block-core.o
+  CC      qapi/qapi-events-block.o
+  CC      qapi/qapi-events-char.o
+  CC      qapi/qapi-events-common.o
+  CC      qapi/qapi-events-crypto.o
+  CC      qapi/qapi-events-dump.o
+  CC      qapi/qapi-events-introspect.o
+  CC      qapi/qapi-events-job.o
+  CC      qapi/qapi-events-machine.o
+  CC      qapi/qapi-events-migration.o
+  CC      qapi/qapi-events-misc.o
+  CC      qapi/qapi-events-net.o
+  CC      qapi/qapi-events-qdev.o
+  CC      qapi/qapi-events-qom.o
+  CC      qapi/qapi-events-rdma.o
+  CC      qapi/qapi-events-rocker.o
+  CC      qapi/qapi-events-run-state.o
+  CC      qapi/qapi-events-sockets.o
+  CC      qapi/qapi-events-tpm.o
+  CC      qapi/qapi-events-trace.o
+  CC      qapi/qapi-events-transaction.o
+  CC      qapi/qapi-events-ui.o
+  CC      qobject/qnull.o
+  CC      qobject/qnum.o
+  CC      qobject/qstring.o
+  CC      qobject/qdict.o
+  CC      qobject/qlist.o
+  CC      qobject/qbool.o
+  CC      qobject/qlit.o
+  CC      qobject/qjson.o
+  CC      qobject/qobject.o
+  CC      qobject/json-lexer.o
+  CC      qobject/json-streamer.o
+  CC      qobject/json-parser.o
+  CC      qobject/block-qdict.o
+  CC      trace/control.o
+  CC      trace/qmp.o
+  CC      util/osdep.o
+  CC      util/cutils.o
+  CC      util/unicode.o
+  CC      util/qemu-timer-common.o
+  CC      util/bufferiszero.o
+  CC      util/lockcnt.o
+  CC      util/aiocb.o
+  CC      util/async.o
+  CC      util/aio-wait.o
+  CC      util/thread-pool.o
+  CC      util/qemu-timer.o
+  CC      util/main-loop.o
+  CC      util/aio-posix.o
+  CC      util/compatfd.o
+  CC      util/event_notifier-posix.o
+  CC      util/mmap-alloc.o
+  CC      util/qemu-openpty.o
+  CC      util/oslib-posix.o
+  CC      util/qemu-thread-posix.o
+  CC      util/memfd.o
+  CC      util/envlist.o
+  CC      util/path.o
+  CC      util/module.o
+  CC      util/host-utils.o
+  CC      util/bitmap.o
+  CC      util/bitops.o
+  CC      util/hbitmap.o
+  CC      util/fifo8.o
+  CC      util/cacheinfo.o
+  CC      util/error.o
+  CC      util/qemu-error.o
+  CC      util/qemu-print.o
+  CC      util/id.o
+  CC      util/iov.o
+  CC      util/qemu-config.o
+  CC      util/qemu-sockets.o
+  CC      util/uri.o
+  CC      util/notify.o
+  CC      util/qemu-option.o
+  CC      util/qemu-progress.o
+  CC      util/keyval.o
+  CC      util/hexdump.o
+  CC      util/crc32c.o
+  CC      util/uuid.o
+  CC      util/throttle.o
+  CC      util/getauxval.o
+  CC      util/readline.o
+  CC      util/rcu.o
+  CC      util/qemu-coroutine.o
+  CC      util/qemu-coroutine-lock.o
+  CC      util/qemu-coroutine-io.o
+  CC      util/qemu-coroutine-sleep.o
+  CC      util/coroutine-ucontext.o
+  CC      util/buffer.o
+  CC      util/timed-average.o
+  CC      util/base64.o
+  CC      util/log.o
+  CC      util/pagesize.o
+  CC      util/qdist.o
+  CC      util/qht.o
+  CC      util/qsp.o
+  CC      util/range.o
+  CC      util/stats64.o
+  CC      util/systemd.o
+  CC      util/iova-tree.o
+  CC      util/filemonitor-inotify.o
+  CC      util/vfio-helpers.o
+  CC      util/drm.o
+  CC      util/guest-random.o
+  CC      trace-root.o
+  CC      accel/kvm/trace.o
+  CC      accel/tcg/trace.o
+  CC      crypto/trace.o
+  CC      monitor/trace.o
+  CC      authz/trace.o
+  CC      block/trace.o
+  CC      io/trace.o
+  CC      nbd/trace.o
+  CC      scsi/trace.o
+  CC      chardev/trace.o
+  CC      audio/trace.o
+  CC      hw/9pfs/trace.o
+  CC      hw/acpi/trace.o
+  CC      hw/alpha/trace.o
+  CC      hw/arm/trace.o
+  CC      hw/audio/trace.o
+  CC      hw/block/trace.o
+  CC      hw/block/dataplane/trace.o
+  CC      hw/char/trace.o
+  CC      hw/dma/trace.o
+  CC      hw/hppa/trace.o
+  CC      hw/i2c/trace.o
+  CC      hw/i386/trace.o
+  CC      hw/i386/xen/trace.o
+  CC      hw/ide/trace.o
+  CC      hw/input/trace.o
+  CC      hw/intc/trace.o
+  CC      hw/isa/trace.o
+  CC      hw/mem/trace.o
+  CC      hw/mips/trace.o
+  CC      hw/misc/trace.o
+  CC      hw/misc/macio/trace.o
+  CC      hw/net/trace.o
+  CC      hw/nvram/trace.o
+  CC      hw/pci/trace.o
+  CC      hw/pci-host/trace.o
+  CC      hw/ppc/trace.o
+  CC      hw/rdma/trace.o
+  CC      hw/rdma/vmw/trace.o
+  CC      hw/s390x/trace.o
+  CC      hw/scsi/trace.o
+  CC      hw/sd/trace.o
+  CC      hw/sparc/trace.o
+  CC      hw/sparc64/trace.o
+  CC      hw/timer/trace.o
+  CC      hw/tpm/trace.o
+  CC      hw/usb/trace.o
+  CC      hw/vfio/trace.o
+  CC      hw/virtio/trace.o
+  CC      hw/watchdog/trace.o
+  CC      hw/xen/trace.o
+  CC      hw/gpio/trace.o
+  CC      hw/riscv/trace.o
+  CC      migration/trace.o
+  CC      net/trace.o
+  CC      ui/trace.o
+  CC      hw/display/trace.o
+  CC      qapi/trace.o
+  CC      qom/trace.o
+  CC      target/arm/trace.o
+  CC      target/hppa/trace.o
+  CC      target/i386/trace.o
+  CC      target/mips/trace.o
+  CC      target/ppc/trace.o
+  CC      target/riscv/trace.o
+  CC      target/s390x/trace.o
+  CC      target/sparc/trace.o
+  CC      util/trace.o
+  CC      crypto/pbkdf-stub.o
+  CC      stubs/bdrv-next-monitor-owned.o
+  CC      stubs/blk-commit-all.o
+  CC      stubs/blockdev-close-all-bdrv-states.o
+  CC      stubs/clock-warp.o
+  CC      stubs/cpu-get-clock.o
+  CC      stubs/cpu-get-icount.o
+  CC      stubs/error-printf.o
+  CC      stubs/dump.o
+  CC      stubs/fdset.o
+  CC      stubs/gdbstub.o
+  CC      stubs/get-vm-name.o
+  CC      stubs/iothread.o
+  CC      stubs/iothread-lock.o
+  CC      stubs/is-daemonized.o
+  CC      stubs/machine-init-done.o
+  CC      stubs/migr-blocker.o
+  CC      stubs/change-state-handler.o
+  CC      stubs/monitor.o
+  CC      stubs/notify-event.o
+  CC      stubs/qtest.o
+  CC      stubs/replay.o
+  CC      stubs/runstate-check.o
+  CC      stubs/set-fd-handler.o
+  CC      stubs/sysbus.o
+  CC      stubs/tpm.o
+  CC      stubs/trace-control.o
+  CC      stubs/uuid.o
+  CC      stubs/vm-stop.o
+  CC      stubs/vmstate.o
+  CC      stubs/fd-register.o
+  CC      stubs/qmp_memory_device.o
+  CC      stubs/target-monitor-defs.o
+  CC      stubs/target-get-monitor-def.o
+  CC      stubs/pc_madt_cpu_entry.o
+  CC      stubs/vmgenid.o
+  CC      stubs/xen-common.o
+  CC      stubs/xen-hvm.o
+  CC      stubs/pci-host-piix.o
+  CC      stubs/ram-block.o
+  CC      stubs/ramfb.o
+  CC      stubs/fw_cfg.o
+  CC      stubs/semihost.o
+  CC      util/filemonitor-stub.o
+  CC      contrib/ivshmem-client/ivshmem-client.o
+  CC      contrib/ivshmem-client/main.o
+  CC      contrib/ivshmem-server/ivshmem-server.o
+  CC      contrib/ivshmem-server/main.o
+  CC      qemu-nbd.o
+  CC      authz/base.o
+  CC      authz/simple.o
+  CC      authz/list.o
+  CC      authz/listfile.o
+  CC      block.o
+  CC      blockjob.o
+  CC      job.o
+  CC      qemu-io-cmds.o
+  CC      replication.o
+  CC      block/raw-format.o
+  CC      block/vmdk.o
+  CC      block/vpc.o
+  CC      block/qcow.o
+  CC      block/vdi.o
+  CC      block/cloop.o
+  CC      block/bochs.o
+  CC      block/vvfat.o
+  CC      block/dmg.o
+  CC      block/qcow2.o
+  CC      block/qcow2-refcount.o
+  CC      block/qcow2-cluster.o
+  CC      block/qcow2-snapshot.o
+  CC      block/qcow2-cache.o
+  CC      block/qcow2-bitmap.o
+  CC      block/qcow2-threads.o
+  CC      block/qed.o
+  CC      block/qed-l2-cache.o
+  CC      block/qed-table.o
+  CC      block/qed-cluster.o
+  CC      block/qed-check.o
+  CC      block/vhdx.o
+  CC      block/vhdx-endian.o
+  CC      block/vhdx-log.o
+  CC      block/quorum.o
+  CC      block/blkdebug.o
+  CC      block/blkverify.o
+  CC      block/blkreplay.o
+  CC      block/parallels.o
+  CC      block/blklogwrites.o
+  CC      block/block-backend.o
+  CC      block/snapshot.o
+  CC      block/qapi.o
+  CC      block/file-posix.o
+  CC      block/null.o
+  CC      block/mirror.o
+  CC      block/commit.o
+  CC      block/io.o
+  CC      block/create.o
+  CC      block/throttle-groups.o
+  CC      block/nvme.o
+  CC      block/nbd.o
+  CC      block/sheepdog.o
+  CC      block/accounting.o
+  CC      block/dirty-bitmap.o
+  CC      block/write-threshold.o
+  CC      block/backup.o
+  CC      block/replication.o
+  CC      block/throttle.o
+  CC      block/copy-on-read.o
+  CC      block/crypto.o
+  CC      nbd/server.o
+  CC      nbd/client.o
+  CC      nbd/common.o
+  CC      scsi/utils.o
+  CC      scsi/pr-manager.o
+  CC      scsi/pr-manager-helper.o
+  CC      crypto/init.o
+  CC      crypto/hash.o
+  CC      crypto/hash-glib.o
+  CC      crypto/hmac.o
+  CC      crypto/hmac-glib.o
+  CC      crypto/aes.o
+  CC      crypto/desrfb.o
+  CC      crypto/cipher.o
+  CC      crypto/tlscreds.o
+  CC      crypto/tlscredsanon.o
+  CC      crypto/tlscredspsk.o
+  CC      crypto/tlscredsx509.o
+  CC      crypto/tlssession.o
+  CC      crypto/secret.o
+  CC      crypto/random-platform.o
+  CC      crypto/pbkdf.o
+  CC      crypto/ivgen.o
+  CC      crypto/ivgen-essiv.o
+  CC      crypto/ivgen-plain.o
+  CC      crypto/ivgen-plain64.o
+  CC      crypto/afsplit.o
+  CC      crypto/xts.o
+  CC      crypto/block.o
+  CC      crypto/block-qcow.o
+  CC      crypto/block-luks.o
+  CC      io/channel.o
+  CC      io/channel-buffer.o
+  CC      io/channel-command.o
+  CC      io/channel-file.o
+  CC      io/channel-socket.o
+  CC      io/channel-tls.o
+  CC      io/channel-watch.o
+  CC      io/channel-websock.o
+  CC      io/channel-util.o
+  CC      io/dns-resolver.o
+  CC      io/net-listener.o
+  CC      io/task.o
+  CC      qom/object.o
+  CC      qom/container.o
+  CC      qom/qom-qobject.o
+  CC      qom/object_interfaces.o
+  GEN     qemu-img-cmds.h
+  CC      qemu-io.o
+  CC      qemu-edid.o
+  CC      hw/display/edid-generate.o
+  CC      scsi/qemu-pr-helper.o
+  CC      qemu-bridge-helper.o
+  CC      chardev/char.o
+  CC      chardev/char-fd.o
+  CC      chardev/char-fe.o
+  CC      chardev/char-file.o
+  CC      chardev/char-io.o
+  CC      chardev/char-mux.o
+  CC      chardev/char-null.o
+  CC      chardev/char-parallel.o
+  CC      chardev/char-pipe.o
+  CC      chardev/char-pty.o
+  CC      chardev/char-ringbuf.o
+  CC      chardev/char-serial.o
+  CC      chardev/char-socket.o
+  CC      chardev/char-stdio.o
+  CC      chardev/char-udp.o
+  BUNZIP2 pc-bios/edk2-aarch64-code.fd.bz2
+  BUNZIP2 pc-bios/edk2-arm-code.fd.bz2
+  BUNZIP2 pc-bios/edk2-arm-vars.fd.bz2
+  BUNZIP2 pc-bios/edk2-i386-code.fd.bz2
+  BUNZIP2 pc-bios/edk2-i386-secure-code.fd.bz2
+  BUNZIP2 pc-bios/edk2-i386-vars.fd.bz2
+  BUNZIP2 pc-bios/edk2-x86_64-code.fd.bz2
+  BUNZIP2 pc-bios/edk2-x86_64-secure-code.fd.bz2
+  CC      blockdev.o
+  CC      blockdev-nbd.o
+  CC      bootdevice.o
+  CC      iothread.o
+  CC      job-qmp.o
+  CC      qdev-monitor.o
+  CC      device-hotplug.o
+  CC      os-posix.o
+  CC      bt-host.o
+  CC      bt-vhci.o
+  CC      dma-helpers.o
+  CC      vl.o
+  CC      tpm.o
+  CC      device_tree.o
+  CC      cpus-common.o
+  CC      audio/audio.o
+  CC      audio/audio_legacy.o
+  CC      audio/noaudio.o
+  CC      audio/wavaudio.o
+  CC      audio/mixeng.o
+  CC      audio/wavcapture.o
+  CC      backends/rng.o
+  CC      backends/rng-egd.o
+  CC      backends/rng-random.o
+  CC      backends/tpm.o
+  CC      backends/hostmem.o
+  CC      backends/hostmem-ram.o
+  CC      backends/hostmem-file.o
+  CC      backends/cryptodev.o
+  CC      backends/cryptodev-builtin.o
+  CC      backends/cryptodev-vhost.o
+  CC      backends/cryptodev-vhost-user.o
+  CC      backends/vhost-user.o
+  CC      backends/hostmem-memfd.o
+  CC      block/stream.o
+  CC      chardev/wctablet.o
+  CC      chardev/msmouse.o
+  CC      chardev/testdev.o
+  CC      disas/i386.o
+  CC      disas/riscv.o
+  CC      dump/dump-hmp-cmds.o
+  CC      fsdev/qemu-fsdev-dummy.o
+  CC      fsdev/qemu-fsdev-opts.o
+  CC      fsdev/qemu-fsdev-throttle.o
+  CC      hw/acpi/acpi-stub.o
+  CC      hw/acpi/ipmi-stub.o
+  CC      hw/audio/es1370.o
+  CC      hw/audio/ac97.o
+  CC      hw/audio/intel-hda.o
+  CC      hw/audio/hda-codec.o
+  CC      hw/audio/soundhw.o
+  CC      hw/block/block.o
+  CC      hw/block/cdrom.o
+  CC      hw/block/hd-geometry.o
+  CC      hw/block/nvme.o
+  CC      hw/bt/core.o
+  CC      hw/bt/l2cap.o
+  CC      hw/bt/sdp.o
+  CC      hw/bt/hci.o
+  CC      hw/bt/hid.o
+  CC      hw/bt/hci-csr.o
+  CC      hw/char/ipoctal232.o
+  CC      hw/char/serial.o
+  CC      hw/char/serial-pci.o
+  CC      hw/char/serial-pci-multi.o
+  CC      hw/char/virtio-console.o
+  CC      hw/char/cadence_uart.o
+  CC      hw/core/qdev.o
+  CC      hw/core/qdev-properties.o
+  CC      hw/core/bus.o
+  CC      hw/core/reset.o
+  CC      hw/core/qdev-fw.o
+  CC      hw/core/fw-path-provider.o
+  CC      hw/core/irq.o
+  CC      hw/core/hotplug.o
+  CC      hw/core/nmi.o
+  CC      hw/core/vm-change-state-handler.o
+  CC      hw/core/sysbus.o
+  CC      hw/core/machine.o
+  CC      hw/core/loader.o
+  CC      hw/core/qdev-properties-system.o
+  CC      hw/core/register.o
+  CC      hw/core/or-irq.o
+  CC      hw/core/split-irq.o
+  CC      hw/core/generic-loader.o
+  CC      hw/core/null-machine.o
+  CC      hw/core/machine-hmp-cmds.o
+  CC      hw/cpu/core.o
+  CC      hw/cpu/cluster.o
+  CC      hw/display/i2c-ddc.o
+  CC      hw/display/edid-region.o
+  CC      hw/display/cirrus_vga.o
+  CC      hw/display/vga-pci.o
+  CC      hw/display/vmware_vga.o
+  CC      hw/display/bochs-display.o
+  CC      hw/i2c/core.o
+  CC      hw/i2c/smbus_slave.o
+  CC      hw/i2c/smbus_master.o
+  CC      hw/i2c/bitbang_i2c.o
+  CC      hw/ide/core.o
+  CC      hw/ide/atapi.o
+  CC      hw/ide/qdev.o
+  CC      hw/ide/ahci.o
+  CC      hw/ide/ich.o
+  CC      hw/input/hid.o
+  CC      hw/input/virtio-input.o
+  CC      hw/input/virtio-input-hid.o
+  CC      hw/input/virtio-input-host.o
+  CC      hw/input/vhost-user-input.o
+  CC      hw/intc/intc.o
+  CC      hw/ipack/ipack.o
+  CC      hw/ipack/tpci200.o
+  CC      hw/misc/pci-testdev.o
+  CC      hw/misc/edu.o
+  CC      hw/misc/unimp.o
+  CC      hw/net/ne2000.o
+  CC      hw/net/ne2000-pci.o
+  CC      hw/net/eepro100.o
+  CC      hw/net/pcnet-pci.o
+  CC      hw/net/pcnet.o
+  CC      hw/net/e1000.o
+  CC      hw/net/e1000x_common.o
+  CC      hw/net/net_tx_pkt.o
+  CC      hw/net/net_rx_pkt.o
+  CC      hw/net/e1000e.o
+  CC      hw/net/e1000e_core.o
+  CC      hw/net/rtl8139.o
+  CC      hw/net/vmxnet3.o
+  CC      hw/net/cadence_gem.o
+  CC      hw/net/vhost_net.o
+  CC      hw/net/vhost_net-stub.o
+  CC      hw/net/rocker/rocker.o
+  CC      hw/net/rocker/rocker_fp.o
+  CC      hw/net/rocker/rocker_desc.o
+  CC      hw/net/rocker/rocker_world.o
+  CC      hw/net/rocker/rocker_of_dpa.o
+  CC      hw/net/can/can_sja1000.o
+  CC      hw/net/can/can_kvaser_pci.o
+  CC      hw/net/can/can_pcm3680_pci.o
+  CC      hw/net/can/can_mioe3680_pci.o
+  CC      hw/nvram/eeprom93xx.o
+  CC      hw/nvram/fw_cfg.o
+  CC      hw/nvram/chrp_nvram.o
+  CC      hw/pci-bridge/pci_bridge_dev.o
+  CC      hw/pci-bridge/pcie_root_port.o
+  CC      hw/pci-bridge/gen_pcie_root_port.o
+  CC      hw/pci-bridge/pcie_pci_bridge.o
+  CC      hw/pci-bridge/xio3130_upstream.o
+  CC      hw/pci-bridge/xio3130_downstream.o
+  CC      hw/pci-bridge/ioh3420.o
+  CC      hw/pci-bridge/i82801b11.o
+  CC      hw/pci-host/gpex.o
+  CC      hw/pci/pci.o
+  CC      hw/pci/pci_bridge.o
+  CC      hw/pci/msix.o
+  CC      hw/pci/msi.o
+  CC      hw/pci/shpc.o
+  CC      hw/pci/slotid_cap.o
+  CC      hw/pci/pci_host.o
+  CC      hw/pci/pcie.o
+  CC      hw/pci/pcie_aer.o
+  CC      hw/pci/pcie_port.o
+  CC      hw/pci/pcie_host.o
+  CC      hw/pci/pci-stub.o
+  CC      hw/pcmcia/pcmcia.o
+  CC      hw/scsi/scsi-disk.o
+  CC      hw/scsi/emulation.o
+  CC      hw/scsi/scsi-generic.o
+  CC      hw/scsi/scsi-bus.o
+  CC      hw/scsi/lsi53c895a.o
+  CC      hw/scsi/mptsas.o
+  CC      hw/scsi/mptconfig.o
+  CC      hw/scsi/mptendian.o
+  CC      hw/scsi/megasas.o
+  CC      hw/scsi/vmw_pvscsi.o
+  CC      hw/scsi/esp.o
+  CC      hw/scsi/esp-pci.o
+  CC      hw/sd/sd.o
+  CC      hw/sd/core.o
+  CC      hw/sd/sdmmc-internal.o
+  CC      hw/sd/sdhci.o
+  CC      hw/sd/sdhci-pci.o
+  CC      hw/smbios/smbios-stub.o
+  CC      hw/smbios/smbios_type_38-stub.o
+  CC      hw/timer/cadence_ttc.o
+  CC      hw/tpm/tpm_util.o
+  CC      hw/usb/core.o
+  CC      hw/usb/combined-packet.o
+  CC      hw/usb/bus.o
+  CC      hw/usb/libhw.o
+  CC      hw/usb/desc.o
+  CC      hw/usb/desc-msos.o
+  CC      hw/usb/hcd-uhci.o
+  CC      hw/usb/hcd-ohci.o
+  CC      hw/usb/hcd-ohci-pci.o
+  CC      hw/usb/hcd-ehci.o
+  CC      hw/usb/hcd-ehci-pci.o
+  CC      hw/usb/hcd-xhci.o
+  CC      hw/usb/hcd-xhci-nec.o
+  CC      hw/usb/dev-hub.o
+  CC      hw/usb/dev-hid.o
+  CC      hw/usb/dev-wacom.o
+  CC      hw/usb/dev-storage.o
+  CC      hw/usb/dev-uas.o
+  CC      hw/usb/dev-audio.o
+  CC      hw/usb/dev-serial.o
+  CC      hw/usb/dev-network.o
+  CC      hw/usb/dev-bluetooth.o
+  CC      hw/usb/dev-smartcard-reader.o
+  CC      hw/usb/dev-mtp.o
+  CC      hw/usb/host-stub.o
+  CC      hw/virtio/virtio-bus.o
+  CC      hw/virtio/virtio-rng.o
+  CC      hw/virtio/virtio-pci.o
+  CC      hw/virtio/virtio-mmio.o
+  CC      hw/virtio/vhost-stub.o
+  CC      hw/watchdog/watchdog.o
+  CC      hw/watchdog/wdt_i6300esb.o
+  CC      migration/migration.o
+  CC      migration/socket.o
+  CC      migration/fd.o
+  CC      migration/exec.o
+  CC      migration/tls.o
+  CC      migration/channel.o
+  CC      migration/savevm.o
+  CC      migration/colo.o
+  CC      migration/colo-failover.o
+  CC      migration/vmstate.o
+  CC      migration/vmstate-types.o
+  CC      migration/page_cache.o
+  CC      migration/qemu-file.o
+  CC      migration/global_state.o
+  CC      migration/qemu-file-channel.o
+  CC      migration/xbzrle.o
+  CC      migration/postcopy-ram.o
+  CC      migration/qjson.o
+  CC      migration/block-dirty-bitmap.o
+  CC      migration/block.o
+  CC      monitor/monitor.o
+  CC      monitor/qmp.o
+  CC      monitor/hmp.o
+  CC      monitor/qmp-cmds.o
+  CC      monitor/hmp-cmds.o
+  CC      net/net.o
+  CC      net/queue.o
+  CC      net/checksum.o
+  CC      net/util.o
+  CC      net/hub.o
+  CC      net/socket.o
+  CC      net/dump.o
+  CC      net/eth.o
+  CC      net/announce.o
+  CC      net/l2tpv3.o
+  CC      net/vhost-user.o
+  CC      net/vhost-user-stub.o
+  CC      net/slirp.o
+  CC      net/filter.o
+  CC      net/filter-buffer.o
+  CC      net/filter-mirror.o
+  CC      net/colo-compare.o
+  CC      net/colo.o
+  CC      net/filter-rewriter.o
+  CC      net/filter-replay.o
+  CC      net/tap.o
+  CC      net/tap-linux.o
+  CC      net/can/can_core.o
+  CC      net/can/can_host.o
+  CC      net/can/can_socketcan.o
+  CC      qapi/qapi-commands-audio.o
+  CC      qapi/qapi-commands-authz.o
+  CC      qapi/qapi-commands-block-core.o
+  CC      qapi/qapi-commands-block.o
+  CC      qapi/qapi-commands-char.o
+  CC      qapi/qapi-commands-common.o
+  CC      qapi/qapi-commands-crypto.o
+  CC      qapi/qapi-commands-dump.o
+  CC      qapi/qapi-commands-introspect.o
+  CC      qapi/qapi-commands-job.o
+  CC      qapi/qapi-commands-machine.o
+  CC      qapi/qapi-commands-migration.o
+  CC      qapi/qapi-commands-misc.o
+  CC      qapi/qapi-commands-net.o
+  CC      qapi/qapi-commands-qdev.o
+  CC      qapi/qapi-commands-qom.o
+  CC      qapi/qapi-commands-rdma.o
+  CC      qapi/qapi-commands-rocker.o
+  CC      qapi/qapi-commands-run-state.o
+  CC      qapi/qapi-commands-sockets.o
+  CC      qapi/qapi-commands-tpm.o
+  CC      qapi/qapi-commands-trace.o
+  CC      qapi/qapi-commands-transaction.o
+  CC      qapi/qapi-commands-ui.o
+  CC      qom/cpu.o
+  CC      qom/qom-hmp-cmds.o
+  CC      qom/qom-qmp-cmds.o
+  CC      replay/replay.o
+  CC      replay/replay-internal.o
+  CC      replay/replay-events.o
+  CC      replay/replay-time.o
+  CC      replay/replay-input.o
+  CC      replay/replay-char.o
+  CC      replay/replay-snapshot.o
+  CC      replay/replay-net.o
+  CC      replay/replay-audio.o
+  CC      ui/keymaps.o
+  CC      ui/console.o
+  CC      ui/cursor.o
+  CC      ui/qemu-pixman.o
+  CC      ui/input.o
+  CC      ui/input-keymap.o
+  CC      ui/input-legacy.o
+  CC      ui/kbd-state.o
+  CC      ui/input-linux.o
+  CC      ui/vnc-stubs.o
+  CC      audio/ossaudio.o
+  CC      contrib/vhost-user-input/main.o
+  AS      pc-bios/optionrom/multiboot.o
+  AS      pc-bios/optionrom/linuxboot.o
+  CC      pc-bios/optionrom/linuxboot_dma.o
+  AS      pc-bios/optionrom/kvmvapic.o
+  AS      pc-bios/optionrom/pvh.o
+  CC      pc-bios/optionrom/pvh_main.o
+  BUILD   pc-bios/optionrom/multiboot.img
+  BUILD   pc-bios/optionrom/linuxboot.img
+  BUILD   pc-bios/optionrom/linuxboot_dma.img
+  BUILD   pc-bios/optionrom/kvmvapic.img
+  CC      contrib/libvhost-user/libvhost-user.o
+  BUILD   pc-bios/optionrom/multiboot.raw
+  BUILD   pc-bios/optionrom/linuxboot.raw
+  BUILD   pc-bios/optionrom/linuxboot_dma.raw
+  BUILD   pc-bios/optionrom/kvmvapic.raw
+  BUILD   pc-bios/optionrom/pvh.img
+  CC      contrib/libvhost-user/libvhost-user-glib.o
+  SIGN    pc-bios/optionrom/multiboot.bin
+  SIGN    pc-bios/optionrom/linuxboot.bin
+  SIGN    pc-bios/optionrom/linuxboot_dma.bin
+  SIGN    pc-bios/optionrom/kvmvapic.bin
+  LINK    tests/qemu-iotests/socket_scm_helper
+  BUILD   pc-bios/optionrom/pvh.raw
+  SIGN    pc-bios/optionrom/pvh.bin
+  CC      qga/commands.o
+  CC      qga/guest-agent-command-state.o
+  CC      qga/main.o
+  CC      qga/commands-posix.o
+  CC      qga/channel-posix.o
+  CC      qga/qapi-generated/qga-qapi-types.o
+  CC      qga/qapi-generated/qga-qapi-visit.o
+  CC      qga/qapi-generated/qga-qapi-commands.o
+  AR      libqemuutil.a
+  CC      qemu-img.o
+  AR      libvhost-user.a
+  LINK    qemu-ga
+  LINK    ivshmem-client
+  LINK    ivshmem-server
+  LINK    qemu-nbd
+  LINK    qemu-img
+  LINK    qemu-io
+  LINK    qemu-edid
+  LINK    scsi/qemu-pr-helper
+  LINK    qemu-bridge-helper
+  LINK    vhost-user-input
+  GEN     riscv64-softmmu/hmp-commands.h
+  GEN     riscv64-softmmu/hmp-commands-info.h
+  GEN     riscv64-softmmu/config-devices.h
+  GEN     riscv64-softmmu/config-target.h
+  CC      riscv64-softmmu/exec.o
+  CC      riscv64-softmmu/tcg/tcg.o
+  CC      riscv64-softmmu/tcg/tcg-op.o
+  CC      riscv64-softmmu/tcg/tcg-op-vec.o
+  CC      riscv64-softmmu/tcg/tcg-op-gvec.o
+  CC      riscv64-softmmu/tcg/tcg-common.o
+  CC      riscv64-softmmu/tcg/optimize.o
+  CC      riscv64-softmmu/fpu/softfloat.o
+  CC      riscv64-softmmu/disas.o
+  GEN     riscv64-softmmu/gdbstub-xml.c
+  CC      riscv64-softmmu/arch_init.o
+  CC      riscv64-softmmu/cpus.o
+  CC      riscv64-softmmu/gdbstub.o
+  CC      riscv64-softmmu/balloon.o
+  CC      riscv64-softmmu/ioport.o
+  CC      riscv64-softmmu/qtest.o
+  CC      riscv64-softmmu/memory.o
+  CC      riscv64-softmmu/memory_mapping.o
+  CC      riscv64-softmmu/migration/ram.o
+  CC      riscv64-softmmu/accel/accel.o
+  CC      riscv64-softmmu/accel/qtest.o
+  CC      riscv64-softmmu/accel/stubs/hax-stub.o
+  CC      riscv64-softmmu/accel/stubs/hvf-stub.o
+  CC      riscv64-softmmu/accel/stubs/whpx-stub.o
+  CC      riscv64-softmmu/accel/stubs/kvm-stub.o
+  CC      riscv64-softmmu/accel/tcg/tcg-all.o
+  CC      riscv64-softmmu/accel/tcg/cputlb.o
+  CC      riscv64-softmmu/accel/tcg/tcg-runtime.o
+  CC      riscv64-softmmu/accel/tcg/tcg-runtime-gvec.o
+  CC      riscv64-softmmu/accel/tcg/cpu-exec.o
+  CC      riscv64-softmmu/accel/tcg/cpu-exec-common.o
+  CC      riscv64-softmmu/accel/tcg/translate-all.o
+  CC      riscv64-softmmu/accel/tcg/translator.o
+  CC      riscv64-softmmu/dump/dump.o
+  CC      riscv64-softmmu/hw/block/virtio-blk.o
+  CC      riscv64-softmmu/hw/block/vhost-user-blk.o
+  CC      riscv64-softmmu/hw/block/dataplane/virtio-blk.o
+  CC      riscv64-softmmu/hw/char/virtio-serial-bus.o
+  CC      riscv64-softmmu/hw/core/machine-qmp-cmds.o
+  CC      riscv64-softmmu/hw/core/numa.o
+  CC      riscv64-softmmu/hw/display/vga.o
+  CC      riscv64-softmmu/hw/display/virtio-gpu-base.o
+  CC      riscv64-softmmu/hw/display/virtio-gpu.o
+  CC      riscv64-softmmu/hw/display/virtio-gpu-3d.o
+  CC      riscv64-softmmu/hw/display/vhost-user-gpu.o
+  CC      riscv64-softmmu/hw/display/virtio-gpu-pci.o
+  CC      riscv64-softmmu/hw/display/vhost-user-gpu-pci.o
+  CC      riscv64-softmmu/hw/display/ati.o
+  CC      riscv64-softmmu/hw/display/ati_2d.o
+  CC      riscv64-softmmu/hw/display/ati_dbg.o
+  CC      riscv64-softmmu/hw/misc/ivshmem.o
+  CC      riscv64-softmmu/hw/net/virtio-net.o
+  CC      riscv64-softmmu/hw/scsi/virtio-scsi.o
+  CC      riscv64-softmmu/hw/scsi/virtio-scsi-dataplane.o
+  CC      riscv64-softmmu/hw/scsi/vhost-scsi-common.o
+  CC      riscv64-softmmu/hw/scsi/vhost-scsi.o
+  CC      riscv64-softmmu/hw/scsi/vhost-user-scsi.o
+  CC      riscv64-softmmu/hw/vfio/common.o
+  CC      riscv64-softmmu/hw/vfio/spapr.o
+  CC      riscv64-softmmu/hw/vfio/pci.o
+  CC      riscv64-softmmu/hw/vfio/pci-quirks.o
+  CC      riscv64-softmmu/hw/vfio/display.o
+  CC      riscv64-softmmu/hw/virtio/virtio.o
+  CC      riscv64-softmmu/hw/virtio/vhost.o
+  CC      riscv64-softmmu/hw/virtio/vhost-backend.o
+  CC      riscv64-softmmu/hw/virtio/vhost-user.o
+  CC      riscv64-softmmu/hw/virtio/virtio-balloon.o
+  CC      riscv64-softmmu/hw/virtio/virtio-crypto.o
+  CC      riscv64-softmmu/hw/virtio/virtio-crypto-pci.o
+  CC      riscv64-softmmu/hw/virtio/vhost-vsock.o
+  CC      riscv64-softmmu/hw/virtio/vhost-vsock-pci.o
+  CC      riscv64-softmmu/hw/virtio/vhost-user-blk-pci.o
+  CC      riscv64-softmmu/hw/virtio/vhost-user-input-pci.o
+  CC      riscv64-softmmu/hw/virtio/vhost-user-scsi-pci.o
+  CC      riscv64-softmmu/hw/virtio/vhost-scsi-pci.o
+  CC      riscv64-softmmu/hw/virtio/virtio-input-host-pci.o
+  CC      riscv64-softmmu/hw/virtio/virtio-input-pci.o
+  CC      riscv64-softmmu/hw/virtio/virtio-rng-pci.o
+  CC      riscv64-softmmu/hw/virtio/virtio-balloon-pci.o
+  CC      riscv64-softmmu/hw/virtio/virtio-scsi-pci.o
+  CC      riscv64-softmmu/hw/virtio/virtio-blk-pci.o
+  CC      riscv64-softmmu/hw/virtio/virtio-net-pci.o
+  CC      riscv64-softmmu/hw/virtio/virtio-serial-pci.o
+  CC      riscv64-softmmu/hw/riscv/boot.o
+  CC      riscv64-softmmu/hw/riscv/riscv_htif.o
+  CC      riscv64-softmmu/hw/riscv/riscv_hart.o
+  CC      riscv64-softmmu/hw/riscv/sifive_e.o
+  CC      riscv64-softmmu/hw/riscv/sifive_clint.o
+  CC      riscv64-softmmu/hw/riscv/sifive_gpio.o
+  CC      riscv64-softmmu/hw/riscv/sifive_prci.o
+  CC      riscv64-softmmu/hw/riscv/sifive_plic.o
+  CC      riscv64-softmmu/hw/riscv/sifive_test.o
+  CC      riscv64-softmmu/hw/riscv/sifive_u.o
+  CC      riscv64-softmmu/hw/riscv/sifive_uart.o
+  CC      riscv64-softmmu/hw/riscv/spike.o
+  CC      riscv64-softmmu/hw/riscv/virt.o
+  CC      riscv64-softmmu/monitor/misc.o
+  CC      riscv64-softmmu/qapi/qapi-introspect.o
+  CC      riscv64-softmmu/qapi/qapi-types-machine-target.o
+  CC      riscv64-softmmu/qapi/qapi-types-misc-target.o
+  CC      riscv64-softmmu/qapi/qapi-types.o
+  CC      riscv64-softmmu/qapi/qapi-visit-machine-target.o
+  CC      riscv64-softmmu/qapi/qapi-visit-misc-target.o
+  CC      riscv64-softmmu/qapi/qapi-visit.o
+  CC      riscv64-softmmu/qapi/qapi-events-machine-target.o
+  CC      riscv64-softmmu/qapi/qapi-events-misc-target.o
+  CC      riscv64-softmmu/qapi/qapi-events.o
+  CC      riscv64-softmmu/qapi/qapi-commands-machine-target.o
+  CC      riscv64-softmmu/qapi/qapi-commands-misc-target.o
+  CC      riscv64-softmmu/qapi/qapi-commands.o
+  GEN     riscv64-softmmu/target/riscv/decode_insn32.inc.c
+  GEN     riscv64-softmmu/target/riscv/decode_insn16.inc.c
+  CC      riscv64-softmmu/target/riscv/op_helper.o
+  CC      riscv64-softmmu/target/riscv/cpu_helper.o
+  CC      riscv64-softmmu/target/riscv/cpu.o
+  CC      riscv64-softmmu/target/riscv/csr.o
+  CC      riscv64-softmmu/target/riscv/fpu_helper.o
+  CC      riscv64-softmmu/target/riscv/gdbstub.o
+  CC      riscv64-softmmu/target/riscv/pmp.o
+  GEN     trace/generated-helpers.c
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:456: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(format) is 0:
+/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/scripts/tracetool/__init__.py:461: SyntaxWarning: "is" with a literal. Did you mean "=="?
+  if len(backends) is 0:
+  CC      riscv64-softmmu/trace/control-target.o
+  CC      riscv64-softmmu/gdbstub-xml.o
+  CC      riscv64-softmmu/target/riscv/translate.o
+  CC      riscv64-softmmu/trace/generated-helpers.o
+  LINK    riscv64-softmmu/qemu-system-riscv64

@@ -1,0 +1,18 @@
+$ python3 tools/test_buddy_host.py
+HOST sizes, alignment, overflow, restoration PASS
+HOST unaligned ranges, reserved holes, multi-map, fragmentation PASS
+HOST maximum order and rounding boundary PASS
+HOST 12000 seeded operations, bitmap overlap oracle PASS
+HOST ALL PASS
+HOST invalid-z: expected assertion PASS
+HOST invalid-d: expected assertion PASS
+HOST invalid-i: expected assertion PASS
+HOST invalid-s: expected assertion PASS
+HOST invalid-r: expected assertion PASS
+HOST invalid-o: expected assertion PASS
+HOST invalid-m: expected assertion PASS
+HOST invalid-n: expected assertion PASS
+HOST invalid-u: expected assertion PASS
+HOST invalid-a: expected assertion PASS
+HOST invalid-f: expected assertion PASS
+HOST normal + 11 invalid cases PASS

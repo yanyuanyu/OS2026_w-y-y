@@ -1,0 +1,163 @@
+make: Nothing to be done for 'TARGETS'.
+Breakpoint 1 at 0x3c330d: file /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/target/riscv/cpu_helper.c, line 438.
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+[New Thread 0x7ffff79ff640 (LWP 10739)]
+[New Thread 0x7ffff4fff640 (LWP 10740)]
+
+OpenSBI v0.4 (Jul  2 2019 11:53:53)
+   ____                    _____ ____ _____
+  / __ \                  / ____|  _ \_   _|
+ | |  | |_ __   ___ _ __ | (___ | |_) || |
+ | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
+ | |__| | |_) |  __/ | | |____) | |_) || |_
+  \____/| .__/ \___|_| |_|_____/|____/_____|
+        | |
+        |_|
+
+Platform Name          : QEMU Virt Machine
+Platform HART Features : RV64ACDFIMSU
+Platform Max HARTs     : 8
+Current Hart           : 0
+Firmware Base          : 0x80000000
+Firmware Size          : 112 KB
+Runtime SBI Version    : 0.1
+
+PMP0: 0x0000000080000000-0x000000008001ffff (A)
+PMP1: 0x0000000000000000-0xffffffffffffffff (A,R,W,X)
+DTB Init
+HartID: 0
+DTB Address: 0x82200000
+Physical Memory from DTB:
+  Base: 0x0000000080000000
+  Size: 0x0000000008000000 (128 MB)
+  End:  0x0000000087ffffff
+DTB init completed
+(THU.CST) os is loading ...
+Special kernel symbols:
+  entry  0xffffffffc02000d8 (virtual)
+  etext  0xffffffffc0201bd2 (virtual)
+  edata  0xffffffffc0206018 (virtual)
+  end    0xffffffffc0208038 (virtual)
+Kernel executable memory footprint: 32KB
+memory management: buddy_pmm_manager
+Physical memory: [0x0000000080000000, 0x0000000088000000)
+Page descriptors: 32768 pages at 0xffffffffc0209000 (virtual)
+Free physical memory begins at 0x0000000080349000
+C-BUDDY rounding/alignment/non-overlap/content/accounting PASS
+C-BUDDY exhausted/restored 31927 pages PASS
+C-BUDDY split/merge/repeat PASS
+C-BUDDY ALL PASS
+[Switching to Thread 0x7ffff4fff640 (LWP 10740)]
+
+Thread 3 "qemu-system-ris" hit Breakpoint 1, riscv_cpu_tlb_fill (cs=0x5555564e1f20, address=18446744072637939712, size=8, access_type=MMU_DATA_STORE, mmu_idx=1, probe=false, retaddr=140737304302414) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/target/riscv/cpu_helper.c:438
+438	{
+Temporary breakpoint 2 at 0x5555559166f8: file /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/target/riscv/cpu_helper.c, line 158.
+
+Thread 3 "qemu-system-ris" hit Temporary breakpoint 2, get_physical_address (env=0x5555564ea930, physical=0x7ffff4ffe260, prot=0x7ffff4ffe254, addr=18446744072637939712, access_type=1, mmu_idx=1) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/target/riscv/cpu_helper.c:158
+158	{
+C-HOST SV39 cold store addr=0xffffffffc0208000 satp=0x8000000000080205 mode=1
+#0  get_physical_address (env=0x5555564ea930, physical=0x7ffff4ffe260, prot=0x7ffff4ffe254, addr=18446744072637939712, access_type=1, mmu_idx=1) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/target/riscv/cpu_helper.c:158
+#1  0x00005555559173d4 in riscv_cpu_tlb_fill (cs=0x5555564e1f20, address=18446744072637939712, size=8, access_type=MMU_DATA_STORE, mmu_idx=1, probe=false, retaddr=140737304302414) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/target/riscv/cpu_helper.c:451
+#2  0x000055555585d6af in tlb_fill (cpu=0x5555564e1f20, addr=18446744072637939712, size=8, access_type=MMU_DATA_STORE, mmu_idx=1, retaddr=140737304302414) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/accel/tcg/cputlb.c:878
+#3  0x0000555555863bbe in store_helper (big_endian=false, size=8, retaddr=140737304302414, oi=49, val=1234605616436508552, addr=18446744072637939712, env=0x5555564ea930) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/accel/tcg/cputlb.c:1522
+#4  helper_le_stq_mmu (env=0x5555564ea930, addr=18446744072637939712, val=1234605616436508552, oi=49, retaddr=140737304302414) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/accel/tcg/cputlb.c:1672
+#5  0x00007ffff507934e in code_gen_buffer ()
+#6  0x00005555558822db in cpu_tb_exec (cpu=0x5555564e1f20, itb=0x7ffff5079200 <code_gen_buffer+496083>) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/accel/tcg/cpu-exec.c:173
+#7  0x0000555555883121 in cpu_loop_exec_tb (cpu=0x5555564e1f20, tb=0x7ffff5079200 <code_gen_buffer+496083>, last_tb=0x7ffff4ffe958, tb_exit=0x7ffff4ffe950) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/accel/tcg/cpu-exec.c:621
+Temporary breakpoint 3 at 0x555555916c09: file /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/target/riscv/cpu_helper.c, line 254.
+
+Thread 3 "qemu-system-ris" hit Temporary breakpoint 3, get_physical_address (env=0x5555564ea930, physical=0x7ffff4ffe260, prot=0x7ffff4ffe254, addr=18446744072637939712, access_type=1, mmu_idx=1) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/target/riscv/cpu_helper.c:254
+254	        target_ulong ppn = pte >> PTE_PPN_SHIFT;
+C-HOST WALK i=0 levels=3 idx=0x1ff base=0x80205000 pte_addr=0x80205ff8 pte=0x200000cf ptshift=18
+C-HOST cold C store_helper write_tag=0xffffffffffffffff (miss)
+0x00005555559173d4 in riscv_cpu_tlb_fill (cs=0x5555564e1f20, address=18446744072637939712, size=8, access_type=MMU_DATA_STORE, mmu_idx=1, probe=false, retaddr=140737304302414) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/target/riscv/cpu_helper.c:451
+451	    ret = get_physical_address(env, &pa, &prot, address, access_type, mmu_idx);
+Value returned is $1 = 0
+C-HOST translated page=0x80208000 prot=7
+Temporary breakpoint 4 at 0x5555559174fd: file /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/target/riscv/cpu_helper.c, line 474.
+
+Thread 3 "qemu-system-ris" hit Temporary breakpoint 4, riscv_cpu_tlb_fill (cs=0x5555564e1f20, address=18446744072637939712, size=8, access_type=MMU_DATA_STORE, mmu_idx=1, probe=false, retaddr=140737304302414) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/target/riscv/cpu_helper.c:474
+474	        return true;
+C-HOST TLB index=8 write_tag=0xffffffffc0208000 addend=0x80001fe00000
+Hardware watchpoint 5: -location *(unsigned long long *)$hostaddr
+
+Thread 3 "qemu-system-ris" hit Hardware watchpoint 5: -location *(unsigned long long *)$hostaddr
+
+Old value = 0
+New value = 1234605616436508552
+stq_he_p (ptr=0x7fffe0008000, v=1234605616436508552) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/include/qemu/bswap.h:370
+370	}
+C-HOST FIRST store value=0x1122334455667788 walks=1
+#0  stq_he_p (ptr=0x7fffe0008000, v=1234605616436508552) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/include/qemu/bswap.h:370
+#1  0x000055555585a9ac in stq_le_p (ptr=0x7fffe0008000, v=1234605616436508552) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/include/qemu/bswap.h:404
+#2  0x00005555558640ac in store_helper (big_endian=false, size=8, retaddr=140737304302414, oi=49, val=1234605616436508552, addr=18446744072637939712, env=0x5555564ea930) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/accel/tcg/cputlb.c:1630
+#3  helper_le_stq_mmu (env=0x5555564ea930, addr=18446744072637939712, val=1234605616436508552, oi=49, retaddr=140737304302414) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/accel/tcg/cputlb.c:1672
+#4  0x00007ffff507934e in code_gen_buffer ()
+#5  0x00005555558822db in cpu_tb_exec (cpu=0x5555564e1f20, itb=0x7ffff5079200 <code_gen_buffer+496083>) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/accel/tcg/cpu-exec.c:173
+#6  0x0000555555883121 in cpu_loop_exec_tb (cpu=0x5555564e1f20, tb=0x7ffff5079200 <code_gen_buffer+496083>, last_tb=0x7ffff4ffe958, tb_exit=0x7ffff4ffe950) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/accel/tcg/cpu-exec.c:621
+
+Thread 3 "qemu-system-ris" hit Hardware watchpoint 5: -location *(unsigned long long *)$hostaddr
+
+Old value = 1234605616436508552
+New value = 9833440827789222417
+0x00007ffff50793bd in code_gen_buffer ()
+C-HOST SECOND store value=0x8877665544332211 walks=1
+#0  0x00007ffff50793bd in code_gen_buffer ()
+#1  0x00005555558822db in cpu_tb_exec (cpu=0x5555564e1f20, itb=0x7ffff5079200 <code_gen_buffer+496083>) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/accel/tcg/cpu-exec.c:173
+#2  0x0000555555883121 in cpu_loop_exec_tb (cpu=0x5555564e1f20, tb=0x7ffff5079200 <code_gen_buffer+496083>, last_tb=0x7ffff4ffe958, tb_exit=0x7ffff4ffe950) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/accel/tcg/cpu-exec.c:621
+#3  0x0000555555883456 in cpu_exec (cpu=0x5555564e1f20) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/accel/tcg/cpu-exec.c:732
+#4  0x0000555555835ab6 in tcg_cpu_exec (cpu=0x5555564e1f20) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/cpus.c:1435
+#5  0x000055555583636f in qemu_tcg_cpu_thread_fn (arg=0x5555564e1f20) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/cpus.c:1743
+#6  0x0000555555c971be in qemu_thread_start (args=0x5555564f8600) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/util/qemu-thread-posix.c:502
+C-HOST SV39 store + TLB cold/hot PASS
+[Inferior 1 (process 10736) killed]
+Breakpoint 1 at 0x3c26f8: file /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/target/riscv/cpu_helper.c, line 158.
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+[New Thread 0x7ffff79ff640 (LWP 10795)]
+[New Thread 0x7ffff4fff640 (LWP 10796)]
+
+OpenSBI v0.4 (Jul  2 2019 11:53:53)
+   ____                    _____ ____ _____
+  / __ \                  / ____|  _ \_   _|
+ | |  | |_ __   ___ _ __ | (___ | |_) || |
+ | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
+ | |__| | |_) |  __/ | | |____) | |_) || |_
+  \____/| .__/ \___|_| |_|_____/|____/_____|
+        | |
+        |_|
+
+Platform Name          : QEMU Virt Machine
+Platform HART Features : RV64ACDFIMSU
+Platform Max HARTs     : 8
+Current Hart           : 0
+Firmware Base          : 0x80000000
+Firmware Size          : 112 KB
+Runtime SBI Version    : 0.1
+
+PMP0: 0x0000000080000000-0x000000008001ffff (A)
+PMP1: 0x0000000000000000-0xffffffffffffffff (A,R,W,X)
+[Switching to Thread 0x7ffff4fff640 (LWP 10796)]
+
+Thread 3 "qemu-system-ris" hit Breakpoint 1, get_physical_address (env=0x5555564ea930, physical=0x7ffff4ffe260, prot=0x7ffff4ffe254, addr=2149605376, access_type=1, mmu_idx=1) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/target/riscv/cpu_helper.c:158
+158	{
+C-HOST BARE addr=0x80206000 satp=0 mode=1
+#0  get_physical_address (env=0x5555564ea930, physical=0x7ffff4ffe260, prot=0x7ffff4ffe254, addr=2149605376, access_type=1, mmu_idx=1) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/target/riscv/cpu_helper.c:158
+#1  0x00005555559173d4 in riscv_cpu_tlb_fill (cs=0x5555564e1f20, address=2149605376, size=8, access_type=MMU_DATA_STORE, mmu_idx=1, probe=false, retaddr=140737304136646) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/target/riscv/cpu_helper.c:451
+#2  0x000055555585d6af in tlb_fill (cpu=0x5555564e1f20, addr=2149605376, size=8, access_type=MMU_DATA_STORE, mmu_idx=1, retaddr=140737304136646) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/accel/tcg/cputlb.c:878
+#3  0x0000555555863bbe in store_helper (big_endian=false, size=8, retaddr=140737304136646, oi=49, val=0, addr=2149605376, env=0x5555564ea930) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/accel/tcg/cputlb.c:1522
+#4  helper_le_stq_mmu (env=0x5555564ea930, addr=2149605376, val=0, oi=49, retaddr=140737304136646) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/accel/tcg/cputlb.c:1672
+#5  0x00007ffff5050bc6 in code_gen_buffer ()
+#6  0x00005555558822db in cpu_tb_exec (cpu=0x5555564e1f20, itb=0x7ffff5050ac0 <code_gen_buffer+330387>) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/accel/tcg/cpu-exec.c:173
+#7  0x0000555555883121 in cpu_loop_exec_tb (cpu=0x5555564e1f20, tb=0x7ffff5050ac0 <code_gen_buffer+330387>, last_tb=0x7ffff4ffe958, tb_exit=0x7ffff4ffe950) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/accel/tcg/cpu-exec.c:621
+0x00005555559173d4 in riscv_cpu_tlb_fill (cs=0x5555564e1f20, address=2149605376, size=8, access_type=MMU_DATA_STORE, mmu_idx=1, probe=false, retaddr=140737304136646) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/target/riscv/cpu_helper.c:451
+451	    ret = get_physical_address(env, &pa, &prot, address, access_type, mmu_idx);
+Value returned is $1 = 0
+C-HOST BARE physical=0x80206000 prot=7
+Temporary breakpoint 2 at 0x5555559174fd: file /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/target/riscv/cpu_helper.c, line 474.
+
+Thread 3 "qemu-system-ris" hit Temporary breakpoint 2, riscv_cpu_tlb_fill (cs=0x5555564e1f20, address=2149605376, size=8, access_type=MMU_DATA_STORE, mmu_idx=1, probe=false, retaddr=140737304136646) at /home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/target/riscv/cpu_helper.c:474
+474	        return true;
+C-HOST BARE still fills software TLB PASS
+[Inferior 1 (process 10792) killed]

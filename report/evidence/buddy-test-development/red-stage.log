@@ -1,0 +1,1 @@
+PANIC tests/buddy_host.c:38: assertion failed: nr_free_pages() == CAPACITY

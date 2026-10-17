@@ -1,0 +1,11 @@
+{
+  "status": "COMPLETE",
+  "updated_date": "2026-10-16",
+  "source": "User-captured real Windows Terminal windows",
+  "terminal_images": 8,
+  "browser_images_in_delivery": 0,
+  "pixel_verification": "All retained pixels match the original rectangular crop exactly",
+  "manifest": "logs/image_crop_manifest.json",
+  "captured_images": 9,
+  "report_usage": "Eight experiment-run figures; source-hash verification archived locally"
+}

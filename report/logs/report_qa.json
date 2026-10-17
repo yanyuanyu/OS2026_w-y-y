@@ -1,0 +1,41 @@
+{
+  "result": "PASS",
+  "submission_branch": "lab2",
+  "submission_root": [
+    "code",
+    "report"
+  ],
+  "prompt_file": "report/prompt.md",
+  "acceptance_run_id": "498ef138-c501-4c5b-8c41-1ccb9ef12637",
+  "source_files_matched": 59,
+  "relative_links_checked": 94,
+  "images": [
+    "01-build.png",
+    "02-grade.png",
+    "03-bestfit-host.png",
+    "04-buddy-host.png",
+    "05-buddy-qemu.png",
+    "06-boundaries.png",
+    "07-guest-gdb.png",
+    "09-bestfit-qemu.png"
+  ],
+  "template_chapters": 6,
+  "structured_prompts": 4,
+  "notes": [
+    "Host-QEMU4.1.1 debugging traces by Yang Siyuan; final local kernel and guest runs use QEMU7",
+    "All members AI tool/model provided by user: ChatGPT / GPT-6.1-sol"
+  ],
+  "latest_full_review_run_id": "56379435-9f70-4ed1-a484-6a3c67a61ff4",
+  "latest_verification_steps": 8,
+  "screenshot_status": {
+    "status": "COMPLETE",
+    "updated_date": "2026-10-16",
+    "source": "User-captured real Windows Terminal windows",
+    "terminal_images": 8,
+    "browser_images_in_delivery": 0,
+    "pixel_verification": "All retained pixels match the original rectangular crop exactly",
+    "manifest": "logs/image_crop_manifest.json",
+    "captured_images": 9,
+    "report_usage": "Eight experiment-run figures; source-hash verification archived locally"
+  }
+}

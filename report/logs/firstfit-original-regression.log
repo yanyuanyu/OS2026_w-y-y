@@ -1,0 +1,2 @@
+PANIC /mnt/c/Users/13789/Desktop/操作系统/实验/lab2/lab2/lab2_new/evidence/firstfit-host/harness.c:27: assertion failed: le->next->prev == le && le->prev->next == le
+Original First-Fit: expected broken-link assertion (regression reproduced)

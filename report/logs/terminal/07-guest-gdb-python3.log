@@ -1,0 +1,30 @@
+$ python3 tools/debug_guest.py
+make: Nothing to be done for 'TARGETS'.
+0x0000000000001000 in ?? ()
+Hardware assisted breakpoint 1 at 0xffffffffc02000d6: file kern/init/init.c, line 30.
+
+Breakpoint 1, kern_init () at kern/init/init.c:30
+30	    memset(edata, 0, end - edata);
+GDB satp=0x8000000000080205 root=0x80205000 VA=0xffffffffc02000d6 index=511 PTE=0x200000cf
+GDB SV39 WALK PASS: PA=0x802000d6 leaf_size=0x40000000
+Hardware assisted breakpoint 2 at 0xffffffffc02013f2: file kern/mm/c_debug_probe.c, line 8.
+
+Breakpoint 2, c_memory_probe () at kern/mm/c_debug_probe.c:8
+8	    asm volatile("sfence.vma" ::: "memory");
+Hardware assisted breakpoint 3 at 0xffffffffc020140a: file kern/mm/c_debug_probe.c, line 9.
+
+Breakpoint 3, 0xffffffffc020140a in c_memory_probe () at kern/mm/c_debug_probe.c:9
+9	    c_probe_word = 0x1122334455667788ULL;
+=> 0xffffffffc020140a <c_memory_probe+24>:	sd	a4,-1030(a3)
+10	    c_probe_word = 0x8877665544332211ULL;
+GDB STORE VA=0xffffffffc0208000 PA=0x80208000 VALUE=0x1122334455667788
+Hardware assisted breakpoint 4 at 0xffffffffc0201412: file kern/mm/c_debug_probe.c, line 10.
+
+Breakpoint 4, 0xffffffffc0201412 in c_memory_probe () at kern/mm/c_debug_probe.c:10
+10	    c_probe_word = 0x8877665544332211ULL;
+=> 0xffffffffc0201412 <c_memory_probe+32>:	sd	a5,-1038(a4)
+0xffffffffc0201416	11	}
+GDB STORE VA=0xffffffffc0208000 PA=0x80208000 VALUE=0x8877665544332211
+GDB TWO STORE STEPS PASS
+[Inferior 1 (process 1) detached]
+

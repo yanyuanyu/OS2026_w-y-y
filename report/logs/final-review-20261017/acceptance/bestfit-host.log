@@ -1,0 +1,22 @@
+$ bash tests/bestfit/run_host.sh
+=== Current environment ===
+Linux 6.6.87.2-microsoft-standard-WSL2
+gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0
+=== Compile real source with AddressSanitizer + UndefinedBehaviorSanitizer ===
+COMPILE PASS
+Lab2 B: real Best-Fit C implementation / host verification
+PASS H01 unchanged teacher basic_check
+PASS H02 unchanged teacher best_fit_check
+PASS H03 minimum suitable block and split (8,4,6 -> request 3 selects 4)
+PASS H04 exact fit removes only the selected block
+PASS H05 equal-size tie selects the lower address
+PASS H06 multiple registrations: tail insertion and two-sided coalescing
+PASS H07 high-address free preserves tail backward link
+PASS H08 middle free joins predecessor and successor
+PASS H09 split allocations fully restore the original block
+PASS H10 shortage and fragmentation failures leave all state unchanged
+PASS H11 single-page exhaustion, recovery and reserved-region protection
+PASS random seed=0x02413682 operations=10000 (independent bitmap oracle)
+PASS random seed=0x20261014 operations=10000 (independent bitmap oracle)
+PASS random seed=0xdeadbeef operations=10000 (independent bitmap oracle)
+HOST RESULT: 11 deterministic tests + 30000 randomized operations PASS

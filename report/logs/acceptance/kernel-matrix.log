@@ -1,0 +1,6 @@
+$ python3 tools/verify_c.py
+QEMU bestfit 128MiB PASS
+QEMU firstfit 128MiB PASS
+QEMU buddy 64MiB PASS
+QEMU buddy 128MiB PASS
+QEMU buddy 256MiB PASS

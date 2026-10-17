@@ -1,0 +1,80 @@
+{
+  "checked_date": "2026-10-17",
+  "os_release": {
+    "PRETTY_NAME": "Ubuntu 22.04.5 LTS",
+    "VERSION_ID": "22.04",
+    "ID": "ubuntu"
+  },
+  "kernel": "6.6.87.2-microsoft-standard-WSL2",
+  "host_architecture": "x86_64",
+  "tools": {
+    "gcc": {
+      "path": "/usr/bin/gcc",
+      "version": "gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0"
+    },
+    "riscv64-unknown-elf-gcc": {
+      "path": "/home/yyy/compiler-env/toolchains/riscv-elf-toolchains/bin/riscv64-unknown-elf-gcc",
+      "version": "riscv64-unknown-elf-gcc (g1b306039ac4) 15.1.0"
+    },
+    "riscv64-unknown-elf-ld": {
+      "path": "/home/yyy/compiler-env/toolchains/riscv-elf-toolchains/bin/riscv64-unknown-elf-ld",
+      "version": "GNU ld (GNU Binutils) 2.45"
+    },
+    "riscv64-unknown-elf-objcopy": {
+      "path": "/home/yyy/compiler-env/toolchains/riscv-elf-toolchains/bin/riscv64-unknown-elf-objcopy",
+      "version": "GNU objcopy (GNU Binutils) 2.45"
+    },
+    "riscv64-unknown-elf-objdump": {
+      "path": "/home/yyy/compiler-env/toolchains/riscv-elf-toolchains/bin/riscv64-unknown-elf-objdump",
+      "version": "GNU objdump (GNU Binutils) 2.45"
+    },
+    "riscv64-unknown-elf-gdb": {
+      "path": "/home/yyy/compiler-env/toolchains/riscv-elf-toolchains/bin/riscv64-unknown-elf-gdb",
+      "version": "GNU gdb (GDB) 16.3.90.20250610-git"
+    },
+    "qemu-system-riscv64": {
+      "path": "/opt/qemu/bin/qemu-system-riscv64",
+      "version": "QEMU emulator version 7.0.0"
+    },
+    "make": {
+      "path": "/usr/bin/make",
+      "version": "GNU Make 4.3"
+    },
+    "python3": {
+      "path": "/usr/bin/python3",
+      "version": "Python 3.10.12"
+    },
+    "git": {
+      "path": "/usr/bin/git",
+      "version": "git version 2.34.1"
+    }
+  },
+  "windows": {
+    "architecture": "x64",
+    "display_version": "25H2",
+    "build": "26200.9711",
+    "cpu": "Intel(R) Core(TM) i7-14650HX"
+  },
+  "target": {
+    "machine": "virt",
+    "architecture": "riscv64",
+    "harts": 1,
+    "default_ram_mib": 128,
+    "tested_ram_mib": [
+      64,
+      128,
+      256
+    ],
+    "page_size": 4096,
+    "translation_mode": "Sv39",
+    "kernel_entry_pa": "0x80200000",
+    "kernel_link_va": "0xffffffffc0200000"
+  },
+  "firmware": {
+    "version": "OpenSBI v1.0",
+    "runtime_sbi": "0.3",
+    "base_pa": "0x80000000",
+    "kernel_mode": "S-mode",
+    "source_log": "logs/acceptance/delivery-make-qemu.log"
+  }
+}

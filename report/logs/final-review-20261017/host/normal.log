@@ -1,0 +1,5 @@
+HOST sizes, alignment, overflow, restoration PASS
+HOST unaligned ranges, reserved holes, multi-map, fragmentation PASS
+HOST maximum order and rounding boundary PASS
+HOST 12000 seeded operations, bitmap overlap oracle PASS
+HOST ALL PASS

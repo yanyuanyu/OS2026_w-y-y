@@ -1,0 +1,20 @@
+# run_id=a84e2392-9f1d-4b88-9bcb-c1d53af557e1
+rm -f -r obj bin
++ cc kern/init/entry.S
++ cc kern/init/init.c
++ cc kern/libs/stdio.c
++ cc kern/debug/panic.c
++ cc kern/driver/console.c
++ cc kern/driver/dtb.c
++ cc kern/mm/best_fit_pmm.c
++ cc kern/mm/buddy_pmm.c
++ cc kern/mm/buddy_test.c
++ cc kern/mm/c_debug_probe.c
++ cc kern/mm/default_pmm.c
++ cc kern/mm/pmm.c
++ cc libs/printfmt.c
++ cc libs/readline.c
++ cc libs/sbi.c
++ cc libs/string.c
++ ld bin/kernel
+riscv64-unknown-elf-objcopy bin/kernel --strip-all -O binary bin/ucore.img

@@ -1,0 +1,116 @@
+{
+  "run_id": "a84e2392-9f1d-4b88-9bcb-c1d53af557e1",
+  "status": "PASS",
+  "results": [
+    {
+      "backend": "bestfit",
+      "memory_MiB": 128,
+      "result": "PASS",
+      "command": [
+        "qemu-system-riscv64",
+        "-machine",
+        "virt",
+        "-m",
+        "128",
+        "-smp",
+        "1",
+        "-nographic",
+        "-bios",
+        "default",
+        "-monitor",
+        "none",
+        "-kernel",
+        "/mnt/c/Users/13789/Desktop/\u64cd\u4f5c\u7cfb\u7edf/\u5b9e\u9a8c/lab2/lab2/lab2_new/bin/ucore.img"
+      ],
+      "log": "evidence/qemu/bestfit-128MiB.log"
+    },
+    {
+      "backend": "firstfit",
+      "memory_MiB": 128,
+      "result": "PASS",
+      "command": [
+        "qemu-system-riscv64",
+        "-machine",
+        "virt",
+        "-m",
+        "128",
+        "-smp",
+        "1",
+        "-nographic",
+        "-bios",
+        "default",
+        "-monitor",
+        "none",
+        "-kernel",
+        "/mnt/c/Users/13789/Desktop/\u64cd\u4f5c\u7cfb\u7edf/\u5b9e\u9a8c/lab2/lab2/lab2_new/bin/firstfit/ucore.img"
+      ],
+      "log": "evidence/qemu/firstfit-128MiB.log"
+    },
+    {
+      "backend": "buddy",
+      "memory_MiB": 64,
+      "result": "PASS",
+      "command": [
+        "qemu-system-riscv64",
+        "-machine",
+        "virt",
+        "-m",
+        "64",
+        "-smp",
+        "1",
+        "-nographic",
+        "-bios",
+        "default",
+        "-monitor",
+        "none",
+        "-kernel",
+        "/mnt/c/Users/13789/Desktop/\u64cd\u4f5c\u7cfb\u7edf/\u5b9e\u9a8c/lab2/lab2/lab2_new/bin/buddy/ucore.img"
+      ],
+      "log": "evidence/qemu/buddy-64MiB.log"
+    },
+    {
+      "backend": "buddy",
+      "memory_MiB": 128,
+      "result": "PASS",
+      "command": [
+        "qemu-system-riscv64",
+        "-machine",
+        "virt",
+        "-m",
+        "128",
+        "-smp",
+        "1",
+        "-nographic",
+        "-bios",
+        "default",
+        "-monitor",
+        "none",
+        "-kernel",
+        "/mnt/c/Users/13789/Desktop/\u64cd\u4f5c\u7cfb\u7edf/\u5b9e\u9a8c/lab2/lab2/lab2_new/bin/buddy/ucore.img"
+      ],
+      "log": "evidence/qemu/buddy-128MiB.log"
+    },
+    {
+      "backend": "buddy",
+      "memory_MiB": 256,
+      "result": "PASS",
+      "command": [
+        "qemu-system-riscv64",
+        "-machine",
+        "virt",
+        "-m",
+        "256",
+        "-smp",
+        "1",
+        "-nographic",
+        "-bios",
+        "default",
+        "-monitor",
+        "none",
+        "-kernel",
+        "/mnt/c/Users/13789/Desktop/\u64cd\u4f5c\u7cfb\u7edf/\u5b9e\u9a8c/lab2/lab2/lab2_new/bin/buddy/ucore.img"
+      ],
+      "log": "evidence/qemu/buddy-256MiB.log"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+0x0000000000001000 in ?? ()
+Hardware assisted breakpoint 1 at 0xffffffffc0200fd4: file kern/mm/pmm.c, line 43.
+
+Breakpoint 1, pmm_init () at kern/mm/pmm.c:147
+147	    init_pmm_manager();
+[Inferior 1 (process 1) detached]

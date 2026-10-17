@@ -1,0 +1,1 @@
+PANIC kern/mm/buddy_pmm.c:81: assertion failed: n > 0

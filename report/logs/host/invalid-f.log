@@ -1,0 +1,1 @@
+PANIC kern/mm/buddy_pmm.c:18: assertion failed: n > 0 && n <= npage - nbase - index

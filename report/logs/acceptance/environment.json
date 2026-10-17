@@ -1,0 +1,25 @@
+{
+  "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.35",
+  "tools": {
+    "gcc": {
+      "path": "/usr/bin/gcc",
+      "version": "gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0"
+    },
+    "riscv64-unknown-elf-gcc": {
+      "path": "/home/yyy/compiler-env/toolchains/riscv-elf-toolchains/bin/riscv64-unknown-elf-gcc",
+      "version": "riscv64-unknown-elf-gcc (g1b306039ac4) 15.1.0"
+    },
+    "qemu-system-riscv64": {
+      "path": "/opt/qemu/bin/qemu-system-riscv64",
+      "version": "QEMU emulator version 7.0.0"
+    },
+    "make": {
+      "path": "/usr/bin/make",
+      "version": "GNU Make 4.3"
+    },
+    "riscv64-unknown-elf-gdb": {
+      "path": "/home/yyy/compiler-env/toolchains/riscv-elf-toolchains/bin/riscv64-unknown-elf-gdb",
+      "version": "GNU gdb (GDB) 16.3.90.20250610-git"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "source": "/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1",
+  "binary": "/home/yangweb/lab2-c-qemu-4.1.1/build/riscv64-softmmu/qemu-system-riscv64",
+  "configure": [
+    "/home/yangweb/lab2-c-qemu-4.1.1/qemu-4.1.1/configure",
+    "--target-list=riscv64-softmmu",
+    "--enable-debug",
+    "--disable-werror",
+    "--disable-strip",
+    "--disable-docs",
+    "--disable-gtk",
+    "--disable-sdl",
+    "--disable-vnc",
+    "--disable-curses",
+    "--extra-cflags=-O0"
+  ],
+  "version": "QEMU emulator version 4.1.1\nCopyright (c) 2003-2019 Fabrice Bellard and the QEMU Project developers\n",
+  "download_url": "https://download.qemu.org/qemu-4.1.1.tar.xz",
+  "download_sha256": "ed6fdbbdd272611446ff8036991e9b9f04a2ab2e3ffa9e79f3bab0eb9a95a1d2"
+}

@@ -1,325 +1,242 @@
-# Lab 1 提示词汇总
+# Lab2 提示词汇总
 
-## 说明
+小组成员：2413681 王优、2413682 严苑毓、2413636 杨思远。
 
-本文件不是聊天记录的逐字导出，而是对本实验中实际使用过的提问进行归并、补全和结构化后的“最终有效提示词”。整理时保留了真实任务、真实材料和真实验证结果，没有虚构代码修改或未执行的测试。其目的不仅是得到结论，还要让 AI 的回答能够被源码、工具输出和实验截图复核。
+本文件汇总本实验的四份最终任务规格：物理内存初始化、First-Fit 分析与 Best-Fit 实现、Buddy 实现与接入、Buddy 独立测试。按成员交付规格和最终采用版本整理，并对照老师《提示词如何撰写》复核。各模块对应的实现、验证与迭代过程见 [实验报告](report.md)。
 
-本次使用提示词时遵循以下证据优先级：
+# 模块一：物理内存初始化
 
-1. 当前课程提供的 Lab 1 源码、实验报告模板和课堂记录；
-2. 当前机器上的实际编译、运行与 GDB 输出；
-3. 对上述证据的原理解释；
-4. 往届报告只用于参考章节组织方式，不能覆盖当前材料或代替实测。
+负责人：2413681 王优。按最终源码整理，并对照《提示词如何撰写》复核的任务规格。
+
+[PROMPT]
+
+任务：在 kern/mm/pmm.c 的 lab2 function1 标记处完成物理内存初始化，使内核能够依据 DTB 建立 Page 描述符，保留已占用区域，并把剩余完整页交给当前物理页分配器。
+操作要求：直接修改工程中的实际文件；实现范围为 page_init() 及其内部辅助逻辑。沿用现有 DTB 解析、启动映射、公共头文件和 PMM 接口，保留原检查函数、lab2 标记及负责人学号。
+输出要求：交付可构建的源码，输出管理的物理范围、描述符数量及地址、空闲起点；执行构建和初始化边界检查，记录命令、结果及异常原因。
+
+[RELY]
+
+- get_memory_base()/get_memory_size() 返回字节单位的 DRAM 基址和长度。
+- PGSIZE、PPN、ROUNDUP/ROUNDDOWN、PHYSICAL_MEMORY_OFFSET、PADDR、pa2page、链接符号 end，以及 nbase=DRAM_BASE/PGSIZE。
+- struct Page 的 flags、property、ref，SetPageReserved、set_page_ref，以及已初始化的 pmm_manager->init_memmap(base,n)。
+- 当前 QEMU virt 使用从 DRAM_BASE 起的固定基址单段 DRAM，启动页表覆盖其中的 1 GiB 窗口。
+
+[GUARANTEE]
+
+```c
+static void page_init(void);
+```
+
+该函数建立 va_pa_offset、npage、pages 和当前 PMM 的初始空闲状态，供 pmm_init() 后续检查和分配使用。
+
+[SPECIFICATION]
+
+## page_init
+
+Pre-Condition：DTB 解析完成，内核运行于规定直映区，当前 PMM 已执行 init。
+
+Post-Condition（成功）：va_pa_offset 等于工程规定的直映偏移；npage 是管理范围末端的排他物理页号；pages[0] 对应 nbase，数组共有 npage-nbase 项。描述符数组从 ROUNDUP(end,PGSIZE) 开始。固件窗口、内核和描述符数组占用的页面保持 Reserved；数组之后到管理末端的完整页已登记到当前 PMM，初始空闲页数与该区间页数一致。
+
+Case 1（有效范围）：物理末端按页向下对齐；尾部不足一页的字节位于管理范围之外。每个描述符与物理页一一对应，初始引用计数为 0。
+Case 2（非法范围）：零基址、零长度、地址加法溢出、非对齐或非预期基址、超出启动映射窗口时，打印原因并 panic。
+Case 3（元数据容量不足）：描述符长度计算或对齐溢出、内核与数组占满可用内存时，打印原因并 panic；数组写入和空闲区登记以全部容量检查通过为前提。
+
+Requirements：使用现有地址转换与 PMM 接口维持系统协作。实际构建并启动内核；通过 GDB 修改 DTB 解析后的参数，分别验证正常尾页、零基址、零长度、加法溢出、映射越界、错误基址和可用空间耗尽。正常案例核对地址、页数和状态，异常案例核对对应 panic。
 
 ---
 
-## 提示词 1：建立实验全局认识并划定个人任务
+# 模块二：First-Fit 分析与 Best-Fit 实现
 
-```markdown
-[角色]
-你是一名熟悉 RISC-V、QEMU、OpenSBI 和 uCore 启动过程的操作系统实验助教。
+负责人：2413682 严苑毓。按本次采用的算法、接口与验证过程整理，并对照《提示词如何撰写》复核的最终规格。
 
-[输入材料]
-请读取当前工作区中的 Lab 1 源码、实验报告模板.md、课堂文字记录，以及组长给出的 A/B/C 分工截图。不要依赖其他版本 uCore 的先验印象。
+[PROMPT]
 
-[任务]
-1. 用“源代码如何变成镜像—虚拟机如何启动—OpenSBI 如何交接—内核如何进入 C 函数”的主线解释本实验。
-2. 分开列出所有成员都必须完成的内容，以及 A、B、C 三人的深入负责内容。
-3. 本成员选择 A，请明确 A 的源码范围、练习题、需要形成的截图证据和答辩时必须能解释的问题。
-4. 判断本实验是代码填空、源码阅读还是动态调试实验；若没有 TODO，不要虚构代码修改任务。
+任务：结合 kern/mm/default_pmm.c 解释 First-Fit 的初始化、登记、分配、释放和合并；在 kern/mm/best_fit_pmm.c 的 lab2 function2-2 标记处完成 Best-Fit 连续物理页管理模块，并在 pmm.c 的 init_pmm_manager() 默认选择 best_fit_pmm_manager。Best-Fit 从所有足够大的空闲块中选择长度最小者，长度相同时选择低地址块。
+操作要求：直接修改实际文件；实现范围为 Best-Fit 管理器、模块内 static 辅助函数及默认管理器选择。保留 basic_check()/best_fit_check() 全文、公共 Page/free_area_t/pmm_manager 结构和宏、lab2 标记与负责人学号，沿用物理内存初始化模块提供的接口。
+输出要求：交付完整源码与注册结果；说明 First-Fit 和 Best-Fit 的选择差异、复杂度及改进方向。实际编译、运行原检查与补充测试，保存命令和输出；启动输出应显示当前管理器为 best_fit_pmm_manager。
 
-[输出格式]
-- 一段不超过 200 字的实验概述；
-- 一张“共同任务 / A / B / C”分工表；
-- 一条按执行顺序排列的实验流程；
-- A 成员的完成标准清单。
+[RELY]
 
-[约束]
-当前报告是 A 成员的个人分工报告：共同编译、运行和启动链需要交代，但正文应重点分析 entry.S、init.c、tools/kernel.ld、0x80200000、启动栈、kern_init() 和练习 1。B、C 专项只概述与 A 结论直接相关的部分。
+- Page 的 ref、flags、property、page_link；free_area_t 的 free_list、nr_free。
+- PageReserved、PageProperty、SetPageProperty/ClearPageProperty、set_page_ref 和 assert。
+- list_init、list_next/list_prev、list_add/list_add_before、list_del、le2page 等当前链表接口。
+- pmm_manager 的 init、init_memmap、alloc_pages、free_pages、nr_free_pages、check，以及公共分配接口的转发约定。
+- 原检查函数对模块内 free_list 和 nr_free 的访问及状态约定。
+
+[GUARANTEE]
+
+```c
+static void best_fit_init(void);
+static void best_fit_init_memmap(struct Page *base, size_t n);
+static struct Page *best_fit_alloc_pages(size_t n);
+static void best_fit_free_pages(struct Page *base, size_t n);
+static size_t best_fit_nr_free_pages(void);
+const struct pmm_manager best_fit_pmm_manager;
 ```
 
-**用途与价值：** 先确定报告边界，避免把“小组共同完成”误写成“三个人各写一份完全相同的内容”，也避免把 B、C 的专项分析写成 A 的主体。
+上述函数经管理器注册供公共 PMM 接口调用；模块内部辅助函数使用 static。
+
+[SPECIFICATION]
+
+## best_fit_init
+
+Pre-Condition：建立一套新的分配器状态。
+Post-Condition：空闲链表为空，nr_free=0。
+
+## best_fit_init_memmap
+
+Pre-Condition：n>0，base 起的 n 个描述符有效且均为 Reserved，区间由初始化模块确认为可分配页。
+Post-Condition：新登记页的引用计数为 0，Reserved 状态已清除；所有空闲块按地址递增排列，物理相邻块已合并。仅空闲块首页具有 PageProperty，首页 property 等于块长，nr_free 增加 n。
+Case：分离区间分别保留；与既有空闲块相邻的区间形成连续大块。n=0 时触发断言。
+
+## best_fit_alloc_pages
+
+Pre-Condition：正常请求满足 n>0；空闲块互斥，地址顺序、首页标记、块长与 nr_free 一致。
+Post-Condition（成功）：返回最小合适块起点，交付其前 n 个连续页；等长块选择低地址者。返回区间与其他持有区间互斥，各页引用计数为 0，分配首页的 PageProperty 已清除且 property=0，nr_free 减少 n。
+Case 1（精确匹配）：整块从空闲集合移除；找到精确匹配后可结束搜索。
+Case 2（所选块更大）：剩余部分成为地址有序的空闲块，其首页标记和长度准确。
+Case 3（分配失败）：n 超过空闲总数，或总数足够但不存在 n 页连续块时返回 NULL；链表、页状态和 nr_free 保持调用前状态。
+Case 4（非法请求）：n=0 时触发断言。
+
+## best_fit_free_pages
+
+Pre-Condition：正常调用传入 n>0 的有效区间，调用者持有其中全部页面，区间与当前空闲集合互斥；这些页的 Reserved 和 PageProperty 均已清除。
+Post-Condition：回收页的引用计数为 0，nr_free 增加 n；回收区间在空闲集合中出现一次，所有物理连续邻块合并为一个块，链表保持地址递增。合并后仅新块首页保留 PageProperty 与正确块长，原首页转为内部页时 property=0。
+Case：分别覆盖链首、链中、链尾插入，以及与前块、后块、双侧相邻和完全分离的情况。n=0 时触发断言。
+Requirements：单次回收的计数增量恰为 n，邻块合并保持空闲页总数；完整分配后再释放可恢复原有空闲覆盖。
+
+## best_fit_nr_free_pages 与管理器注册
+
+Pre-Condition：管理器初始化完成，空闲集合一致。
+Post-Condition：查询返回当前空闲页总数，查询前后状态一致；管理器名称为 best_fit_pmm_manager，check 绑定原 best_fit_check，pmm.c 默认选择该管理器。
+
+Requirements（模块验证）：直接编译真实 C 源码并保留原检查。用确定性案例核对最小块、等长选择、精确/拆分、尾插、双向合并、多区间及失败状态；用独立位图核对空闲覆盖、持有区间互斥和计数。保留本次 11 项确定性与三种种子各 10,000 次随机操作，启用 ASan/UBSan，最终在 RISC-V/QEMU 中启动并执行 make grade。各条规格应可对应到断言、源码检查或运行记录。
 
 ---
 
-## 提示词 2：先检查真实环境，再给出执行方案
+# 模块三：Buddy 实现与内核接入
 
-```markdown
-[背景]
-宿主机是 Windows，实验目录位于 Windows 文件系统中，但课程工具链可能安装在 WSL。不要根据目录名称猜测环境，也不要一开始就建议重新安装。
+负责人：2413636 杨思远。按 Buddy 重写方案与最终接口整理，并对照《提示词如何撰写》复核的实现规格。
 
-[任务]
-1. 检查当前可用的 WSL 发行版以及实验实际使用的 Linux 环境。
-2. 分别确认 riscv64-unknown-elf-gcc、riscv64-unknown-elf-gdb、qemu-system-riscv64 和 make 是否存在，并记录路径、版本。
-3. 判断编译、QEMU 运行、GDB 调试应该在 PowerShell 还是 WSL 终端执行。
-4. 检查源码路径中包含中文时是否会影响 WSL 访问，并给出实际进入目录的命令。
+[PROMPT]
 
-[验收条件]
-- 所有版本号必须来自命令输出；
-- 明确区分“未安装”和“没有加入当前 shell 的 PATH”；
-- 只有检查确认缺失时才能提出安装命令；
-- 输出一张环境表和一组可以直接执行的命令。
+任务：在当前 ucore 物理内存框架内完成 Buddy 分配模块，交付 kern/mm/buddy_pmm.c/.h，并通过 pmm.c 和 Makefile 接入。模块按二次幂块管理空闲页，支持分裂、伙伴合并及整块回收；请求 n 页时实际交付向上取整的幂次块。
+操作要求：直接修改实际文件，修改范围为 Buddy 模块及管理器、构建选择位置；沿用公共 ABI，保留物理内存初始化、Best-Fit 的最终实现和原检查函数。默认 Best-Fit，PMM_ALGO=buddy 选择 Buddy，各后端使用独立对象目录。
+输出要求：交付可构建的源码与结构验证接口，说明实际占用、计数和释放约定，并记录后端构建与检查结果。
+
+[RELY]
+
+- pmm_manager 允许分配至少 n 页，空闲计数反映实际占用；公共 alloc_pages/free_pages 经当前管理器转发。
+- Page.property、flags、ref、page_link，Reserved/Property 状态及双向循环链表接口。
+- pages[0] 对应 nbase=0x80000，该页号在最大 2^18 页边界上对齐；npage-nbase 表示描述符容量。
+- 物理内存初始化模块交给 init_memmap 的区间具有有效且处于 Reserved 状态的描述符；当前内核按单 hart 顺序执行。
+
+[GUARANTEE]
+
+```c
+static void buddy_init(void);
+static void buddy_init_memmap(struct Page *base, size_t n);
+static struct Page *buddy_alloc_pages(size_t n);
+static void buddy_free_pages(struct Page *base, size_t n);
+static size_t buddy_nr_free_pages(void);
+void buddy_validate(void);
+const struct pmm_manager buddy_pmm_manager;
 ```
 
-**用途与价值：** 确认本次实际环境为 WSL Ubuntu 22.04、RISC-V GCC 15.1.0、GDB 16.3.90、QEMU 7.0.0 和 Make 4.3，避免在 PowerShell 中误判工具链缺失。
+管理器 check 绑定 buddy_test.c 的 buddy_check()；模块内部辅助函数使用 static。
+
+[SPECIFICATION]
+
+## 状态与调用约定
+
+维护 0～18 阶空闲块，阶 o 的块含 2^o 页，块起点相对 pages 的索引按块长对齐。Page flags bit2 标记实际已分配页，分配头 property 记录实际块长。调用者成对保存 base 与原请求 n，并以原 n 释放整个块。空闲块仅首页设置 PageProperty，空闲计数按实际页数计算。
+
+## buddy_init
+
+Pre-Condition：建立新的 Buddy 状态。
+Post-Condition：各阶链表为空，free_count=0。
+
+## buddy_init_memmap
+
+Pre-Condition：正常登记满足 n>0，描述符区间有效且全部为 Reserved。
+Post-Condition：该区间由互斥、对齐的二次幂空闲块完整覆盖，新登记页 ref=0，free_count 增加 n；可合并的同阶伙伴已合并。
+Case 1：非规则长度、分离区间及相邻区间反序登记均得到对应空闲覆盖；保留洞维持 Reserved。
+Case 2：零页、无效描述符、越界或重复登记触发断言；完整区间检查是登记和清理页面状态的前提。
+
+## buddy_alloc_pages
+
+Pre-Condition：正常请求满足 n>0；阶链表、块状态和页计数一致。
+Post-Condition（成功）：actual 为覆盖 n 的最小二次幂，返回区间按 actual 页对齐且与其他持有区间互斥；实际页均标记 bit2、ref=0，分配头 property=actual，free_count 减少 actual。其余空闲页仍由合法阶块完整覆盖。
+Case 1：对应阶已有块或存在更大块时，可获得所需块；较大块分裂后的余块保持可分配。
+Case 2：总量不足、缺少可用连续块或请求超过最大阶时返回 NULL，保留链表、页面状态与计数。SIZE_MAX 请求属于超阶失败。
+Case 3：n=0 时触发断言。
+
+## buddy_free_pages
+
+Pre-Condition：正常释放传入完整分配块及原请求 n，所有实际页 ref=0。
+Post-Condition：actual 页全部恢复为空闲状态，free_count 增加 actual；同阶伙伴按相对索引异或关系合并，所有可合并伙伴已合并，持有的其他区间维持原状。
+Case：零页、无效或越界描述符、内部指针、重复释放、与块长不匹配的请求阶、Reserved 页面及非零引用触发断言。
+Requirements：描述符范围、块对齐、实际块长及逐页状态检查通过后才回收页面；释放语义以分配头记录的 actual 和调用者保存的原 n 为依据。
+
+## buddy_nr_free_pages
+
+Pre-Condition：初始化完成，状态一致。
+Post-Condition：返回剩余实际页总数，查询前后状态一致。
+
+## buddy_validate
+
+Pre-Condition：测试或调试阶段的稳定状态。
+Post-Condition：一致状态正常返回；结构异常触发断言。检查涵盖链表双向关系、块范围/对齐/长度、页状态、计数及伙伴合并完整性。
+Requirements：全结构慢检查由测试路径调用，日常分配释放维持阶结构及实际页状态。通过独立宿主测试和 QEMU 内核检查验证上述结果。
 
 ---
 
-## 提示词 3：从源码和链接产物回答练习 1
+# 模块四：Buddy 独立测试
 
-```markdown
-[角色]
-你是本实验 A 部分的代码审阅者。只依据当前仓库文件和当前编译产物回答，不引用其他分支或旧版 uCore。
+负责人：2413636 杨思远。按真实算法与本次测试整理，并对照《提示词如何撰写》复核的测试规格。
 
-[必须读取的文件]
-- tools/kernel.ld
-- kern/init/entry.S
-- kern/init/init.c
-- Makefile
-- 与 cprintf、console、SBI 输出有关的调用链文件（仅用于解释 kern_init 的后续行为）
+[PROMPT]
 
-[核心问题]
-1. 0x80200000 从哪里确定？分别指出链接脚本中的 BASE_ADDRESS、ENTRY 和 ELF 入口之间的关系。
-2. 逐条解释 `la sp, bootstacktop`：它是伪指令还是单条机器指令，如何根据 PC 和符号地址得到最终 sp？
-3. 逐条解释 `tail kern_init`：它如何展开、为什么不保存返回地址、为什么适合 noreturn 的 kern_init？
-4. 解释 `.align PGSHIFT`、`bootstack`、`.space KSTACKSIZE`、`bootstacktop` 如何共同形成启动栈，并计算栈的地址范围和大小。
-5. 按执行顺序解释 kern_init 中 BSS 清零、cprintf 和无限循环；说明 `j 0x8020003a` 为什么是自跳转死循环。
-6. 若 `edata == end`，说明本次为什么没有实际字节需要清零，但为什么清零代码仍然正确且有必要。
+任务：为 Buddy 实现与内核接入模块设计可独立执行的宿主与内核验证，覆盖块大小、对齐、分配互斥、计数、伙伴合并、失败处理和实际内存读写。宿主案例位于 tests/buddy_host.c，内核检查位于 kern/mm/buddy_test.c，并通过管理器 check 运行。
+操作要求：直接修改上述测试及 tools/test_buddy_host.py、tools/verify_c.py 等相应测试脚本，编译真实 buddy_pmm.c，沿用公共 Page/链表头和生产算法接口。用独立占用位图作为区间和计数的外部参照；生产实现与测试分别承担分配和验证职责。
+输出要求：交付可执行测试、实际命令、退出状态及原始日志。正常案例输出检查结果，非法案例核对预期断言；每轮汇总使用独立 run_id，并能追溯本轮构建和执行记录。
 
-[证据要求]
-每个结论都标注为以下三类之一：
-- 源码事实：可在具体文件中直接找到；
-- 工具实测：由 readelf、nm、objdump 或 GDB 输出验证；
-- 原理解释：在前两类证据上作出的推导。
+[RELY]
 
-[输出格式]
-先给“符号—地址—来源—作用”表，再给启动过程逐指令说明，最后用独立小节完整回答练习 1。不要只翻译汇编语句，必须写出执行前后 PC、sp、ra 是否变化。
+- 整块分配、向上取整、传原 n 释放的调用约定，以及 buddy_validate。
+- alloc_pages、free_pages、nr_free_pages、page2pa、va_pa_offset、PGSIZE 和真实 Page/链表定义。
+- 宿主 Page 数组、I/O/panic 适配及 ASan/UBSan；QEMU virt 三后端选择与内存容量参数。
+
+[GUARANTEE]
+
+```c
+// kern/mm/buddy_test.c
+void buddy_check(void);
+// tests/buddy_host.c
+int main(int argc, char **argv);
 ```
 
-**用途与价值：** 这是 A 分工的核心提示词。它要求将源码、符号地址、反汇编和寄存器变化相互印证，而不是只给出“设置栈、跳到 C 函数”的笼统答案。
+同时交付宿主编译/执行脚本 tools/test_buddy_host.py、QEMU 多配置脚本 tools/verify_c.py，以及对应原始输出与运行汇总。
 
----
+[SPECIFICATION]
 
-## 提示词 4：构建并核验 ELF、镜像和关键符号
+## 宿主测试入口
 
-```markdown
-[任务]
-请在当前 Lab 1 目录中进行一次可复现构建，并用只读检查命令验证结果。除非编译失败明确指向源码，否则不要修改实验代码。
+Pre-Condition：每个案例从明确初始状态开始；生产分配器直接参与测试，非法操作在独立子进程执行。
+Post-Condition：正常案例全部断言成立并以 0 退出；错误案例输出 assertion failed 断言失败信息并由适配层以 99 退出；测试脚本同时核对这两个条件后，将其记为该案例通过。ASan/UBSan 对执行路径完成内存和未定义行为检查。
+Case 1（大小）：1～1025 页与最大阶分别核对实际幂次块长、对齐、ref、页状态、计数扣减及恢复；超阶与 SIZE_MAX 返回 NULL，失败前后状态一致。
+Case 2（登记与合并）：起点 3/长度 13 和 [32,64) 共取得 45 页，保留 [16,32) 的洞；相邻 16 页反序登记形成 32 页；两个分离 8 页区间申请 16 页返回 NULL，即使空闲总量等于请求仍按连续性判断。
+Case 3（随机）：固定种子执行 12,000 次操作，以独立位图核对持有区间互斥和空闲计数，最后恢复完整空闲覆盖。
+Case 4（错误）：十一类输入分别验证零页、重复/内部/错误阶释放、保留/越界/NULL/非对齐描述符、重复登记及非零引用保护。任一非法操作被正常接受时，整轮测试失败。
 
-[执行与核验]
-1. 运行 `make clean` 和 `make`，记录是否成功以及 bin/kernel、bin/ucore.img 的大小。
-2. 用 readelf 检查 bin/kernel 的架构、ELF 类型和入口地址。
-3. 用 nm 或 objdump 查找 kern_entry、kern_init、bootstack、bootstacktop、edata、end 和 cprintf。
-4. 反汇编 kern_entry 和 kern_init，说明伪指令展开后的实际指令。
-5. 解释 bin/kernel 与 bin/ucore.img 的用途差异：哪一个包含符号供 GDB 使用，哪一个是供 QEMU 加载的裸镜像。
+## buddy_check
 
-[结果表达]
-输出“命令—关键输出—能够证明的结论”三列表。不要把命令成功等同于启动成功；构建验证和运行验证必须分开。
-```
+Pre-Condition：物理内存初始化模块已登记真实物理空闲页，当前管理器为 Buddy，初始可用页数足以完成案例。
+Post-Condition：多种大小同时持有时区间互斥，各实际页首尾标记读回一致；逐页耗尽后再次分配返回 NULL；全量释放及 100 轮 64 页循环后，空闲页数和结构恢复。
+Requirements：实际运行 64/128/256 MiB Buddy，以及三后端 128 MiB 配置，核对管理器名称、检查完成标记与串口状态；代码中的断言负责检验页面内容和计数。
 
-**用途与价值：** 得到 `kern_entry=0x80200000`、`kern_init=0x8020000a`、`bootstacktop=0x80203000`、`edata=end=0x80203008` 等静态证据，并明确 ELF 与裸镜像的不同角色。
+## 运行脚本与汇总
 
----
-
-## 提示词 5：诊断 QEMU 7.0.0 启动兼容问题
-
-```markdown
-[现象]
-课程 Makefile 使用 `-device loader,file=bin/ucore.img,addr=0x80200000`。在当前 QEMU 7.0.0 中能够看到 OpenSBI 信息，但 `Domain0 Next Address` 显示 0x0，内核字符串没有输出。
-
-[任务]
-1. 检查 Makefile 中 QEMU 的完整参数，并把“镜像字节被放入内存”和“OpenSBI 知道下一阶段入口”作为两个不同条件分析。
-2. 不修改内核源码，使用 `-kernel bin/ucore.img` 做对照实验，观察 OpenSBI 的 Next Address 和最终内核输出是否变化。
-3. 判断问题属于代码错误、镜像错误还是 QEMU/OpenSBI 启动参数兼容差异。
-4. 给出正常运行和 `-s -S` 调试两套完整命令，并说明兼容方案是否改变链接地址、机器指令或实验结论。
-
-[证据边界]
-- 已观察到的终端输出写为“实测”；
-- 对 QEMU 参数语义的解释写为“原因分析”；
-- 若没有查到 QEMU 源码，不要声称定位到了某个内部函数或确定的版本缺陷。
-
-[期望输出]
-形成“原命令现象—对照命令现象—差异—结论”的诊断表，以及一段可直接放入实验报告的兼容性说明。
-```
-
-**用途与价值：** 说明本次为何使用 `-kernel`。该处理只修正 QEMU 与 OpenSBI 的交接参数，不修改 uCore 源码，也不改变 `0x80200000` 的链接和运行结论。
-
----
-
-## 提示词 6：设计可复现的 GDB 启动链验证
-
-```markdown
-[目标]
-使用两个 WSL 终端验证 CPU 的真实控制流：QEMU virt 复位 ROM 0x1000 → OpenSBI 0x80000000 → uCore kern_entry 0x80200000 → kern_init → cprintf → 内核自循环。
-
-[任务]
-1. 给出终端 A 启动 QEMU 的完整命令，使用 `-s -S` 暂停 CPU 并开启默认 GDB Server。
-2. 给出终端 B 启动 RISC-V GDB、加载 bin/kernel 符号和连接 `localhost:1234` 的命令。
-3. 为每个检查点写出：断点命令、继续/单步命令、要查看的寄存器或反汇编、预期关键现象、适合截图的画面。
-4. 特别说明 0x1000 是 QEMU virt 平台复位 ROM 的运行时入口，不是 kernel.ld 中的内核链接地址；1234 来自 QEMU `-s` 的默认端口缩写。
-5. 在 kern_entry 中先记录设置栈前后的 sp，再验证最终 sp 是否等于 bootstacktop；在 kern_init 中检查 edata、end 和 cprintf 调用；最后确认 PC 停留在自跳转指令。
-
-[输出格式]
-- 终端 A / 终端 B 两栏命令；
-- 按时间顺序排列的检查点表；
-- 每一步的“成功判据”和“失败时首先排查项”；
-- 结束 QEMU 和退出 GDB 的方法。
-
-[限制]
-不要只根据静态符号表声称 CPU 已经执行到某地址；动态结论必须由断点、PC 或单步结果支持。
-```
-
-**用途与价值：** 把练习 2 的调试过程作为全组共同证据，同时为 A 部分提供 sp、`kern_init` 和 `cprintf` 的动态验证。
-
----
-
-## 提示词 7：逐张审查测试截图并解释结果
-
-```markdown
-[输入]
-请实际查看 report/images 中的所有截图，不要只按文件名推测内容。
-
-[任务]
-对每张图检查：
-1. 图中命令和关键输出是否清晰、是否足以支撑对应结论；
-2. 地址是否与当前源码、符号表和报告正文一致；
-3. 标题是否准确，尤其区分“命中 cprintf 断点”和“已经完成字符串输出”；
-4. 是否存在重复图片、证据缺口、泄露无关信息或引用路径错误；
-5. 给出每张图应该放入报告的章节和图注。
-
-[需要核对的关键值]
-- ELF 入口和 kern_entry：0x80200000
-- OpenSBI 入口：0x80000000
-- QEMU virt 复位 PC：0x1000
-- bootstack：0x80201000
-- bootstacktop：0x80203000
-- kern_init：0x8020000a
-- edata 与 end：本次均为 0x80203008
-
-[输出格式]
-生成“图片文件名—图中证据—支撑结论—建议图注—是否合格”表。发现不一致时指出应重截还是只需修改文字，不能擅自改变图片内容。
-```
-
-**用途与价值：** 确保报告中的 10 张图分别承担清晰的证明作用，而不是为了数量堆叠截图。
-
----
-
-## 提示词 8：按照模板撰写 A 分工实验报告
-
-```markdown
-[任务背景]
-依据当前工作区的“实验报告模板.md”撰写 Lab 1 报告。报告代表 A 成员的个人分工成果，但实验由三人协作完成，因此应保留全组共同实验流程和必要的 B/C 接口说明。
-
-[必须覆盖]
-1. 实验目的、真实软件环境、小组分工；
-2. 从构建到启动的整体逻辑，以及 QEMU → OpenSBI → uCore 的职责边界；
-3. A 部分详细分析：kernel.ld、entry.S、init.c、0x80200000、启动栈、kern_init 和练习 1；
-4. 实际编译、符号检查、QEMU 启动和 GDB 断点结果；
-5. QEMU 7.0.0 下 `-device loader` 与 `-kernel` 的兼容性处理；
-6. 遇到的问题、解决过程、实验总结和 AI 使用说明；
-7. 用相对路径引用 report/images 中与正文对应的截图。
-
-[写作要求]
-- 每项重要结论尽量采用“源码依据 + 实测现象 + 原理解释”的结构；
-- 明确写出本实验没有补写 TODO，工作重点是阅读、构建、调试和验证；
-- A 部分应显著详细于 B、C 的专项内容；
-- 不复制往届不同版本中的中断、异常、时钟、物理内存管理等内容；
-- 不把 `edata == end` 误写成 BSS 清零代码失效；
-- 不把 QEMU 加载镜像、OpenSBI 初始化平台和 uCore 执行内核代码混为一谈；
-- 不伪造未运行的 `make grade`、代码修改或测试结果；
-- 缺失的组员信息保留醒目的待填写标记。
-
-[输出]
-生成 report/report.md，并在末尾给出一份“尚需人工填写/最终确认”的清单。
-```
-
-**用途与价值：** 形成以 A 分工为主、又能完整说明实验上下文的报告正文。
-
----
-
-## 提示词 9：提交前一致性与证据审计
-
-```markdown
-[角色]
-你是实验报告的最终审阅者，不重写全文，只检查可验证性、前后一致性和提交结构。
-
-[检查对象]
-- report/report.md
-- report/prompt.md
-- report/images/
-- code/ 中的提交源码
-- 原始 Lab 1 源码和本次实际命令输出
-
-[检查清单]
-1. code 和 report 两个目录及指定文件名是否符合提交要求；
-2. Markdown 图片相对路径是否全部存在，图片是否确实支撑附近结论；
-3. 版本号、入口地址、符号地址、栈范围和镜像名称是否全文一致；
-4. 报告是否明确为 A 分工重点，同时保留共同实验基础；
-5. 是否混入往届旧版实验的任务、地址或结论；
-6. 是否把推测写成实测，或把静态地址检查写成动态执行证据；
-7. 是否仍有姓名、学号、AI 工具等待填写项；
-8. 提示词是否与真实实验过程相符，是否错误声称 AI 修改了源码。
-
-[输出格式]
-按“必须修改 / 建议修改 / 已通过”三类列出结果。每个问题给出文件位置、原因和最小修改建议；若某项没有证据，不要替用户编造。
-```
-
-**用途与价值：** 在提交前进行一次独立验收，重点防止地址矛盾、图片失效、分工边界模糊和往届内容误混入。
-
----
-
-## 提示词迭代说明
-
-| 阶段 | 原始需求倾向 | 优化后增加的约束 | 改进效果 |
-|---|---|---|---|
-| V1 | “给我讲一遍实验怎么做” | 指定材料、分工边界和输出结构 | 从泛化讲解变为针对当前 Lab 1 的流程说明 |
-| V2 | “解释 entry.S 和 kern_init” | 强制结合源码、符号、反汇编和寄存器 | 避免只翻译汇编，不解释地址和执行效果 |
-| V3 | “为什么 QEMU 不进内核” | 加入对照实验和事实/推断边界 | 将兼容问题与内核代码错误区分开 |
-| V4 | “写实验报告” | 指定 A 为重点、模板结构、图片证据和验收清单 | 形成可提交且可复核的报告，而非通用文字拼接 |
-
-## 全局约束提示词
-
-```markdown
-仅依据当前 Lab 1 源码、当前实验报告模板、课堂记录和本次实际命令输出工作。对重要结论明确区分“源码事实”“工具实测”“原理解释”。往届报告只用于参考结构，不能作为当前地址、环境和运行结果的证据。不要把其他版本 uCore 的中断、异常、时钟或内存管理任务写入本报告；不要声称运行了未提供的测试；不要伪造代码修改。报告应完整交代共同实验流程，但必须以 A 成员负责的练习 1、内核入口、启动栈和 kern_init 分析为重点。
-```
-
-## 提示词 10：成员 B 的构建、启动与 SBI 输出分析（依据交付内容整理）
-
-> **来源说明：** B 的压缩包没有附原始 AI 对话提示词。以下不是逐字聊天记录，而是依据 B 的交付报告、构建日志和 QEMU 输出重新整理的“最终有效提示词”。报告中的迭代复盘也只描述日志能支持的实验分析和验证步骤，不声称还原了未提供的对话轮次。
-
-````markdown
-[角色]
-你是熟悉 RISC-V 裸机内核构建、QEMU/OpenSBI 启动和 SBI 控制台输出的操作系统实验助教。请协助分析本组 Lab 1 的 B 部分，但只做源码阅读、构建和运行结果解释；不要擅自修改内核代码。
-
-[输入材料]
-1. 当前 Lab 1 源码，重点是 Makefile、tools/function.mk、tools/kernel.ld、kern/init/init.c、libs/printf.c、libs/stdio.c、kern/driver/console.c 和 SBI 相关实现；
-2. B 成员提交的完整运行记录 `B部分-完整运行记录.log`；
-3. 本次实际环境版本、readelf/nm 检查结果以及 QEMU/OpenSBI 的启动输出；
-4. 当前课程的实验报告模板。若某项没有出现在材料里，请明确写“未记录”，不要猜测。
-
-[任务]
-1. 解释 Makefile 如何收集 `.c`/`.S` 源文件，tools/function.mk 如何生成 `.o` 和头文件依赖 `.d`，以及编译器、链接器和 objcopy 如何依次生成 `bin/kernel` 与 `bin/ucore.img`。
-2. 结合实际命令解释关键编译参数的用途，并区分宿主机架构与交叉编译目标架构。
-3. 使用 ELF 检查结果说明 `bin/kernel` 的格式、RISC-V 架构和入口地址；说明 ELF 文件与裸二进制镜像各自适用的场景。
-4. 从源码逐层追踪 `(THU.CST) os is loading ...` 的输出链：`kern_init → cprintf → vcprintf → vprintfmt → cputch → cons_putc → sbi_console_putchar → sbi_call → ecall → OpenSBI → QEMU 虚拟串口`。说明 SBI 调用号和参数寄存器只在源码/日志能确认时写入。
-5. 对比课程 `make qemu` 使用的 `-device loader` 路径与显式 `-kernel bin/kernel` 启动路径。把 OpenSBI 的 `Domain0 Next Address` 和内核字符串作为判据，解释为什么前者日志中的 `Next Address=0x0` 没有进入内核，而显式 `-kernel` 路径进入 `0x80200000`。
-6. 准确解释构建警告、命令退出码和观察超时：不要把 `Clock skew detected` 误写成编译失败；若内核进入无限循环后由 `timeout` 返回 124，应说明这是观察时限结束，而不是内核崩溃。
-7. 按实验报告模板输出 B 模块内容：模块目标/范围、函数与文件、最终提示词、基于证据的工作迭代、测试结论及答辩要点。所有截图必须标明真实来源；没有 B 个人截图时，明确说明并引用日志，不得把 A/C 截图标成 B 的截图。
-
-[证据与输出格式]
-- 先给“构建步骤—命令/规则—产物—证据”表；
-- 再给 `cprintf` 到 QEMU 串口的调用链；
-- 再用对照表列出原始启动方式和 `-kernel bin/kernel` 的实际差异；
-- 每个结论区分“源码事实”“日志实测”“原理解释”；
-- 最后给出简洁的测试结论和答辩说明，并指出未能从交付材料确认的内容。
-
-[边界条件]
-- 不虚构原始 AI 对话、代码修改、工具版本、截图或未执行的测试；
-- 不把 QEMU 装载镜像与 OpenSBI 交接控制权混为一谈；
-- 不宣称 `make grade` 已运行，除非日志确有证据；
-- 若报告、日志、源码之间存在冲突，列出冲突并优先保留可复核的原始输出。
-````
-
-**用途与价值：** 该提示词把 B 部分范围固定在构建链、镜像检查、启动参数对比和 SBI 输出验证，并规定了证据标注和报告格式，减少把猜测写成实验结论的风险。
-
-**迭代记录边界：** B 的交付报告记载本模块阅读已有实现、构建并运行验证，没有修改内核源代码。因此下方所述是由实际工作步骤重建的验证迭代，不是 AI 对话原文，也不代表发生过代码生成/修复。
+Pre-Condition：每轮使用新 run_id，并从本轮实际命令收集退出状态和日志。
+Post-Condition：开始状态为 RUNNING，构建失败、异常退出、超时或完成标记缺失记为 FAIL，全部案例通过后记为 PASS；汇总通过原子更新关联本轮原始日志。新一轮失败覆盖上一轮结果，读取汇总即可识别当前轮次。
+Requirements：保留原始测试输出；汇总结果由退出状态、断言和完成标记共同决定。

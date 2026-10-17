@@ -1,4 +1,4 @@
-PROJ	:= lab1
+PROJ	:= lab2
 EMPTY	:=
 SPACE	:= $(EMPTY) $(EMPTY)
 SLASH	:= /
@@ -13,6 +13,9 @@ ifndef QEMU
 QEMU := qemu-system-riscv64
 endif
 
+ifndef SPIKE
+SPIKE := spike
+endif
 
 # eliminate default suffix rules
 .SUFFIXES: .c .S .h
@@ -27,12 +30,21 @@ HOSTCFLAGS	:= -Wall -O2
 GDB		:= $(GCCPREFIX)gdb
 
 CC		:= $(GCCPREFIX)gcc
-CFLAGS  := -mcmodel=medany -std=gnu99 -Wno-unused -Werror
+CFLAGS  := -mcmodel=medany -std=gnu99 -Wno-unused -Werror 
 CFLAGS	+= -fno-builtin -Wall -O2 -nostdinc $(DEFS)
 CFLAGS	+= -fno-stack-protector -ffunction-sections -fdata-sections
 CFLAGS	+= -g
+CFLAGS2 = $(CFLAGS) -D ucore_test
+PMM_ALGO ?= bestfit
+ifeq ($(filter $(PMM_ALGO),bestfit firstfit buddy),)
+$(error PMM_ALGO must be bestfit, firstfit or buddy)
+endif
+ifeq ($(PMM_ALGO),buddy)
+CFLAGS += -DUSE_BUDDY_PMM
+else ifeq ($(PMM_ALGO),firstfit)
+CFLAGS += -DUSE_FIRST_FIT_PMM
+endif
 CTYPE	:= c S
-
 LD      := $(GCCPREFIX)ld
 LDFLAGS	:= -m elf64lriscv
 LDFLAGS	+= -nostdlib --gc-sections
@@ -50,8 +62,9 @@ SH		:= sh
 TR		:= tr
 TOUCH	:= touch -c
 
-OBJDIR	:= obj
-BINDIR	:= bin
+# Keep A/B's default paths; alternate backends never reuse their object files.
+OBJDIR	:= obj$(if $(filter bestfit,$(PMM_ALGO)),,/$(PMM_ALGO))
+BINDIR	:= bin$(if $(filter bestfit,$(PMM_ALGO)),,/$(PMM_ALGO))
 
 ALLOBJS	:=
 ALLDEPS	:=
@@ -63,6 +76,7 @@ listf_cc = $(call listf,$(1),$(CTYPE))
 
 # for cc
 add_files_cc = $(call add_files,$(1),$(CC),$(CFLAGS) $(3),$(2),$(4))
+add_files_cc2 = $(call add_files,$(1),$(CC),$(CFLAGS2) $(3),$(2),$(4))
 create_target_cc = $(call create_target,$(1),$(2),$(3),$(CC),$(CFLAGS))
 
 # for hostcc
@@ -81,7 +95,7 @@ match = $(shell echo $(2) | $(AWK) '{for(i=1;i<=NF;i++){if(match("$(1)","^"$$(i)
 # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 # include kernel/user
 
-INCLUDE	+= libs 
+INCLUDE	+= libs/
 
 CFLAGS	+= $(addprefix -I,$(INCLUDE))
 
@@ -94,22 +108,22 @@ $(call add_files_cc,$(call listf_cc,$(LIBDIR)),libs,)
 
 KINCLUDE	+= kern/debug/ \
 			   kern/driver/ \
-			   kern/trap/ \
-			   kern/libs/\
 			   kern/mm/ \
 			   kern/arch/
 
 KSRCDIR		+= kern/init \
-			   kern/debug \
 			   kern/libs \
+			   kern/debug \
 			   kern/driver \
-			   kern/trap \
 			   kern/mm
 
 KCFLAGS		+= $(addprefix -I,$(KINCLUDE))
 
+ifeq ($(MAKECMDGOALS),test)
+$(call add_files_cc2,$(call listf_cc,$(KSRCDIR)),kernel,$(KCFLAGS))
+else
 $(call add_files_cc,$(call listf_cc,$(KSRCDIR)),kernel,$(KCFLAGS))
-
+endif
 KOBJS	= $(call read_packet,kernel libs)
 
 # create kernel target
@@ -155,44 +169,56 @@ endif
 TARGETS: $(TARGETS)
 
 .DEFAULT_GOAL := TARGETS
-
-.PHONY: qemu 
+.PHONY: qemu spike test
 qemu: $(UCOREIMG) $(SWAPIMG) $(SFSIMG)
-#	$(V)$(QEMU) -kernel $(UCOREIMG) -nographic
 	$(V)$(QEMU) \
 		-machine virt \
 		-nographic \
 		-bios default \
-		-device loader,file=$(UCOREIMG),addr=0x80200000
+		-kernel $(UCOREIMG)
 
 debug: $(UCOREIMG) $(SWAPIMG) $(SFSIMG)
 	$(V)$(QEMU) \
 		-machine virt \
 		-nographic \
 		-bios default \
-		-device loader,file=$(UCOREIMG),addr=0x80200000\
+		-kernel $(UCOREIMG) \
 		-s -S
 
 gdb:
-	riscv64-unknown-elf-gdb \
-    -ex 'file bin/kernel' \
+	$(GDB) \
+    -ex 'file $(BINDIR)/kernel' \
     -ex 'set arch riscv:rv64' \
     -ex 'target remote localhost:1234'
 
-	
+test: $(UCOREIMG) $(SWAPIMG) $(SFSIMG)
+	$(V)$(QEMU) \
+		-machine virt \
+		-nographic \
+		-bios default \
+		-kernel $(UCOREIMG)
+spike: $(UCOREIMG) $(SWAPIMG) $(SFSIMG)
+	$(V)$(SPIKE) $(UCOREIMG)
+
 .PHONY: grade touch
 
 GRADE_GDB_IN	:= .gdb.in
 GRADE_QEMU_OUT	:= .qemu.out
 HANDIN			:= proj$(PROJ)-handin.tar.gz
 
-TOUCH_FILES		:= kern/trap/trap.c
+TOUCH_FILES		:=
 
 MAKEOPTS		:= --quiet --no-print-directory
 
+GRADE_TMP	:= /tmp/lab2_grade
+
 grade:
-	$(V)$(MAKE) $(MAKEOPTS) clean
-	$(V)$(SH) tools/grade.sh
+	@set -eu; \
+	grade_tmp=$$(mktemp -d /tmp/lab2-grade.XXXXXX); \
+	trap 'rm -rf "$$grade_tmp"' EXIT HUP INT TERM; \
+	tar -C . --exclude=.git --exclude=.vscode --exclude=vcs --exclude=bin --exclude=obj --exclude=evidence -cf - . | tar -C "$$grade_tmp" -xf -; \
+	python3 tools/inject.py "$$grade_tmp"; \
+	cd "$$grade_tmp" && $(SH) tools/grade.sh
 
 touch:
 	$(V)$(foreach f,$(TOUCH_FILES),$(TOUCH) $(f))
