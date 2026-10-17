@@ -8,7 +8,7 @@
   "prompt_file": "report/prompt.md",
   "acceptance_run_id": "946fb102-4528-4b3b-a09d-1b8f51b7dbec",
   "source_files_matched": 63,
-  "relative_links_checked": 103,
+  "relative_links_checked": 104,
   "images": [
     "01-build.png",
     "02-grade.png",

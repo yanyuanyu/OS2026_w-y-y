@@ -16,7 +16,7 @@
 | 2413682 严苑毓 | 连续物理页分配：First-Fit 分析、Best-Fit 实现、对照和回归 | 算法流程、改进分析、Best-Fit 测试；整合总报告和最终证据 |
 | 2413636 杨思远 | Buddy 伙伴分配器、独立测试及 GDB 页表/访存/TLB 观察 | Buddy 规格、测试理由和调试记录 |
 
-报告按文件夹《实验报告模板.md》的六章结构整理，依次说明初始化、分配策略、Buddy、调试过程和验证结果。代码采用王优的 page_init 与 SLUB、严苑毓的 Best-Fit 和杨思远的 Buddy，位于提交包 [code/](../code/)。
+报告按文件夹《实验报告模板.md》的六章结构整理，依次说明物理内存初始化、页分配策略、SLUB 对象分配、调试过程和验证结果。代码采用王优的 page_init 与 SLUB、严苑毓的 Best-Fit 和杨思远的 Buddy，位于提交包 [code/](../code/)。
 
 ## 一、实验目的
 
@@ -33,7 +33,7 @@
 
 | 成员 | AI 编程工具 | 底层模型 | 备注 |
 |------|------------|---------|------|
-| 2413681 王优 | ChatGPT | GPT-6.1-sol | 物理内存初始化、边界分析与报告整理 |
+| 2413681 王优 | ChatGPT | GPT-6.1-sol | 物理内存初始化、SLUB 实现、边界分析与报告整理 |
 | 2413682 严苑毓 | ChatGPT | GPT-6.1-sol | First-Fit 分析、Best-Fit 实现、集成测试与总报告整理 |
 | 2413636 杨思远 | ChatGPT | GPT-6.1-sol | Buddy 实现、独立测试与 GDB 调试 |
 
@@ -119,9 +119,10 @@ QEMU 装载固件和内核镜像
 | [kern/init/entry.S](../code/kern/init/entry.S) | 保存启动参数，设置启动页表与 satp，准备栈并进入 C 代码 |
 | [kern/init/init.c](../code/kern/init/init.c) | 清零 BSS，依次完成设备树、控制台、内核信息和物理内存初始化 |
 | [kern/driver/dtb.c](../code/kern/driver/dtb.c) | 解析设备树，向 page_init 提供 DRAM 基址和大小 |
-| [kern/mm/pmm.c](../code/kern/mm/pmm.c)、[pmm.h](../code/kern/mm/pmm.h) | 实现公共 PMM 接口、管理器选择和物理页初始化，将机制与分配策略连接起来 |
+| [kern/mm/pmm.c](../code/kern/mm/pmm.c)、[pmm.h](../code/kern/mm/pmm.h) | 实现公共 PMM 接口、管理器选择和物理页初始化，在 PMM 自检后接入 SLUB 初始化与对象自检 |
 | [memlayout.h](../code/kern/mm/memlayout.h)、[mmu.h](../code/kern/mm/mmu.h) | 定义 Page、空闲区、页大小、页表项和地址相关常量 |
 | [default_pmm.c](../code/kern/mm/default_pmm.c)、[best_fit_pmm.c](../code/kern/mm/best_fit_pmm.c)、[buddy_pmm.c](../code/kern/mm/buddy_pmm.c) | 实现 First-Fit、Best-Fit 和 Buddy 三种页分配策略 |
+| [slub.c](../code/kern/mm/slub.c)、[slub.h](../code/kern/mm/slub.h)、[slub_test.c](../code/kern/mm/slub_test.c) | 在物理页之上实现大小类缓存、大对象分配、槽位复用和对象层自检 |
 | [buddy_test.c](../code/kern/mm/buddy_test.c)、[c_debug_probe.c](../code/kern/mm/c_debug_probe.c) | 执行内核页内容与状态检查，提供可观察的真实访存指令 |
 | [kern/libs/stdio.c](../code/kern/libs/stdio.c)、[libs/printfmt.c](../code/libs/printfmt.c)、[libs/sbi.c](../code/libs/sbi.c) | 完成格式化输出和 SBI 调用，把启动与测试信息输出到终端 |
 | [tests/](../code/tests/)、[tools/](../code/tools/) | 提供宿主测试、评分、QEMU 多配置和 GDB 自动检查 |
@@ -136,7 +137,7 @@ QEMU 装载固件和内核镜像
 
 4. **启动模拟机器并进入内核入口。** 执行 make qemu 后，QEMU 建立 virt 模拟平台，将 OpenSBI 固件与内核镜像装入模拟物理内存。CPU 从复位代码进入位于 0x80000000 的 OpenSBI；OpenSBI 完成固件和特权级相关初始化后，将控制权交给物理地址 0x80200000 处的内核入口 kern_entry，内核在 S-mode 执行。
 
-5. **完成汇编入口和 C 语言初始化。** kern_entry 定义在 entry.S 中，保存 hart 编号和设备树地址，设置启动页表与 satp、刷新 TLB、建立栈，然后跳转到 kern_init()。kern_init() 清零 BSS，解析设备树，初始化控制台并输出内核信息，随后调用 pmm_init()，完成分配器选择、物理页初始化及分配器自检。
+5. **完成汇编入口和 C 语言初始化。** kern_entry 定义在 entry.S 中，保存 hart 编号和设备树地址，设置启动页表与 satp、刷新 TLB、建立栈，然后跳转到 kern_init()。kern_init() 清零 BSS，解析设备树，初始化控制台并输出内核信息，随后调用 pmm_init()，完成分配器选择、物理页初始化、页分配器自检和 SLUB 对象自检。
 
 ### 3.2 功能的逐步实现
 
@@ -154,7 +155,7 @@ QEMU 装载固件和内核镜像
 
 ### 3.3 模块整合与环境适配
 
-1. 合并版本保留王优的 page_init()、严苑毓的 best_fit_pmm.c，以及杨思远的 buddy_pmm.c、buddy_pmm.h、buddy_test.c 和 c_debug_probe.c；Page/PMM ABI 与老师测试保持一致。
+1. 合并版本采用王优的 page_init()、slub.c、slub.h 与 slub_test.c，严苑毓的 best_fit_pmm.c，以及杨思远的 buddy_pmm.c、buddy_pmm.h、buddy_test.c 和 c_debug_probe.c；Page/PMM ABI 与老师测试保持一致。
 2. entry.S 根项 2 增加 0x80000000 起的 1 GiB 恒等映射，保留项 511 的高地址直映。保证写 satp 后仍在物理 PC 执行的过渡指令可取指；否则本机曾在 0x80200038 报取指页故障。该适配已加入最终源码。
 3. Makefile 使用 -kernel 加载，避免本机旧 loader 方式导致 OpenSBI Next Address 为零；不同后端分别构建。
 4. make grade 在唯一临时目录注入测试，结束清理自己的副本；评分条件不变。等待最后测试标记而非固定睡 1 秒，并清理本次 QEMU 子进程，避免启动慢造成假失败。
@@ -249,7 +250,7 @@ DRAM 范围为 `[0x80000000,0x88000000)`。下列数值对应最终 Best-Fit 内
 
 页描述符与物理页一一对应，但二者所占字节数不同：本实验 RV64 ABI 下一个 Page 描述符占 40 字节，一个物理页占 4096 字节。描述符指针增加 1，表示转到下一个物理页的管理记录；page2pa() 根据描述符索引计算其对应的物理页地址。
 
-初始化顺序先由 init_pmm_manager() 建立分配器内部状态，再由 page_init() 调用 init_memmap() 登记空闲页。这样登记时链表与计数已经处于有效初始状态。默认启动及布局记录见[内核运行日志](logs/qemu/bestfit-128MiB.log)。
+初始化顺序先由 init_pmm_manager() 建立分配器内部状态，再由 page_init() 调用 init_memmap() 登记空闲页。这样登记时链表与计数已经处于有效初始状态。默认启动及布局记录见[当前集成版本内核运行日志](logs/final-review-20261017/qemu/bestfit-128MiB.log)。
 
 #### 最终提示词
 
@@ -1071,7 +1072,7 @@ Requirements：每轮先写 RUNNING；构建失败、panic、超时、缺少最�
 
 ##### 第一阶段：核对并保留交接实现
 
-**遇到的问题：** 早期合并只采用了物理内存初始化，完整交接包中的 SLUB 源码、测试和截图尚待接入。
+**接入要求：** SLUB 对象层依赖已初始化的 PMM；需要确定初始化与自检顺序，并使大对象释放参数符合三个页分配后端的约定。
 
 **问题解决策略：** 对照交付清单和源码，逐字保留三个 SLUB 文件；在当前 pmm_init() 的 PMM 检查之后调用 slub_init()/slub_check()，通过 Makefile 已有的源码收集规则参与编译。
 
@@ -1106,7 +1107,7 @@ Requirements：每轮先写 RUNNING；构建失败、panic、超时、缺少最�
 | page_init 正常尾部及 6 类异常范围 | 全部符合预期 | [日志](logs/final-review-20261017/acceptance/page-init.log) |
 | GDB 真实根叶子转换、两次 sd 后内存值 | PASS | [日志](logs/final-review-20261017/guest-gdb/walk.log) |
 | 运行状态更新与失败记录回归 | PASS | [日志](logs/final-review-20261017/acceptance/evidence-state.log) |
-| 从最终 ZIP 解出的源码，make clean、重新构建与 make qemu 启动 | PASS | [日志](logs/final-review-20261017/acceptance/make-qemu.log) |
+| 集成源码的干净构建及 make qemu 启动 | PASS | [日志](logs/final-review-20261017/acceptance/make-qemu.log) |
 | 本地 make grade：Page Init / Best-Fit | 20/20 | [评分](logs/final-review-20261017/acceptance/grade.log)、[真实串口](logs/final-review-20261017/acceptance/grade-serial.log) |
 
 本地评分检查物理内存初始化与 Best-Fit，结果为 20/20；Buddy 通过独立宿主与内核测试验证，地址翻译通过客户机和宿主调试记录验证。
@@ -1171,7 +1172,7 @@ Buddy 的宿主测试核对阶边界、伙伴合并、12,000 次固定种子操�
 
 ### 5.4 真实运行结果截图
 
-本节保留真实终端运行记录：图 1～8 来自 2026-10-16 的基础分配器与调试阶段，图 9 来自王优交接的 SLUB 测试。原始日志位于 logs/terminal/ 和 logs/terminal-detail/；加入 SLUB 后的当前集成结果、地址和页数列于本章前两节及 logs/final-review-20261017/。
+本节保留真实终端运行记录：图 1～8 展示基础分配器与调试阶段的运行过程，图 9 展示王优交接的 SLUB 测试。原始日志位于 logs/terminal/ 和 logs/terminal-detail/；加入 SLUB 后的当前集成结果、地址和页数列于本章前两节及 logs/final-review-20261017/。
 
 图 1 和图 2 分别展示编译与启动结果。图 2 使用与 Makefile qemu 目标相同的内核镜像和 QEMU 启动方式；图 3 直接执行 make grade，记录 Page Init、Best-Fit 和总分。
 
@@ -1195,7 +1196,7 @@ Buddy 的宿主测试核对阶边界、伙伴合并、12,000 次固定种子操�
 
 ![Buddy 宿主自检运行结果](images/04-buddy-host.png)
 
-**图 6：上半部为本轮实际运行的多配置测试结果，下半部为随后的 Buddy 内核实时输出，含真实页内容检查和耗尽恢复。**
+**图 6：上半部为多配置测试的实际运行结果，下半部为随后的 Buddy 内核实时输出，含真实页内容检查和耗尽恢复。**
 
 ![Buddy 多配置与实际内核运行](images/05-buddy-qemu.png)
 
@@ -1203,7 +1204,7 @@ Buddy 的宿主测试核对阶边界、伙伴合并、12,000 次固定种子操�
 
 ![初始化边界与 First-Fit 回归](images/06-boundaries.png)
 
-**图 8：本轮 GDB 实际单步过程记录，保留断点、sd 指令、虚实地址和写入后的内存值。**
+**图 8：GDB 实际单步过程记录，保留断点、sd 指令、虚实地址和写入后的内存值。**
 
 ![GDB 实际单步记录](images/07-guest-gdb.png)
 
@@ -1363,7 +1364,3 @@ GDB 读数使 Sv39 的层级结构变得直观。我们从 satp 找到根页表�
 140 个对象跨页测试让“复用”具有可观察的判断条件：释放部分对象并重新申请后，空闲页计数保持不变，保留对象的数据也保持完整。大对象测试则说明接口约定的重要性：对象层保存原页请求，Buddy 按实际幂次块恢复计数，两个层次据此完成整块回收。
 
 后续可以在现有单 hart 实现上研究缓存查找、空 slab 保留策略和并发保护，并比较大小类内部余量、管理结构开销与页回收频率。这些优化应继续结合真实请求序列、对象内容及实际页面计数验证。
-
-课程依据：[Lab2 练习](http://oslab.mobisys.top/lab2026/_book/lab2/lab2_2_1_exercise.html)、[报告要求](http://oslab.mobisys.top/lab2026/_book/lab2/lab2_5_labs_requirement.html)、[GDB 分支任务](http://oslab.mobisys.top/lab2026/_book/lab2/lab2_4_qemu_mmu_debug.html)、[四段式提示词](http://oslab.mobisys.top/lab2026/_book/lab0.5/3_prompt_structure.html)。本报告对照文件夹内保存的完整手册页面、当前源码与实验报告模板整理，手册页面位于 references/。
-
-补充参考：[项目组成和执行流](references/oslab-lab1-project-flow.html)、[实验报告模板](references/实验报告模板.md)。
