@@ -1,7 +1,7 @@
 {
   "result": "PASS",
-  "updated_date": "2026-10-16",
-  "count": 8,
+  "updated_date": "2026-10-17",
+  "count": 9,
   "images": [
     {
       "image": "images/01-build.png",
@@ -178,6 +178,29 @@
       "output_sha256": "fcd63a3ad7043a9de4982928408cf6458f0a7b6b7b2173e01a6853286f850f68",
       "retained_pixels_identical": true,
       "operation": "crop bottom margin only; no resize, redraw or text edit"
+    },
+    {
+      "image": "images/10-slub-tests.png",
+      "source_name": "06-slub-tests.png",
+      "source_path": "lab2/参考资料/王优_A交付_20261015/报告/截图/06-slub-tests.png",
+      "source_sha256": "6cf76ff966269b1e600be99006c50d03f096234e33cd07f18deed44d60df0e00",
+      "original_size": [
+        1500,
+        900
+      ],
+      "crop_box": [
+        20,
+        22,
+        1500,
+        550
+      ],
+      "output_size": [
+        1480,
+        528
+      ],
+      "output_sha256": "a8585ca07e48369d7f5ad4bb08ffc61f8b08c83beb7f687af190306e2ca9864c",
+      "retained_pixels_identical": true,
+      "operation": "Exact rectangular crop of original Windows Terminal image; retain command and results"
     }
   ]
 }

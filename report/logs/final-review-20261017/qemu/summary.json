@@ -1,5 +1,5 @@
 {
-  "run_id": "58b3e78d-b8b3-4c1b-af02-bbf0b4900951",
+  "run_id": "56926484-c5bb-4a2a-915c-e51af0639d09",
   "status": "PASS",
   "results": [
     {
@@ -20,7 +20,7 @@
         "-monitor",
         "none",
         "-kernel",
-        "/mnt/c/Users/13789/Desktop/\u64cd\u4f5c\u7cfb\u7edf/\u5b9e\u9a8c/lab2/.qa/final_audit_20261017T081729/code/bin/ucore.img"
+        "/mnt/c/Users/13789/Desktop/\u64cd\u4f5c\u7cfb\u7edf/\u5b9e\u9a8c/lab2/.qa/slub_integration_20261017/code/bin/ucore.img"
       ],
       "log": "evidence/qemu/bestfit-128MiB.log"
     },
@@ -42,7 +42,7 @@
         "-monitor",
         "none",
         "-kernel",
-        "/mnt/c/Users/13789/Desktop/\u64cd\u4f5c\u7cfb\u7edf/\u5b9e\u9a8c/lab2/.qa/final_audit_20261017T081729/code/bin/firstfit/ucore.img"
+        "/mnt/c/Users/13789/Desktop/\u64cd\u4f5c\u7cfb\u7edf/\u5b9e\u9a8c/lab2/.qa/slub_integration_20261017/code/bin/firstfit/ucore.img"
       ],
       "log": "evidence/qemu/firstfit-128MiB.log"
     },
@@ -64,7 +64,7 @@
         "-monitor",
         "none",
         "-kernel",
-        "/mnt/c/Users/13789/Desktop/\u64cd\u4f5c\u7cfb\u7edf/\u5b9e\u9a8c/lab2/.qa/final_audit_20261017T081729/code/bin/buddy/ucore.img"
+        "/mnt/c/Users/13789/Desktop/\u64cd\u4f5c\u7cfb\u7edf/\u5b9e\u9a8c/lab2/.qa/slub_integration_20261017/code/bin/buddy/ucore.img"
       ],
       "log": "evidence/qemu/buddy-64MiB.log"
     },
@@ -86,7 +86,7 @@
         "-monitor",
         "none",
         "-kernel",
-        "/mnt/c/Users/13789/Desktop/\u64cd\u4f5c\u7cfb\u7edf/\u5b9e\u9a8c/lab2/.qa/final_audit_20261017T081729/code/bin/buddy/ucore.img"
+        "/mnt/c/Users/13789/Desktop/\u64cd\u4f5c\u7cfb\u7edf/\u5b9e\u9a8c/lab2/.qa/slub_integration_20261017/code/bin/buddy/ucore.img"
       ],
       "log": "evidence/qemu/buddy-128MiB.log"
     },
@@ -108,7 +108,7 @@
         "-monitor",
         "none",
         "-kernel",
-        "/mnt/c/Users/13789/Desktop/\u64cd\u4f5c\u7cfb\u7edf/\u5b9e\u9a8c/lab2/.qa/final_audit_20261017T081729/code/bin/buddy/ucore.img"
+        "/mnt/c/Users/13789/Desktop/\u64cd\u4f5c\u7cfb\u7edf/\u5b9e\u9a8c/lab2/.qa/slub_integration_20261017/code/bin/buddy/ucore.img"
       ],
       "log": "evidence/qemu/buddy-256MiB.log"
     }

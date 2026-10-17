@@ -2,7 +2,7 @@
 
 小组成员：2413681 王优、2413682 严苑毓、2413636 杨思远。
 
-本文件汇总本实验的四份最终任务规格：物理内存初始化、First-Fit 分析与 Best-Fit 实现、Buddy 实现与接入、Buddy 独立测试。按成员交付规格和最终采用版本整理，并对照老师《提示词如何撰写》复核。各模块对应的实现、验证与迭代过程见 [实验报告](report.md)。
+本文件汇总本实验的六份复现任务规格：物理内存初始化、First-Fit 分析与 Best-Fit 实现、Buddy 实现与接入、Buddy 独立测试、SLUB 实现、SLUB 独立测试。这些规格依据成员交付材料与最终采用代码整理，用于复现和审查；其中 SLUB 两份规格对应王优交接的实现与测试说明。AI 工具及模型按组内确认填写。全部规格对照老师《提示词如何撰写》复核。各模块对应的实现、验证与迭代过程见 [实验报告](report.md)。
 
 # 模块一：物理内存初始化
 
@@ -240,3 +240,96 @@ Requirements：实际运行 64/128/256 MiB Buddy，以及三后端 128 MiB 配�
 Pre-Condition：每轮使用新 run_id，并从本轮实际命令收集退出状态和日志。
 Post-Condition：开始状态为 RUNNING，构建失败、异常退出、超时或完成标记缺失记为 FAIL，全部案例通过后记为 PASS；汇总通过原子更新关联本轮原始日志。新一轮失败覆盖上一轮结果，读取汇总即可识别当前轮次。
 Requirements：保留原始测试输出；汇总结果由退出状态、断言和完成标记共同决定。
+
+
+---
+
+# 模块五：SLUB 对象分配实现
+
+负责人：2413681 王优。依据交接材料及最终接入接口整理的复现规格。
+
+[PROMPT]
+
+任务：将王优交接的 kern/mm/slub.c、slub.h 对象分配实现接入当前内核，在物理页分配器之上提供 slub_init()、slub_alloc(size) 和 slub_free(ptr)。沿用八个大小类与连续页大对象路径。
+操作要求：直接修改实际工程；以交接实现为基础，保留公共 Page/PMM ABI、三种页分配器和原检查函数。在 pmm_init() 的页分配器检查之后调用 SLUB 初始化与自检。内部辅助函数使用 static。
+输出要求：交付可构建源码，说明页内元数据、对象复用、对齐、大小计算及回收。通过三个 PMM 后端检查释放后的实际空闲页恢复。
+
+[RELY]
+
+- alloc_page()/free_page()、alloc_pages(n)/free_pages(base,n)、nr_free_pages()。
+- page2pa()、va_pa_offset、PADDR()、pa2page()、PGSIZE、ROUNDUP/ROUNDDOWN、assert 与 memset。
+- Best-Fit/First-Fit 取得 n 页；Buddy 向上取整，调用者保存原请求 n 并以 n 归还整个块。
+- 当前为单 hart 顺序调用；交给 slub_free 的非 NULL 指针是尚未释放的完整对象起点。
+
+[GUARANTEE]
+
+```c
+void slub_init(void);
+void *slub_alloc(size_t size);
+void slub_free(void *ptr);
+```
+
+实现位于 kern/mm/slub.c，接口位于 slub.h；slub_check() 由独立测试文件提供。
+
+[SPECIFICATION]
+
+## slub_init
+
+Pre-Condition：页管理器已初始化，缓存处于 BSS 初始零状态或已完全归还对象的空状态。
+Post-Condition：确认八个大小类缓存均为空，准备对象分配。
+
+## slub_alloc
+
+Pre-Condition：SLUB 与底层页分配器状态有效，按单 hart 顺序调用。
+Post-Condition（成功）：返回至少覆盖 size 字节且 16 字节对齐的对象，与其他持有对象互斥。
+Case 1（1～2048 字节）：向上选择 16、32、64、128、256、512、1024、2048 字节大小类。优先从已有 slab 空闲链取槽位；需要新 slab 时取得一页，记录容量、所属类、空闲链与 256 位分配位图。
+Case 2（大于 2048 字节）：检查 size+元数据+页对齐运算，申请足够的连续页。首部保存原始申请页数，返回首部之后的对象区。
+Case 3（失败）：零长度、大小计算溢出、页数不足或底层连续页分配失败时返回 NULL，已有对象与空闲页计数保持原状。
+
+## slub_free
+
+Pre-Condition：ptr 为 NULL，或是本分配器返回且仍由调用者持有的对象起点。
+Post-Condition：NULL 调用正常返回。小对象清除槽位分配位并归还空闲链；slab 最后一个对象释放时摘链并归还页面。大对象按首部记录的原申请页数归还整块，使底层实际页计数恢复。
+Requirements：检查 magic、对象槽位范围/边界和分配位；保留仍在使用的其他对象内容。分配位图和页管理器分别维护对象槽位与物理页状态。
+
+---
+
+# 模块六：SLUB 独立测试
+
+负责人：2413681 王优；严苑毓负责在当前集成版本运行与汇总。依据交接测试及实际验证入口整理。
+
+[PROMPT]
+
+任务：接入王优交接的 kern/mm/slub_test.c，在当前 Best-Fit、First-Fit、Buddy 上验证真实 SLUB C 实现，并提供 tools/test_slub.py 作为独立验收入口。
+操作要求：直接修改真实测试与验收脚本；保留生产算法和原有分配器检查。测试在 QEMU 中读写实际对象，核对分配区间、内容、复用和页数恢复。
+输出要求：保存本轮构建、串口日志、退出状态和 run_id；三个后端全部符合断言后汇总 PASS。verify_all.py 应包含独立 SLUB 验证步骤。
+
+[RELY]
+
+- slub_init()/slub_alloc()/slub_free()、nr_free_pages()，以及现有 QEMU 三后端构建选择。
+- 16 字节对齐、八个大小类、页首元数据和大对象连续页的调用约定。
+- verify_c.run_case() 的实际构建/运行、完整最终标记、panic 检测及进程清理机制。
+
+[GUARANTEE]
+
+```c
+void slub_check(void);
+```
+
+同时交付 tools/test_slub.py；在 pmm_init() 和 tools/verify_all.py 接入测试。原始串口与汇总存放于 evidence/slub/。
+
+[SPECIFICATION]
+
+## slub_check
+
+Pre-Condition：页管理器与 SLUB 已初始化，记录 before=nr_free_pages()。
+Post-Condition：下列案例全部通过；归还所有对象后 nr_free_pages() 等于 before。
+Case 1（失败与空指针）：申请 0、SIZE_MAX 和超出当前空闲页容量的大小返回 NULL，页计数保持不变；slub_free(NULL) 正常返回。
+Case 2（26 个大小）：覆盖 1～9000 字节及所有大小类边界。逐个检查 16 字节对齐、持有对象区间互斥，向对象全部请求字节写入不同标记并读回；逆序释放后恢复页计数。
+Case 3（跨页与复用）：同时分配 140 个 64 字节对象，占用多个 slab；释放偶数位置对象后重新申请，页计数保持 occupied，说明复用已有槽位。保留的奇数位置对象内容应完整；最后全部释放恢复 before。
+
+## test_slub.py 与总验收
+
+Pre-Condition：本轮使用独立 run_id，运行真实内核并收集本轮串口。
+Post-Condition：三个 128 MiB 后端的断言与完成标记均通过，恢复页数等于各自初始化空闲页数，汇总状态为 PASS。
+Requirements：每轮先写 RUNNING；构建失败、panic、超时、缺少最终标记或计数不符时写 FAIL。内核多配置检查同时验证 SLUB 成功标记，完整组合验收包含九项。

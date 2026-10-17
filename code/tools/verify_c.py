@@ -43,6 +43,8 @@ def run_case(backend, memory, run_id):
                 if physical:
                     if "check_alloc_page() succeeded!" not in text:
                         raise RuntimeError(f"PMM check missing: {log}")
+                    if "slub_check() succeeded! free pages restored:" not in text:
+                        raise RuntimeError(f"SLUB check missing: {log}")
                     expected = {"bestfit": "best_fit", "firstfit": "default", "buddy": "buddy"}
                     if f"memory management: {expected[backend]}_pmm_manager" not in text:
                         raise RuntimeError(f"wrong backend: {log}")

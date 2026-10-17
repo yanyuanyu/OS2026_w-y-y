@@ -1,0 +1,5 @@
+$ python3 tools/test_slub.py
+SLUB bestfit: 26 sizes, 140-object cross-page/reuse, data and reclaim PASS; restored=31928
+SLUB firstfit: 26 sizes, 140-object cross-page/reuse, data and reclaim PASS; restored=31928
+SLUB buddy: 26 sizes, 140-object cross-page/reuse, data and reclaim PASS; restored=31926
+SLUB ALL THREE BACKENDS PASS run_id=dedc9d29-22bd-4ff6-9adb-c348baf04d2e

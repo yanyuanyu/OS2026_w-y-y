@@ -1,4 +1,4 @@
-# run_id=58b3e78d-b8b3-4c1b-af02-bbf0b4900951
+# run_id=56926484-c5bb-4a2a-915c-e51af0639d09
 
 OpenSBI v1.0
    ____                    _____ ____ _____
@@ -55,14 +55,16 @@ DTB init completed
 (THU.CST) os is loading ...
 Special kernel symbols:
   entry  0xffffffffc02000d6 (virtual)
-  etext  0xffffffffc0201822 (virtual)
-  edata  0xffffffffc0206018 (virtual)
-  end    0xffffffffc0206078 (virtual)
-Kernel executable memory footprint: 24KB
+  etext  0xffffffffc02020de (virtual)
+  edata  0xffffffffc0207018 (virtual)
+  end    0xffffffffc02070b8 (virtual)
+Kernel executable memory footprint: 28KB
 memory management: default_pmm_manager
 Physical memory: [0x0000000080000000, 0x0000000088000000)
-Page descriptors: 32768 pages at 0xffffffffc0207000 (virtual)
-Free physical memory begins at 0x0000000080347000
+Page descriptors: 32768 pages at 0xffffffffc0208000 (virtual)
+Free physical memory begins at 0x0000000080348000
 check_alloc_page() succeeded!
-satp virtual address: 0xffffffffc0205000
-satp physical address: 0x0000000080205000
+slub_check: size boundaries, alignment, data, reuse, cross-page, large, reclaim PASS
+slub_check() succeeded! free pages restored: 31928
+satp virtual address: 0xffffffffc0206000
+satp physical address: 0x0000000080206000

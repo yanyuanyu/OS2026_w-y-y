@@ -1,4 +1,4 @@
-# run_id=58b3e78d-b8b3-4c1b-af02-bbf0b4900951
+# run_id=56926484-c5bb-4a2a-915c-e51af0639d09
 
 OpenSBI v1.0
    ____                    _____ ____ _____
@@ -55,19 +55,21 @@ DTB init completed
 (THU.CST) os is loading ...
 Special kernel symbols:
   entry  0xffffffffc02000d6 (virtual)
-  etext  0xffffffffc0201bbe (virtual)
-  edata  0xffffffffc0206018 (virtual)
-  end    0xffffffffc0208038 (virtual)
-Kernel executable memory footprint: 32KB
+  etext  0xffffffffc020247a (virtual)
+  edata  0xffffffffc0207018 (virtual)
+  end    0xffffffffc0209038 (virtual)
+Kernel executable memory footprint: 36KB
 memory management: buddy_pmm_manager
 Physical memory: [0x0000000080000000, 0x0000000084000000)
-Page descriptors: 16384 pages at 0xffffffffc0209000 (virtual)
-Free physical memory begins at 0x00000000802a9000
+Page descriptors: 16384 pages at 0xffffffffc020a000 (virtual)
+Free physical memory begins at 0x00000000802aa000
 C-BUDDY rounding/alignment/non-overlap/content/accounting PASS
-C-BUDDY exhausted/restored 15703 pages PASS
+C-BUDDY exhausted/restored 15702 pages PASS
 C-BUDDY split/merge/repeat PASS
 C-BUDDY ALL PASS
 C-PROBE store pair PASS
 check_alloc_page() succeeded!
-satp virtual address: 0xffffffffc0205000
-satp physical address: 0x0000000080205000
+slub_check: size boundaries, alignment, data, reuse, cross-page, large, reclaim PASS
+slub_check() succeeded! free pages restored: 15702
+satp virtual address: 0xffffffffc0206000
+satp physical address: 0x0000000080206000

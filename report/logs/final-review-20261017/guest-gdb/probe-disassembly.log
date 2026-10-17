@@ -6,12 +6,12 @@ Disassembly of section .text:
 
 ffffffffc02013f2 <c_memory_probe>:
 ffffffffc02013f2:	12000073          	sfence.vma
-ffffffffc02013f6:	00001717          	auipc	a4,0x1
-ffffffffc02013fa:	7ca73703          	ld	a4,1994(a4) # ffffffffc0202bc0 <error_string+0x38>
-ffffffffc02013fe:	00001797          	auipc	a5,0x1
-ffffffffc0201402:	7ca7b783          	ld	a5,1994(a5) # ffffffffc0202bc8 <error_string+0x40>
-ffffffffc0201406:	00007697          	auipc	a3,0x7
-ffffffffc020140a:	bee6bd23          	sd	a4,-1030(a3) # ffffffffc0208000 <c_probe_word>
-ffffffffc020140e:	00007717          	auipc	a4,0x7
-ffffffffc0201412:	bef73923          	sd	a5,-1038(a4) # ffffffffc0208000 <c_probe_word>
+ffffffffc02013f6:	00002717          	auipc	a4,0x2
+ffffffffc02013fa:	51273703          	ld	a4,1298(a4) # ffffffffc0203908 <error_string+0x38>
+ffffffffc02013fe:	00002797          	auipc	a5,0x2
+ffffffffc0201402:	5127b783          	ld	a5,1298(a5) # ffffffffc0203910 <error_string+0x40>
+ffffffffc0201406:	00008697          	auipc	a3,0x8
+ffffffffc020140a:	bee6bd23          	sd	a4,-1030(a3) # ffffffffc0209000 <c_probe_word>
+ffffffffc020140e:	00008717          	auipc	a4,0x8
+ffffffffc0201412:	bef73923          	sd	a5,-1038(a4) # ffffffffc0209000 <c_probe_word>
 ffffffffc0201416:	8082                	ret

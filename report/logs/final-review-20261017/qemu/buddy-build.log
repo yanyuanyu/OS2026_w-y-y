@@ -1,4 +1,4 @@
-# run_id=58b3e78d-b8b3-4c1b-af02-bbf0b4900951
+# run_id=56926484-c5bb-4a2a-915c-e51af0639d09
 rm -f -r obj/buddy bin/buddy
 + cc kern/init/entry.S
 + cc kern/init/init.c
@@ -12,6 +12,8 @@ rm -f -r obj/buddy bin/buddy
 + cc kern/mm/c_debug_probe.c
 + cc kern/mm/default_pmm.c
 + cc kern/mm/pmm.c
++ cc kern/mm/slub.c
++ cc kern/mm/slub_test.c
 + cc libs/printfmt.c
 + cc libs/readline.c
 + cc libs/sbi.c

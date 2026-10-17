@@ -1,7 +1,7 @@
 set pagination off
 set confirm off
 file bin/buddy/kernel
-target remote 127.0.0.1:44106
+target remote 127.0.0.1:42034
 hbreak kern_init
 continue
 set $sv = (unsigned long long)$satp

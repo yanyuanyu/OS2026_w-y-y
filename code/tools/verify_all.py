@@ -34,6 +34,7 @@ def main():
         run('buddy-host',['python3','tools/test_buddy_host.py'])
         run('firstfit-tail',['python3','tools/test_firstfit_tail.py'])
         run('kernel-matrix',['python3','tools/verify_c.py'])
+        run('slub',['python3','tools/test_slub.py'])
         run('page-init',['python3','tools/test_page_init.py'])
         run('guest-gdb',['python3','tools/debug_guest.py'])
         run('evidence-state',['python3','-m','unittest','discover','-s','tests','-p','test_evidence.py'])

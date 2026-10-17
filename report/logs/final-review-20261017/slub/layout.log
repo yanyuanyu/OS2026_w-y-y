@@ -1,0 +1,3 @@
+$ riscv64-unknown-elf-gdb -batch -nx -ex file bin/kernel -ex p sizeof(struct slab) -ex p sizeof(struct Page)
+$1 = 88
+$2 = 40

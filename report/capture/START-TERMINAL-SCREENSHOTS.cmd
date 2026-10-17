@@ -5,7 +5,7 @@ if not exist "%~dp0..\images_terminal" mkdir "%~dp0..\images_terminal"
 pushd "%~dp0..\..\code"
 if errorlevel 1 exit /b 1
 mode con: cols=145 lines=44
-for %%S in (01-build 02-grade 03-bestfit-host 04-buddy-host 05-buddy-qemu 06-boundaries 07-guest-gdb 08-source-audit 09-bestfit-qemu) do (
+for %%S in (01-build 02-grade 03-bestfit-host 04-buddy-host 05-buddy-qemu 06-boundaries 07-guest-gdb 08-source-audit 09-bestfit-qemu 10-slub-tests) do (
     cls
     title LAB2-%%S
     echo Running real commands for screenshot: %%S
@@ -23,7 +23,7 @@ for %%S in (01-build 02-grade 03-bestfit-host 04-buddy-host 05-buddy-qemu 06-bou
     echo After saving the screenshot, press any key for the next case.
     pause >nul
 )
-echo All nine command cases completed. Screenshots must be saved manually.
+echo All ten command cases completed. Screenshots must be saved manually.
 pause
 popd
 endlocal

@@ -1,5 +1,5 @@
 {
-  "acceptance_run_id": "498ef138-c501-4c5b-8c41-1ccb9ef12637",
+  "acceptance_run_id": "946fb102-4528-4b3b-a09d-1b8f51b7dbec",
   "checks": {
     "A_page_init_preserved": true,
     "B_final_file_preserved": true,
@@ -18,8 +18,12 @@
     "framework_kern/mm/memlayout.h": true,
     "framework_kern/mm/mmu.h": true,
     "framework_libs/list.h": true,
-    "framework_kern/driver/dtb.c": true
+    "framework_kern/driver/dtb.c": true,
+    "A_slub.c": true,
+    "A_slub.h": true,
+    "A_slub_test.c": true
   },
   "result": "PASS",
-  "source_hashes_file": "acceptance/source_hashes.json"
+  "source_hashes_file": "final-review-20261017/acceptance/source_hashes.json",
+  "previous_acceptance_run_id": "498ef138-c501-4c5b-8c41-1ccb9ef12637"
 }

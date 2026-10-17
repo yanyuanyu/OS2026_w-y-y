@@ -1,6 +1,6 @@
 $ python3 -m unittest discover -s tests -p test_evidence.py
 .
 ----------------------------------------------------------------------
-Ran 1 test in 0.010s
+Ran 1 test in 0.002s
 
 OK

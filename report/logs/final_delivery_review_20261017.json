@@ -1,29 +1,10 @@
 {
   "status": "PASS",
-  "acceptance_run_id": "56379435-9f70-4ed1-a484-6a3c67a61ff4",
-  "checks": {
-    "template_six_chapters": "PASS",
-    "chapter4_modules_then_exercises_then_challenge": "PASS",
-    "module_functions_prompts_iterations": "PASS",
-    "manual_exercise_and_question_coverage": "PASS",
-    "four_prompt_specifications_synchronized": "PASS",
-    "source_inventory_and_59_hashes": "PASS",
-    "original_A_B_C_implementations_and_teacher_checks": "PASS",
-    "all_eight_acceptance_steps": "PASS",
-    "clean_build_make_qemu_and_normal_exit": "PASS",
-    "five_QEMU_configurations": "PASS",
-    "page_init_seven_boundaries": "PASS",
-    "GDB_address_arithmetic_and_store_values": "PASS",
-    "preserved_host_cold_hot_Bare_debug_records": "PASS",
-    "eight_screenshots_visual_review": "PASS",
-    "eight_original_pixel_comparisons": "PASS",
-    "report_environment_rechecked_live": "PASS",
-    "chapter_references_and_real_log_values": "PASS",
-    "Markdown_tables_fences_links": "PASS",
-    "Python_source_syntax": "PASS",
-    "SLUB_recorded_as_future_design": "PASS"
-  },
-  "handbook_basis": "Complete saved official pages and teacher template; live course site unavailable",
-  "source_files": 59,
-  "images": 8
+  "acceptance_run_id": "946fb102-4528-4b3b-a09d-1b8f51b7dbec",
+  "source_files": 63,
+  "images": 9,
+  "prompts": 6,
+  "verification_steps": 9,
+  "SLUB": "26 sizes, 140 objects, three PMM backends, content and actual page restoration PASS",
+  "source_provenance": "Original A page_init and SLUB, B Best-Fit, C Buddy and probe preserved"
 }

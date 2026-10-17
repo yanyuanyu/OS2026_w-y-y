@@ -1,11 +1,11 @@
 {
   "status": "COMPLETE",
-  "updated_date": "2026-10-16",
+  "updated_date": "2026-10-17",
   "source": "User-captured real Windows Terminal windows",
-  "terminal_images": 8,
+  "terminal_images": 9,
   "browser_images_in_delivery": 0,
   "pixel_verification": "All retained pixels match the original rectangular crop exactly",
   "manifest": "logs/image_crop_manifest.json",
-  "captured_images": 9,
-  "report_usage": "Eight experiment-run figures; source-hash verification archived locally"
+  "captured_images": 10,
+  "report_usage": "Eight allocator/debug development figures plus Wang You SLUB delivery figure; latest nine-step integration logs included"
 }

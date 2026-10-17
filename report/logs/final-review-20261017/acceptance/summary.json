@@ -1,6 +1,6 @@
 {
-  "run_id": "56379435-9f70-4ed1-a484-6a3c67a61ff4",
-  "started_utc": "2026-10-17T08:17:32.447371+00:00",
+  "run_id": "946fb102-4528-4b3b-a09d-1b8f51b7dbec",
+  "started_utc": "2026-10-17T14:24:49.112890+00:00",
   "status": "PASS",
   "steps": [
     {
@@ -24,6 +24,11 @@
       "log": "kernel-matrix.log"
     },
     {
+      "name": "slub",
+      "returncode": 0,
+      "log": "slub.log"
+    },
+    {
       "name": "page-init",
       "returncode": 0,
       "log": "page-init.log"
@@ -44,5 +49,5 @@
       "log": "grade.log"
     }
   ],
-  "finished_utc": "2026-10-17T08:18:25.769005+00:00"
+  "finished_utc": "2026-10-17T14:25:44.567459+00:00"
 }

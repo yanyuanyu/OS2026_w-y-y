@@ -82,5 +82,6 @@ elif case=='08-source-audit':
     print('A function, B implementation, C Buddy and teacher checks preserved: PASS',flush=True)
     (OUT/'08-source-audit.json').write_text(json.dumps({'result':'PASS','checked':len(expected),'acceptance_run_id':audit['acceptance_run_id']},indent=2))
 elif case=='09-bestfit-qemu':qemu('bestfit')
+elif case=='10-slub-tests':run(['python3','tools/test_slub.py'])
 else:raise SystemExit('Unknown case')
 print('\nCommand completed successfully; exit code 0.',flush=True)

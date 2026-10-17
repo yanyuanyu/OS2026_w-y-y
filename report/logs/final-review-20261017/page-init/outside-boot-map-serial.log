@@ -54,10 +54,10 @@ DTB init completed
 (THU.CST) os is loading ...
 Special kernel symbols:
   entry  0xffffffffc02000d6 (virtual)
-  etext  0xffffffffc0201756 (virtual)
-  edata  0xffffffffc0206018 (virtual)
-  end    0xffffffffc0206078 (virtual)
-Kernel executable memory footprint: 24KB
+  etext  0xffffffffc0202012 (virtual)
+  edata  0xffffffffc0207018 (virtual)
+  end    0xffffffffc02070b8 (virtual)
+Kernel executable memory footprint: 28KB
 memory management: best_fit_pmm_manager
-kernel panic at kern/mm/pmm.c:94:
+kernel panic at kern/mm/pmm.c:95:
     page_init: physical memory outside boot mapping

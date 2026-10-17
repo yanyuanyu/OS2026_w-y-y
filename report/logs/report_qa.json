@@ -6,9 +6,9 @@
     "report"
   ],
   "prompt_file": "report/prompt.md",
-  "acceptance_run_id": "498ef138-c501-4c5b-8c41-1ccb9ef12637",
-  "source_files_matched": 59,
-  "relative_links_checked": 94,
+  "acceptance_run_id": "946fb102-4528-4b3b-a09d-1b8f51b7dbec",
+  "source_files_matched": 63,
+  "relative_links_checked": 103,
   "images": [
     "01-build.png",
     "02-grade.png",
@@ -17,25 +17,26 @@
     "05-buddy-qemu.png",
     "06-boundaries.png",
     "07-guest-gdb.png",
-    "09-bestfit-qemu.png"
+    "09-bestfit-qemu.png",
+    "10-slub-tests.png"
   ],
   "template_chapters": 6,
-  "structured_prompts": 4,
+  "structured_prompts": 6,
   "notes": [
     "Host-QEMU4.1.1 debugging traces by Yang Siyuan; final local kernel and guest runs use QEMU7",
     "All members AI tool/model provided by user: ChatGPT / GPT-6.1-sol"
   ],
-  "latest_full_review_run_id": "56379435-9f70-4ed1-a484-6a3c67a61ff4",
-  "latest_verification_steps": 8,
+  "latest_full_review_run_id": "946fb102-4528-4b3b-a09d-1b8f51b7dbec",
+  "latest_verification_steps": 9,
   "screenshot_status": {
     "status": "COMPLETE",
-    "updated_date": "2026-10-16",
+    "updated_date": "2026-10-17",
     "source": "User-captured real Windows Terminal windows",
-    "terminal_images": 8,
+    "terminal_images": 9,
     "browser_images_in_delivery": 0,
     "pixel_verification": "All retained pixels match the original rectangular crop exactly",
     "manifest": "logs/image_crop_manifest.json",
-    "captured_images": 9,
-    "report_usage": "Eight experiment-run figures; source-hash verification archived locally"
+    "captured_images": 10,
+    "report_usage": "Eight allocator/debug development figures plus Wang You SLUB delivery figure; latest nine-step integration logs included"
   }
 }
