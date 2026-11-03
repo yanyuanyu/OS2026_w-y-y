@@ -1,16 +1,17 @@
-# Lab3：A+B+C 集成
+# Lab3：中断与异常处理
 
 | 分工 | 姓名 | 学号 |
 |---|---|---|
-| A：Trap 入口与上下文恢复 | 严苑毓 | 2413682 |
-| B：中断与时钟处理 | 杨思远 | 2413636 |
-| C：异常处理 | 王优 | 2413681 |
+| Trap 入口与上下文恢复 | 严苑毓 | 2413682 |
+| 中断与时钟处理 | 杨思远 | 2413636 |
+| 异常处理 | 王优 | 2413681 |
 
 - [实验代码](code/)
 - [总体报告与要求验收](report/integration-abc/验收报告.md)
-- [A 报告](report/A.md)
-- [B 报告](report/report.md)
-- [C 原始交付报告](report/C/C组实验报告.md)
+- [Trap 入口专项报告](report/A.md)
+- [全组实验报告](report/report.md)
+- [全组 AI 提示词汇总](report/prompt.md)
+- [异常处理专项报告](report/C/C组实验报告.md)
 - [本轮日志](report/integration-abc/logs/)
 
 在 WSL/Linux 中进入 lab3/code：
