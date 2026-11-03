@@ -12,7 +12,7 @@
 
 #define TICK_NUM 100
 
-//lab3 function2 B 2413682: local default; the handout gives no numeric limit.
+//lab3 function2 B 2413636: local default; the handout gives no numeric limit.
 // The group can override it with DEFS+=-DSHUTDOWN_AFTER=<positive count>.
 #ifndef SHUTDOWN_AFTER
 #define SHUTDOWN_AFTER 10
@@ -90,7 +90,7 @@ void print_regs(struct pushregs *gpr) {
     cprintf("  t6       0x%08x\n", gpr->t6);
 }
 
-//lab3 function2 B 2413682
+//lab3 function2 B 2413636
 void interrupt_handler(struct trapframe *tf) {
     static size_t reports = 0;
     // scause's top bit marks an interrupt; the remaining bits hold its code.
@@ -149,7 +149,7 @@ void interrupt_handler(struct trapframe *tf) {
     }
 }
 
-//lab3 function2 C
+//lab3 function2 C 2413681
 void exception_handler(struct trapframe *tf) {
     switch (tf->cause) {
     case CAUSE_ILLEGAL_INSTRUCTION:

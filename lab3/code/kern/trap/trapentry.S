@@ -56,7 +56,7 @@
 
     .macro RESTORE_ALL
 
-    #lab3 function1 STUDENT_ID_TODO
+    #lab3 function1 2413682
     # Return CSRs first; temporary GPRs are restored below.
     LOAD s1, 32*REGBYTES(sp)
     LOAD s2, 33*REGBYTES(sp)
@@ -102,7 +102,7 @@
 __alltraps:
     SAVE_ALL
 
-    #lab3 function1 STUDENT_ID_TODO
+    #lab3 function1 2413682
     mv a0, sp
     jal trap
     # sp should be the same as before "jal trap"

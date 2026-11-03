@@ -1,5 +1,7 @@
 # A 部分：Trap 入口与上下文恢复
 
+负责人：严苑毓，学号 2413682。
+
 ## Spec
 
 保持 SAVE_ALL、struct trapframe 和 trap() 接口不变。frame 共 36 个 REGBYTES：0–31 为通用寄存器，32 为 sstatus，33 为 sepc，34 为 badvaddr，35 为 cause。RV64 总大小 288 字节，保持调用栈 16 字节对齐。
@@ -8,7 +10,7 @@ RESTORE_ALL 先恢复 sstatus、sepc，再恢复 x1、x3–x31，最后由第 2 
 
 ## Prompt
 
-请以现有 SAVE_ALL 和 trapframe 为布局依据，只补全 trapentry.S 的 RESTORE_ALL 与 __alltraps。使用 LOAD、REGBYTES；临时寄存器使用后恢复其原值，sp 最后恢复。以 a0 传递当前 frame，jal trap 后进入既有返回路径。不修改 SAVE_ALL、trapframe、C 层中断异常策略，不强制修改 SPP。保留 lab3 标记，学号待本人填写。
+请以现有 SAVE_ALL 和 trapframe 为布局依据，只补全 trapentry.S 的 RESTORE_ALL 与 __alltraps。使用 LOAD、REGBYTES；临时寄存器使用后恢复其原值，sp 最后恢复。以 a0 传递当前 frame，jal trap 后进入既有返回路径。不修改 SAVE_ALL、trapframe、C 层中断异常策略，不强制修改 SPP。保留 lab3 标记，学号填写 2413682。
 
 ## 来源与测试边界
 
