@@ -149,10 +149,33 @@ void interrupt_handler(struct trapframe *tf) {
     }
 }
 
-// C owns this function. The definition is supplied when the group integrates C.
-void exception_handler(struct trapframe *tf);
-
-//lab3 function2 C YOUR CODE
+//lab3 function2 C
+void exception_handler(struct trapframe *tf) {
+    switch (tf->cause) {
+    case CAUSE_ILLEGAL_INSTRUCTION:
+    case CAUSE_BREAKPOINT: {
+        /* Lab 3 executes kernel instructions in directly readable memory. */
+        uint16_t instruction = *(const uint16_t *)tf->epc;
+        if (tf->cause == CAUSE_ILLEGAL_INSTRUCTION) {
+            cprintf("Illegal instruction at 0x%lx\n", tf->epc);
+        } else {
+            cprintf("Breakpoint at 0x%lx\n", tf->epc);
+        }
+        if ((instruction & 3) != 3) {
+            tf->epc += 2;
+        } else if ((instruction & 0x1f) != 0x1f) {
+            tf->epc += 4;
+        } else {
+            /* Longer encodings are outside this lab; do not guess their size. */
+            print_trapframe(tf);
+        }
+        break;
+    }
+    default:
+        print_trapframe(tf);
+        break;
+    }
+}
 
 
 static inline void trap_dispatch(struct trapframe *tf) {

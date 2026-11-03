@@ -1,29 +1,23 @@
-# Lab3：A+B 合并交付
-
-本目录由 Lab2 分支新建 lab3 分支后新增，根目录原 Lab2 代码与报告保持不动。
+# Lab3：A+B+C 集成
 
 - [实验代码](code/)
-- [A 部分说明](report/A.md)
-- [B 原始报告](report/report.md)（严苑毓 2413682）
-- [B 原始交付说明](report/README.md)
-- [本轮合并验证日志](report/integration/logs/)
+- [总体报告与要求验收](report/integration-abc/验收报告.md)
+- [A 报告](report/A.md)
+- [B 报告](report/report.md)
+- [C 原始交付报告](report/C/C组实验报告.md)
+- [本轮日志](report/integration-abc/logs/)
 
-## 合并范围
-
-A：RESTORE_ALL、__alltraps（原 E 盘当前未挂载，依据本聊天上一轮已验证实现恢复）。学号 STUDENT_ID_TODO 待本人填写。
-B：原附件 interrupt_handler、关机次数配置及其报告、截图与测试证据，保留成员学号和署名。
-共享依赖：保留 B 附件已迁移的 page_init 与 Best-Fit 实现。
-C：exception_handler 尚未提交，生产代码保留声明与占位，未冒充完成。
-
-## 本轮复测
-
-在 WSL Ubuntu-22.04 中进入本目录：
+在 WSL/Linux 中进入 lab3/code：
 
 ```sh
-python3 code/tests/ab/verify_ab.py
+make -j2
+python3 tests/test_exception.py
+make grade
+make qemu
 ```
 
-集成测试从 B 的测试脚本派生，但源码审计允许 A 的汇编改动；测试镜像直接使用合并后的 A 汇编，不另行替换 A。只在临时副本加入遇异常即终止的 C 测试占位和启动恒等过渡映射，并按本机工具链加入旧 CSR 名称兼容宏。临时文件位于仓库的 .qa 目录，不提交。
+本分支保持根目录 Lab2 内容不变。Lab3 全部生产函数已合入；正式启动路径增加分页过渡恒等映射，QEMU 使用 -kernel，评分测试项目、输入与判分条件未改变。详情见总体报告。
 
-B 原始脚本 code/tests/b/verify_b.py 是 B 单独交付的范围审计，原样保留；A 合并后请运行上述 AB 脚本。
-历史截图与 B 原始日志来自附件，不表示本轮重新截图；本轮实际运行证据单独存放于 report/integration/logs。尚未进行全组三模块 make grade，完整生产链接仍需 C 实现及正式启动衔接。
+tests/b 与 tests/ab 脚本、report/logs 及 report/integration 为成员交付和前轮集成的历史证据，其 A/C 占位及旧启动映射假设不适用于当前三人完整代码。当前验收请使用上述命令。C 附件原始日志保留在 report/C/测试日志，不冒充本轮结果。
+
+提交作业前仍需填写 A/C 姓名、学号、班级，按课程要求确认目录结构和完整截图。
