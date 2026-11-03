@@ -1,0 +1,207 @@
+{
+  "environment": {
+    "command": [
+      "bash",
+      "-c",
+      "uname -a; riscv64-unknown-elf-gcc --version; qemu-system-riscv64 --version; gcc --version; python3 --version"
+    ],
+    "cwd": "/mnt/c/Users/LENOVO/Documents/Codex/os-lab3-merge/repo/.qa/AB_integration",
+    "returncode": 0,
+    "seconds": 0.081
+  },
+  "audit": {
+    "changed_files": [
+      "kern/mm/best_fit_pmm.c",
+      "kern/mm/pmm.c",
+      "kern/trap/trap.c",
+      "kern/trap/trapentry.S"
+    ],
+    "teacher_checks_unchanged": true,
+    "A_integrated": true,
+    "C_unimplemented_in_delivery": true
+  },
+  "host_build_default": {
+    "command": [
+      "gcc",
+      "-std=c11",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "host_b.c",
+      "-o",
+      "/mnt/c/Users/LENOVO/Documents/Codex/os-lab3-merge/repo/.qa/AB_integration/host_b_default"
+    ],
+    "cwd": "/mnt/c/Users/LENOVO/Documents/Codex/os-lab3-merge/repo/.qa/AB_integration",
+    "returncode": 0,
+    "seconds": 2.02
+  },
+  "host_default": {
+    "command": [
+      "/mnt/c/Users/LENOVO/Documents/Codex/os-lab3-merge/repo/.qa/AB_integration/host_b_default"
+    ],
+    "cwd": "/mnt/c/Users/LENOVO/Documents/Codex/os-lab3-merge/repo/.qa/AB_integration",
+    "returncode": 0,
+    "seconds": 0.04
+  },
+  "host_build_override3": {
+    "command": [
+      "gcc",
+      "-std=c11",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-DSHUTDOWN_AFTER=3",
+      "host_b.c",
+      "-o",
+      "/mnt/c/Users/LENOVO/Documents/Codex/os-lab3-merge/repo/.qa/AB_integration/host_b_override3"
+    ],
+    "cwd": "/mnt/c/Users/LENOVO/Documents/Codex/os-lab3-merge/repo/.qa/AB_integration",
+    "returncode": 0,
+    "seconds": 1.956
+  },
+  "host_override3": {
+    "command": [
+      "/mnt/c/Users/LENOVO/Documents/Codex/os-lab3-merge/repo/.qa/AB_integration/host_b_override3"
+    ],
+    "cwd": "/mnt/c/Users/LENOVO/Documents/Codex/os-lab3-merge/repo/.qa/AB_integration",
+    "returncode": 0,
+    "seconds": 0.039
+  },
+  "reject_zero": {
+    "command": [
+      "gcc",
+      "-std=c11",
+      "-DSHUTDOWN_AFTER=0",
+      "-c",
+      "host_b.c",
+      "-o",
+      "invalid.o"
+    ],
+    "cwd": "/mnt/c/Users/LENOVO/Documents/Codex/os-lab3-merge/repo/.qa/AB_integration",
+    "returncode": 1,
+    "seconds": 0.078
+  },
+  "compile_B_object": {
+    "command": [
+      "riscv64-unknown-elf-gcc",
+      "-mcmodel=medany",
+      "-std=gnu99",
+      "-Wno-unused",
+      "-Werror",
+      "-fno-builtin",
+      "-Wall",
+      "-O2",
+      "-nostdinc",
+      "-fno-stack-protector",
+      "-Ilibs",
+      "-Ikern/debug",
+      "-Ikern/driver",
+      "-Ikern/trap",
+      "-Ikern/mm",
+      "-c",
+      "kern/trap/trap.c",
+      "-o",
+      "/mnt/c/Users/LENOVO/Documents/Codex/os-lab3-merge/repo/.qa/AB_integration/trap_B.o"
+    ],
+    "cwd": "/mnt/c/Users/LENOVO/Documents/Codex/os-lab3-merge/repo/lab3/code",
+    "returncode": 0,
+    "seconds": 0.733
+  },
+  "kernel_build_default": {
+    "command": [
+      "make",
+      "-j2",
+      "DEFS+=-Dsbadaddr=stval"
+    ],
+    "cwd": "/mnt/c/Users/LENOVO/Documents/Codex/os-lab3-merge/repo/.qa/AB_integration/kernel_default",
+    "returncode": 0,
+    "seconds": 9.069
+  },
+  "kernel_default_shutdown": {
+    "command": [
+      "qemu-system-riscv64",
+      "-machine",
+      "virt",
+      "-nographic",
+      "-bios",
+      "default",
+      "-kernel",
+      "bin/ucore.img",
+      "-monitor",
+      "none",
+      "-no-reboot"
+    ],
+    "cwd": "/mnt/c/Users/LENOVO/Documents/Codex/os-lab3-merge/repo/.qa/AB_integration/kernel_default",
+    "returncode": 0,
+    "seconds": 10.184
+  },
+  "teacher_inject": {
+    "command": [
+      "python3",
+      "/mnt/c/Users/LENOVO/Documents/Codex/os-lab3-merge/repo/lab3/code/tools/inject.py",
+      "/mnt/c/Users/LENOVO/Documents/Codex/os-lab3-merge/repo/.qa/AB_integration/kernel_teacher_timer"
+    ],
+    "cwd": "/mnt/c/Users/LENOVO/Documents/Codex/os-lab3-merge/repo/.qa/AB_integration",
+    "returncode": 0,
+    "seconds": 0.892
+  },
+  "kernel_build_teacher_timer": {
+    "command": [
+      "make",
+      "-j2",
+      "DEFS+=-DGRADE_LAB3_TIMER -Dsbadaddr=stval"
+    ],
+    "cwd": "/mnt/c/Users/LENOVO/Documents/Codex/os-lab3-merge/repo/.qa/AB_integration/kernel_teacher_timer",
+    "returncode": 0,
+    "seconds": 11.186
+  },
+  "teacher_timer": {
+    "command": [
+      "qemu-system-riscv64",
+      "-machine",
+      "virt",
+      "-nographic",
+      "-bios",
+      "default",
+      "-kernel",
+      "bin/ucore.img",
+      "-monitor",
+      "none",
+      "-no-reboot"
+    ],
+    "cwd": "/mnt/c/Users/LENOVO/Documents/Codex/os-lab3-merge/repo/.qa/AB_integration/kernel_teacher_timer",
+    "returncode": 0,
+    "seconds": 10.203
+  },
+  "kernel_build_override3": {
+    "command": [
+      "make",
+      "-j2",
+      "DEFS+=-DSHUTDOWN_AFTER=3 -Dsbadaddr=stval"
+    ],
+    "cwd": "/mnt/c/Users/LENOVO/Documents/Codex/os-lab3-merge/repo/.qa/AB_integration/kernel_override3",
+    "returncode": 0,
+    "seconds": 9.522
+  },
+  "kernel_override3_shutdown": {
+    "command": [
+      "qemu-system-riscv64",
+      "-machine",
+      "virt",
+      "-nographic",
+      "-bios",
+      "default",
+      "-kernel",
+      "bin/ucore.img",
+      "-monitor",
+      "none",
+      "-no-reboot"
+    ],
+    "cwd": "/mnt/c/Users/LENOVO/Documents/Codex/os-lab3-merge/repo/.qa/AB_integration/kernel_override3",
+    "returncode": 0,
+    "seconds": 3.098
+  },
+  "status": "PASS"
+}

@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-28",
+  "status": "PASS",
+  "top_level": [
+    "code",
+    "report"
+  ],
+  "report_template": "references/实验报告模板.md",
+  "screenshot_count": 6,
+  "screenshots": "Native screenshots of fresh WSL test processes; see screenshot_manifest.json",
+  "fresh_acceptance": "logs/screenshots/06-fresh-acceptance.json",
+  "core_source_hashes_match": true,
+  "scope": "B module only; full-group make grade requires A/C integration",
+  "checks": [
+    "template structure",
+    "image links",
+    "all local document links",
+    "six fresh case PASS records",
+    "source hashes",
+    "archive root layout",
+    "archive CRC and per-file content"
+  ]
+}

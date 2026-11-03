@@ -1,0 +1,206 @@
+{
+  "environment": {
+    "command": [
+      "bash",
+      "-c",
+      "uname -a; riscv64-unknown-elf-gcc --version; qemu-system-riscv64 --version; gcc --version; python3 --version"
+    ],
+    "cwd": "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/.qa/B_2413682",
+    "returncode": 0,
+    "seconds": 0.058
+  },
+  "audit": {
+    "changed_files": [
+      "kern/mm/best_fit_pmm.c",
+      "kern/mm/pmm.c",
+      "kern/trap/trap.c"
+    ],
+    "teacher_checks_unchanged": true,
+    "A_unchanged": true,
+    "C_unimplemented_in_delivery": true
+  },
+  "host_build_default": {
+    "command": [
+      "gcc",
+      "-std=c11",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "host_b.c",
+      "-o",
+      "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/.qa/B_2413682/host_b_default"
+    ],
+    "cwd": "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/.qa/B_2413682",
+    "returncode": 0,
+    "seconds": 0.419
+  },
+  "host_default": {
+    "command": [
+      "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/.qa/B_2413682/host_b_default"
+    ],
+    "cwd": "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/.qa/B_2413682",
+    "returncode": 0,
+    "seconds": 0.009
+  },
+  "host_build_override3": {
+    "command": [
+      "gcc",
+      "-std=c11",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-DSHUTDOWN_AFTER=3",
+      "host_b.c",
+      "-o",
+      "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/.qa/B_2413682/host_b_override3"
+    ],
+    "cwd": "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/.qa/B_2413682",
+    "returncode": 0,
+    "seconds": 0.178
+  },
+  "host_override3": {
+    "command": [
+      "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/.qa/B_2413682/host_b_override3"
+    ],
+    "cwd": "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/.qa/B_2413682",
+    "returncode": 0,
+    "seconds": 0.01
+  },
+  "reject_zero": {
+    "command": [
+      "gcc",
+      "-std=c11",
+      "-DSHUTDOWN_AFTER=0",
+      "-c",
+      "host_b.c",
+      "-o",
+      "invalid.o"
+    ],
+    "cwd": "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/.qa/B_2413682",
+    "returncode": 1,
+    "seconds": 0.021
+  },
+  "compile_B_object": {
+    "command": [
+      "riscv64-unknown-elf-gcc",
+      "-mcmodel=medany",
+      "-std=gnu99",
+      "-Wno-unused",
+      "-Werror",
+      "-fno-builtin",
+      "-Wall",
+      "-O2",
+      "-nostdinc",
+      "-fno-stack-protector",
+      "-Ilibs",
+      "-Ikern/debug",
+      "-Ikern/driver",
+      "-Ikern/trap",
+      "-Ikern/mm",
+      "-c",
+      "kern/trap/trap.c",
+      "-o",
+      "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/.qa/B_2413682/trap_B.o"
+    ],
+    "cwd": "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/提交_严苑毓_B/code",
+    "returncode": 0,
+    "seconds": 0.449
+  },
+  "kernel_build_default": {
+    "command": [
+      "make",
+      "-j2",
+      "DEFS+=-Dsbadaddr=stval"
+    ],
+    "cwd": "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/.qa/B_2413682/kernel_default",
+    "returncode": 0,
+    "seconds": 2.855
+  },
+  "kernel_default_shutdown": {
+    "command": [
+      "qemu-system-riscv64",
+      "-machine",
+      "virt",
+      "-nographic",
+      "-bios",
+      "default",
+      "-kernel",
+      "bin/ucore.img",
+      "-monitor",
+      "none",
+      "-no-reboot"
+    ],
+    "cwd": "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/.qa/B_2413682/kernel_default",
+    "returncode": 0,
+    "seconds": 10.18
+  },
+  "teacher_inject": {
+    "command": [
+      "python3",
+      "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/提交_严苑毓_B/code/tools/inject.py",
+      "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/.qa/B_2413682/kernel_teacher_timer"
+    ],
+    "cwd": "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/.qa/B_2413682",
+    "returncode": 0,
+    "seconds": 0.111
+  },
+  "kernel_build_teacher_timer": {
+    "command": [
+      "make",
+      "-j2",
+      "DEFS+=-DGRADE_LAB3_TIMER -Dsbadaddr=stval"
+    ],
+    "cwd": "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/.qa/B_2413682/kernel_teacher_timer",
+    "returncode": 0,
+    "seconds": 2.769
+  },
+  "teacher_timer": {
+    "command": [
+      "qemu-system-riscv64",
+      "-machine",
+      "virt",
+      "-nographic",
+      "-bios",
+      "default",
+      "-kernel",
+      "bin/ucore.img",
+      "-monitor",
+      "none",
+      "-no-reboot"
+    ],
+    "cwd": "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/.qa/B_2413682/kernel_teacher_timer",
+    "returncode": 0,
+    "seconds": 10.2
+  },
+  "kernel_build_override3": {
+    "command": [
+      "make",
+      "-j2",
+      "DEFS+=-DSHUTDOWN_AFTER=3 -Dsbadaddr=stval"
+    ],
+    "cwd": "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/.qa/B_2413682/kernel_override3",
+    "returncode": 0,
+    "seconds": 2.753
+  },
+  "kernel_override3_shutdown": {
+    "command": [
+      "qemu-system-riscv64",
+      "-machine",
+      "virt",
+      "-nographic",
+      "-bios",
+      "default",
+      "-kernel",
+      "bin/ucore.img",
+      "-monitor",
+      "none",
+      "-no-reboot"
+    ],
+    "cwd": "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/.qa/B_2413682/kernel_override3",
+    "returncode": 0,
+    "seconds": 3.114
+  },
+  "status": "PASS"
+}

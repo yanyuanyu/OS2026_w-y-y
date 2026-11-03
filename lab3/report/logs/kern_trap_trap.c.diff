@@ -1,0 +1,94 @@
+--- a/kern/trap/trap.c
++++ b/kern/trap/trap.c
+@@ -6,10 +6,20 @@
+ #include <memlayout.h>
+ #include <mmu.h>
+ #include <riscv.h>
++#include <sbi.h>
+ #include <stdio.h>
+ #include <trap.h>
+ 
+ #define TICK_NUM 100
++
++//lab3 function2 B 2413682: local default; the handout gives no numeric limit.
++// The group can override it with DEFS+=-DSHUTDOWN_AFTER=<positive count>.
++#ifndef SHUTDOWN_AFTER
++#define SHUTDOWN_AFTER 10
++#endif
++#if SHUTDOWN_AFTER <= 0
++#error "SHUTDOWN_AFTER must be a positive number of tick reports"
++#endif
+ 
+ static void print_ticks() {
+     cprintf("%d ticks\n", TICK_NUM);
+@@ -80,7 +90,69 @@
+     cprintf("  t6       0x%08x\n", gpr->t6);
+ }
+ 
+-//lab3 function2 YOUR CODE
++//lab3 function2 B 2413682
++void interrupt_handler(struct trapframe *tf) {
++    static size_t reports = 0;
++    // scause's top bit marks an interrupt; the remaining bits hold its code.
++    uintptr_t cause = tf->cause & ~((uintptr_t)1 << (sizeof(uintptr_t) * 8 - 1));
++
++    switch (cause) {
++    case IRQ_U_SOFT:
++        cprintf("User software interrupt\n");
++        break;
++    case IRQ_S_SOFT:
++        cprintf("Supervisor software interrupt\n");
++        break;
++    case IRQ_H_SOFT:
++        cprintf("Hypervisor software interrupt\n");
++        break;
++    case IRQ_M_SOFT:
++        cprintf("Machine software interrupt\n");
++        break;
++    case IRQ_U_TIMER:
++        cprintf("User timer interrupt\n");
++        break;
++    case IRQ_S_TIMER:
++        // SBI arms one event at a time: re-arm before returning from the trap.
++        clock_set_next_event();
++        ticks++;
++        if (ticks % TICK_NUM == 0) {
++            print_ticks();
++            reports++;
++            if (reports >= SHUTDOWN_AFTER) {
++                sbi_shutdown();
++            }
++        }
++        break;
++    case IRQ_H_TIMER:
++        cprintf("Hypervisor timer interrupt\n");
++        break;
++    case IRQ_M_TIMER:
++        cprintf("Machine timer interrupt\n");
++        break;
++    case IRQ_U_EXT:
++        cprintf("User external interrupt\n");
++        break;
++    case IRQ_S_EXT:
++        cprintf("Supervisor external interrupt\n");
++        break;
++    case IRQ_H_EXT:
++        cprintf("Hypervisor external interrupt\n");
++        break;
++    case IRQ_M_EXT:
++        cprintf("Machine external interrupt\n");
++        break;
++    default:
++        cprintf("Unknown interrupt: cause %lu\n", (unsigned long)cause);
++        print_trapframe(tf);
++        break;
++    }
++}
++
++// C owns this function. The definition is supplied when the group integrates C.
++void exception_handler(struct trapframe *tf);
++
++//lab3 function2 C YOUR CODE
+ 
+ 
+ static inline void trap_dispatch(struct trapframe *tf) {

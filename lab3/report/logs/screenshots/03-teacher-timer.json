@@ -1,0 +1,50 @@
+{
+  "case": "03-teacher-timer",
+  "started": "2026-10-28T13:05:18.968085+08:00",
+  "status": "PASS",
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/提交_严苑毓_B/code/tools/inject.py",
+        "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/.qa/B_2413682/capture_teacher"
+      ],
+      "cwd": "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/.qa/B_2413682",
+      "returncode": 0,
+      "seconds": 0.207,
+      "log": "03-teacher-timer-01.log"
+    },
+    {
+      "argv": [
+        "make",
+        "-j2",
+        "DEFS+=-DGRADE_LAB3_TIMER -Dsbadaddr=stval"
+      ],
+      "cwd": "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/.qa/B_2413682/capture_teacher",
+      "returncode": 0,
+      "seconds": 3.111,
+      "log": "03-teacher-timer-02.log"
+    },
+    {
+      "argv": [
+        "qemu-system-riscv64",
+        "-machine",
+        "virt",
+        "-nographic",
+        "-bios",
+        "default",
+        "-kernel",
+        "bin/ucore.img",
+        "-monitor",
+        "none",
+        "-no-reboot"
+      ],
+      "cwd": "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/.qa/B_2413682/capture_teacher",
+      "returncode": 0,
+      "seconds": 10.187,
+      "tick_lines": 10
+    }
+  ],
+  "verify_results": {},
+  "scope": "B with QA fixtures; not full group make grade"
+}

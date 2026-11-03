@@ -1,0 +1,5 @@
+host_b.c: In function ‘call_preserving_frame’:
+host_b.c:115:17: error: null character(s) preserved in literal [-Werror]
+  115 |     output[0] = ' ';
+      |                 ^
+cc1: all warnings being treated as errors

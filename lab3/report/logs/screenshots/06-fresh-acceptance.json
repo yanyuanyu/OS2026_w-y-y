@@ -1,0 +1,19 @@
+{
+  "case": "06-fresh-acceptance",
+  "started": "2026-10-28T14:58:05.347869+08:00",
+  "status": "PASS",
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/提交_严苑毓_B/code/tests/b/verify_b.py"
+      ],
+      "cwd": "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/提交_严苑毓_B",
+      "returncode": 0,
+      "seconds": 43.018,
+      "log": "06-fresh-acceptance-01.log"
+    }
+  ],
+  "verify_results": {},
+  "scope": "B with QA fixtures; not full group make grade"
+}

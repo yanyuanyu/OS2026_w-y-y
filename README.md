@@ -9,3 +9,8 @@
 - [Release 页面](https://github.com/yanyuanyu/OS2026_w-y-y/releases/tag/lab2-demo-20261026)
 
 视频作为 Release 附件保存，不占用 Git 代码历史。
+
+## Lab3（当前分支）
+
+- [A+B 合并代码与说明](lab3/README.md)
+- C 异常处理待合入；Lab2 历史内容保持原样。

@@ -1,0 +1,3 @@
+host_b.c:45:2: error: #error "SHUTDOWN_AFTER must be a positive number of tick reports"
+   45 | #error "SHUTDOWN_AFTER must be a positive number of tick reports"
+      |  ^~~~~

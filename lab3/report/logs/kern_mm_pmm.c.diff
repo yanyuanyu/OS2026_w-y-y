@@ -1,0 +1,83 @@
+--- a/kern/mm/pmm.c
++++ b/kern/mm/pmm.c
+@@ -35,7 +35,7 @@
+ 
+ // init_pmm_manager - initialize a pmm_manager instance
+ static void init_pmm_manager(void) {
+-    pmm_manager = &default_pmm_manager;
++    pmm_manager = &best_fit_pmm_manager;
+     cprintf("memory management: %s\n", pmm_manager->name);
+     pmm_manager->init();
+ }
+@@ -81,7 +81,70 @@
+     return ret;
+ }
+ 
+-//lab2 请补充你在lab2中的代码
++//lab2 function1 - migrated from the final group submission
++static void page_init(void) {
++    extern char end[];
++    uint64_t mem_base = get_memory_base();
++    uint64_t mem_size = get_memory_size();
++    uint64_t mem_end;
++    size_t page_count;
++    uintptr_t pages_va, pages_end_va, free_pa;
++
++    va_pa_offset = PHYSICAL_MEMORY_OFFSET;
++    if (mem_base == 0 || mem_size == 0 || mem_size > ~(uint64_t)0 - mem_base) {
++        panic("page_init: invalid physical memory range");
++    }
++    mem_end = mem_base + mem_size;
++    if ((mem_base & (PGSIZE - 1)) != 0 || mem_base / PGSIZE != nbase) {
++        panic("page_init: unsupported or unaligned physical memory range");
++    }
++    /* entry.S maps only the DRAM-start 1 GiB window with a root leaf PTE. */
++    if (mem_end > (uint64_t)DRAM_BASE + (1ULL << 30)) {
++        panic("page_init: physical memory outside boot mapping");
++    }
++    /* An incomplete tail page must not be advertised to the allocator. */
++    mem_end = ROUNDDOWN(mem_end, PGSIZE);
++
++    npage = PPN(mem_end);
++    if (npage <= nbase) {
++        panic("page_init: no physical pages available");
++    }
++    page_count = npage - nbase;
++
++    pages_va = ROUNDUP((uintptr_t)end, PGSIZE);
++    if (page_count > (~(uintptr_t)0 - pages_va) / sizeof(struct Page)) {
++        panic("page_init: page descriptor array size overflow");
++    }
++    pages_end_va = pages_va + page_count * sizeof(struct Page);
++    if (pages_end_va < pages_va) {
++        panic("page_init: page descriptor array overflow");
++    }
++    if (pages_end_va > ~(uintptr_t)0 - (PGSIZE - 1)) {
++        panic("page_init: page descriptor alignment overflow");
++    }
++    free_pa = PADDR(ROUNDUP(pages_end_va, PGSIZE));
++    if (PADDR(pages_va) < mem_base || free_pa < mem_base || free_pa >= mem_end) {
++        panic("page_init: kernel and page descriptors consume physical memory");
++    }
++    pages = (struct Page *)pages_va;
++
++    /* Reserve all pages first. init_memmap clears the state of free pages. */
++    for (size_t i = 0; i < page_count; i++) {
++        pages[i].flags = 0;
++        pages[i].property = 0;
++        set_page_ref(&pages[i], 0);
++        SetPageReserved(&pages[i]);
++    }
++
++    cprintf("Physical memory: [0x%016lx, 0x%016lx)\n",
++            (unsigned long)mem_base, (unsigned long)mem_end);
++    cprintf("Page descriptors: %lu pages at 0x%016lx (virtual)\n",
++            (unsigned long)page_count, (unsigned long)pages_va);
++    cprintf("Free physical memory begins at 0x%016lx\n",
++            (unsigned long)free_pa);
++
++    pmm_manager->init_memmap(pa2page(free_pa), npage - PPN(free_pa));
++}
+ 
+ /* pmm_init - initialize the physical memory management */
+ void pmm_init(void) {

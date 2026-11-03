@@ -1,0 +1,28 @@
+{
+  "case": "02-qemu-default",
+  "started": "2026-10-28T13:05:18.947728+08:00",
+  "status": "PASS",
+  "commands": [
+    {
+      "argv": [
+        "qemu-system-riscv64",
+        "-machine",
+        "virt",
+        "-nographic",
+        "-bios",
+        "default",
+        "-kernel",
+        "bin/ucore.img",
+        "-monitor",
+        "none",
+        "-no-reboot"
+      ],
+      "cwd": "/mnt/c/Users/13789/Desktop/操作系统/实验/lab3/.qa/B_2413682/capture_default",
+      "returncode": 0,
+      "seconds": 10.178,
+      "tick_lines": 10
+    }
+  ],
+  "verify_results": {},
+  "scope": "B with QA fixtures; not full group make grade"
+}
