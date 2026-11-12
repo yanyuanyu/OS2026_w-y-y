@@ -1,1 +1,0 @@
-PANIC kern/mm/buddy_pmm.c:17: assertion failed: npage >= nbase && index < npage - nbase

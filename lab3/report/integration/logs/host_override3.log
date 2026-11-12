@@ -1,7 +1,0 @@
-PASS: 11 non-timer branches with/without interrupt flag; no timer side effects
-PASS: unknown interrupt prints normalized cause and dumps trapframe
-PASS: timer boundary ticks=99
-PASS: timer boundary ticks=100
-PASS: timer boundary ticks=199
-PASS: timer boundary ticks=200
-PASS: shutdown exactly at 3 reports / 300 ticks; every trapframe preserved

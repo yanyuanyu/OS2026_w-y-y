@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Inject Lab2 grading tests into a temporary student-tree copy.
+"""Inject Lab4 grading tests into a temporary student-tree copy.
 
 Tests are inserted at function boundaries:
-  * pmm_init: function body (after specific function calls)
+  * pmm_init: function tail
+  * proc_init: function tail
+  * init_main: function entry
 
-The injector operates only on the temporary grading copy; the student's
-original sources are never modified.
+The injector does not depend on implementation-specific statements such as
+"ret = 0", comments, labels, or a particular final call in a function.
 """
 
 import os
@@ -15,7 +17,7 @@ import sys
 
 
 def die(message):
-    print("[lab2 inject] ERROR: " + message)
+    print("[lab4 inject] ERROR: " + message)
     raise SystemExit(1)
 
 
@@ -45,9 +47,9 @@ def find_function(text, name):
     pattern = re.compile(
         r"(?ms)^[ \t]*"
         r"(?:static[ \t]+)?"
-        r"[A-Za-z_][A-Za-z0-9_ \t\n\*]*?"
+        r"[A-Za-z_][A-Za-z0-9_ \t\r\n\*]*?"
         r"\b" + re.escape(name) +
-        r"[ \t\n]*\([^;{}]*\)[ \t\n]*\{"
+        r"[ \t\r\n]*\([^;{}]*\)[ \t\r\n]*\{"
     )
     matches = list(pattern.finditer(text))
     if len(matches) != 1:
@@ -124,6 +126,13 @@ def indent_code(code):
     return "\n" + "\n".join("    " + line for line in code.splitlines()) + "\n"
 
 
+def insert_at_function_start(path, name, code):
+    text = read_text(path)
+    _, body_start, _ = find_function(text, name)
+    insertion = indent_code(code)
+    write_text(path, text[:body_start + 1] + insertion + text[body_start + 1:])
+
+
 def insert_at_function_end(path, name, code):
     text = read_text(path)
     _, _, body_end = find_function(text, name)
@@ -132,40 +141,36 @@ def insert_at_function_end(path, name, code):
 
 
 makefile = os.path.join(root, "Makefile")
-pmm = os.path.join(root, "kern", "mm", "pmm.c")
+make = read_text(makefile)
+if "kern/test" in make or "test_lab4.h" in make:
+    die("The skeleton already contains test hooks; duplicate injection is not allowed")
+if "--wrap=" in make:
+    die("Detected leftover --wrap configuration; the grading skeleton must use direct injection")
+
 testdir = os.path.join(root, "kern", "test")
-
-# Pre-condition: verify the skeleton is clean
-make_text = read_text(makefile)
-if "kern/test" in make_text:
-    die("Makefile already contains kern/test; the skeleton is polluted")
-pmm_text = read_text(pmm)
-if "#include <test_lab2.h>" in pmm_text:
-    die("pmm.c already includes test_lab2.h; the skeleton was injected")
-
-# Copy test sources into kern/test/
 os.makedirs(testdir, exist_ok=True)
-for name in ("test_lab2.c", "test_lab2.h"):
+for name in ("test_lab4.c", "test_lab4.h"):
     src = os.path.join(tools, name)
     if not os.path.exists(src):
-        die("tools/{} not found".format(name))
+        die("tools/ not found".format(name))
     shutil.copyfile(src, os.path.join(testdir, name))
 
-# Add kern/test to Makefile
 for variable in ("KINCLUDE", "KSRCDIR"):
     match = re.search(
-        r"(?m)^" + variable + r"[ \t]+\+=.*(?:\n[ \t]+[^\n]*)*",
-        make_text,
+        r"(?m)^" + variable + r"[ \t]*\+=.*(?:\n[ \t]+[^\n]*)*",
+        make,
     )
     if match is None:
         die("Makefile variable not found: " + variable)
-    make_text = make_text[:match.end()] + "\n" + variable + "\t+= kern/test" + make_text[match.end():]
-write_text(makefile, make_text)
+    make = make[:match.end()] + "\n" + variable + "\t+= kern/test" + make[match.end():]
+write_text(makefile, make)
 
-# Add #include <test_lab2.h> to pmm.c
-insert_include(pmm, "test_lab2.h", "pmm.h")
+pmm = os.path.join(root, "kern", "mm", "pmm.c")
+proc = os.path.join(root, "kern", "process", "proc.c")
+insert_include(pmm, "test_lab4.h", "pmm.h")
+insert_include(proc, "test_lab4.h", "proc.h")
+insert_at_function_end(pmm, "pmm_init", "test_lab4_pmm_basic();")
+insert_at_function_end(proc, "proc_init", "test_lab4_process_create();")
+insert_at_function_start(proc, "init_main", "test_lab4_schedule();")
 
-# Inject tests at the end of pmm_init
-insert_at_function_end(pmm, "pmm_init", "test_page_init();\ntest_best_fit();")
-
-print("lab2 injection complete")
+print("lab4 injection complete")

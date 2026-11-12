@@ -1,16 +1,5 @@
 #!/bin/sh
 
-# Clean up only the QEMU child started by this grading run.
-pid=
-cleanup_qemu() {
-    if [ -n "$pid" ]; then
-        kill "$pid" 2>/dev/null || true
-        wait "$pid" 2>/dev/null || true
-    fi
-}
-trap cleanup_qemu EXIT
-trap 'exit 130' INT TERM HUP
-
 verbose=false
 if [ "x$1" = "x-v" ]; then
     verbose=true
@@ -44,13 +33,18 @@ grep='grep'
 rm='rm -f'
 sed='sed'
 
-## sym table / gdb / qemu
+## symbol table
 sym_table='obj/kernel.sym'
+
+## gdb & gdbopts
 gdb="$(make_print GDB)"
 gdbport='1234'
+
 gdb_in="$(make_print GRADE_GDB_IN)"
 
+## qemu & qemuopts
 qemu="$(make_print qemu)"
+
 qemu_out="$(make_print GRADE_QEMU_OUT)"
 
 if $qemu -nographic -help | grep -q '^-gdb'; then
@@ -59,13 +53,17 @@ else
     qemugdb="-s -p $gdbport"
 fi
 
+## default variables
 default_timeout=30
+default_pts=5
+
 pts=5
 part=0
 part_pos=0
 total=0
 total_pos=0
 
+## default functions
 update_score() {
     total=`expr $total + $part`
     total_pos=`expr $total_pos + $part_pos`
@@ -126,6 +124,8 @@ fail() {
 }
 
 run_qemu() {
+    # Run qemu with serial output redirected to $qemu_out. If $brkfun is non-empty,
+    # wait until $brkfun is reached or $timeout expires, then kill QEMU
     qemuextra=
     if [ "$brkfun" ]; then
         qemuextra="-S $qemugdb"
@@ -142,21 +142,11 @@ run_qemu() {
     ) > $out 2> $err &
     pid=$!
 
-    # Wait for the actual final test marker, not a fixed boot delay.
-    if [ -z "$brkfun" ]; then
-        deadline=$(( $(date +%s) + timeout ))
-        while kill -0 "$pid" 2>/dev/null; do
-            if [ -s "$qemu_out" ] && { grep -F '[Test 2] Best-Fit:' "$qemu_out" >/dev/null || grep -F 'kernel panic' "$qemu_out" >/dev/null; }; then
-                break
-            fi
-            [ "$(date +%s)" -lt "$deadline" ] || break
-            sleep 0.05
-        done
-    else
-        sleep 1
-    fi
+    # wait for QEMU to start
+    sleep 1
 
     if [ -n "$brkfun" ]; then
+        # find the address of the kernel $brkfun function
         brkaddr=`$grep " $brkfun\$" $sym_table | $sed -e's/ .*$//g'`
         brkaddr_phys=`echo $brkaddr | sed "s/^c0/00/g"`
         (
@@ -167,15 +157,44 @@ run_qemu() {
             fi
             echo "continue"
         ) > $gdb_in
+
         $gdb -batch -nx -x $gdb_in > /dev/null 2>&1
+
+        # make sure that QEMU is dead
+        # on OS X, exiting gdb doesn't always exit qemu
         kill $pid > /dev/null 2>&1
     fi
 }
 
+build_run() {
+    # usage: build_run <tag> <args>
+    show_build_tag "$1"
+    shift
+
+    if $verbose; then
+        echo "$make $@ ..."
+    fi
+    $make $makeopts $@ 'DEFS+=-DDEBUG_GRADE' > $out 2> $err
+
+    if [ $? -ne 0 ]; then
+        echo $make $@ failed
+        exit 1
+    fi
+
+    # now run qemu and save the output
+    run_qemu
+
+    show_time
+
+    cp $qemu_out .`echo $tag | tr '[:upper:]' '[:lower:]' | sed 's/ /_/g'`.log
+}
+
 check_result() {
+    # usage: check_result <tag> <check> <check args...>
     show_check_tag "$1"
     shift
 
+    # give qemu some time to run (for asynchronous mode)
     if [ ! -s $qemu_out ]; then
         sleep 4
     fi
@@ -234,7 +253,57 @@ check_regexps() {
     fi
 }
 
+run_test() {
+    # usage: run_test [-tag <tag>] [-Ddef...] [-check <check>] checkargs ...
+    tag=
+    check=check_regexps
+    while true; do
+        select=
+        case $1 in
+            -tag)
+                select=`expr substr $1 2 ${#1}`
+                eval $select='$2'
+                ;;
+        esac
+        if [ -z "$select" ]; then
+            break
+        fi
+        shift
+        shift
+    done
+    defs=
+    while expr "x$1" : "x-D.*" > /dev/null; do
+        defs="DEFS+='$1' $defs"
+        shift
+    done
+    if [ "x$1" = "x-check" ]; then
+        check=$2
+        shift
+        shift
+    fi
+
+    $make $makeopts touch > /dev/null 2>&1
+    build_run "$tag" "$defs"
+
+    check_result 'check result' "$check" "$@"
+}
+
+quick_run() {
+    # usage: quick_run <tag> [-Ddef...]
+    tag="$1"
+    shift
+    defs=
+    while expr "x$1" : "x-D.*" > /dev/null; do
+        defs="DEFS+='$1' $defs"
+        shift
+    done
+
+    $make $makeopts touch > /dev/null 2>&1
+    build_run "$tag" "$defs"
+}
+
 quick_check() {
+    # usage: quick_check <tag> checkargs ...
     tag="$1"
     shift
     check_result "$tag" check_regexps "$@"
@@ -242,29 +311,36 @@ quick_check() {
 
 ## kernel image
 osimg=$(make_print ucoreimg)
+
+## swap image
 swapimg=$(make_print swapimg)
 
-## qemu-options
+## set default qemu-options
 qemuopts="-machine virt -nographic -bios default -kernel bin/ucore.img"
 
-## the lab2 kernel only while(1) after entering kernel mode and never calls readline,
-## so no break function is needed and brkfun stays empty
-brkfun=
+## set break-function, default is readline
+brkfun=readline
 
 run_qemu
 
 ## check now!!
 
-pts=10
-quick_check 'check page init'                \
-    '[Test 1] Page Init: PASS'
+# quick_run 'Check VMM'
 
 pts=10
-quick_check 'check best fit'                 \
-    '[Test 2] Best-Fit: PASS'
+quick_check 'check PMM'                                     \
+    '[Test PMM] PASS'
+
+pts=10
+quick_check 'check Process Create'                          \
+    '[Test Process Create] PASS'
+
+pts=10
+quick_check 'check Schedule'                                \
+    '[Test Schedule] PASS'                                   \
+    'this initproc, pid = 1, name = "init"'                 \
+    'To U: "Hello world!!".'                                \
+    'To U: "en.., Bye, Bye. :)"'
 
 ## print final-score
-if [ -n "${GRADE_EVIDENCE:-}" ] && [ -f "$qemu_out" ]; then
-    cp "$qemu_out" "$GRADE_EVIDENCE"
-fi
 show_final

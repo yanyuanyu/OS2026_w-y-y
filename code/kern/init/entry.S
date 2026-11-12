@@ -11,7 +11,7 @@ kern_entry:
     sd a0, 0(t0)
     la t0, boot_dtb
     sd a1, 0(t0)
-
+    
     # t0 := 三级页表的虚拟地址
     lui     t0, %hi(boot_page_table_sv39)
     # t1 := 0xffffffff40000000 即虚实映射偏移量
@@ -57,10 +57,10 @@ bootstacktop:
 # 分配 4KiB 内存给预设的三级页表
 boot_page_table_sv39:
     # 0xffffffff_c0000000 map to 0x80000000 (1G)
-    # Entry 2 keeps physical PC valid immediately after enabling Sv39.
-    # Entries 2 and 511 map the same 1 GiB DRAM window.
+    # 前 511 个页表项均设置为 0 ，因此 V=0 ，意味着是空的(unmapped)
+    # 启用分页后先在物理 PC 执行几条指令，需保留临时恒等映射。
     .zero 8 * 2
-    .quad (0x80000 << 10) | 0xcf # identity transition: 0x80000000 -> 0x80000000
+    .quad (0x80000 << 10) | 0xcf
     .zero 8 * 508
     # 设置最后一个页表项，PPN=0x80000，标志位 VRWXAD 均为 1
     .quad (0x80000 << 10) | 0xcf # VRWXAD
