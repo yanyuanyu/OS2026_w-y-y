@@ -1,0 +1,40 @@
+COMMAND: bash run_dual.sh
+{
+  "ecall_pc": "0x800092",
+  "sret_pc": "0xffffffffc0200d40",
+  "returned_pc": "0x800096",
+  "returned_pid": 2,
+  "ecall_privilege": "U -> S",
+  "sret_privilege": "S -> U",
+  "passed": true
+}
+DUAL_GDB_ALL_PASS
+
+$ grep privilege transitions and helpers in actual GDB logs
+ECALL before: priv=0 pc=0x800092 a0=18
+#0  helper_raise_exception (env=0x5555566c14a0, exception=8) at ../target/riscv/op_helper.c:36
+#1  0x00007fffb0000124 in code_gen_buffer ()
+#0  riscv_cpu_do_interrupt (cs=0x5555566b8320) at ../target/riscv/cpu_helper.c:1328
+#1  0x0000555555b5fdda in cpu_handle_exception (ret=<synthetic pointer>, cpu=0x5555566b8320) at ../accel/tcg/cpu-exec.c:681
+ECALL after: priv=1 pc=0xffffffffc0200c74 sepc=0x800092 scause=8
+SRET before: priv=1 pc=0xffffffffc0200d40 sepc=0x800096
+#0  helper_sret (env=0x5555566c14a0) at ../target/riscv/op_helper.c:120
+#1  0x00007fffb0000114 in code_gen_buffer ()
+SRET after: priv=0 return_pc=0x800096
+
+$ grep guest PC and return values
+pc             0x800092	0x800092 <sys_getpid+12>
+a0             0x12	18
+sepc           0x8000aa	8388778
+scause         0x8	8
+pc             0xffffffffc0200c74	0xffffffffc0200c74 <__alltraps>
+sepc           0x800092	8388754
+scause         0x8	8
+pc             0xffffffffc0200d40	0xffffffffc0200d40 <__trapret+92>
+a0             0x2	2
+sepc           0x800096	8388758
+pc             0x800096	0x800096 <sys_getpid+16>
+a0             0x2	2
+sepc           0x800096	8388758
+
+HOST_EXIT=0

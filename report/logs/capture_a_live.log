@@ -1,0 +1,30 @@
+COMMAND: bash run_a.sh
+=== 64 MiB ===
+[A] COW sharing / nested fork / split / singleton / readonly / release PASS
+[A] eager copy of COW source PASS
+[A] VMA / page-table / COW allocation failure rollback PASS
+[A] page-table reclamation preserves live sibling PASS
+[A] kernel copyout / cross-page / readonly / holes / overflow PASS
+[A] real Sv39 store-fault / retry / parent TLB downgrade PASS
+[A] fork PID / child-zero / stack / links / CLONE_VM / failure cleanup PASS
+[A] ALL PASS
+=== 128 MiB ===
+[A] COW sharing / nested fork / split / singleton / readonly / release PASS
+[A] eager copy of COW source PASS
+[A] VMA / page-table / COW allocation failure rollback PASS
+[A] page-table reclamation preserves live sibling PASS
+[A] kernel copyout / cross-page / readonly / holes / overflow PASS
+[A] real Sv39 store-fault / retry / parent TLB downgrade PASS
+[A] fork PID / child-zero / stack / links / CLONE_VM / failure cleanup PASS
+[A] ALL PASS
+=== 256 MiB ===
+[A] COW sharing / nested fork / split / singleton / readonly / release PASS
+[A] eager copy of COW source PASS
+[A] VMA / page-table / COW allocation failure rollback PASS
+[A] page-table reclamation preserves live sibling PASS
+[A] kernel copyout / cross-page / readonly / holes / overflow PASS
+[A] real Sv39 store-fault / retry / parent TLB downgrade PASS
+[A] fork PID / child-zero / stack / links / CLONE_VM / failure cleanup PASS
+[A] ALL PASS
+
+HOST_EXIT=0

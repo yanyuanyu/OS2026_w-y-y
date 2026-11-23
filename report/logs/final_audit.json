@@ -1,0 +1,268 @@
+{
+  "grade": "130/130",
+  "a_memory_mib": [
+    64,
+    128,
+    256
+  ],
+  "integration_cases": [
+    {
+      "case": "b_lifecycle",
+      "memory_mib": 128,
+      "passed": true
+    },
+    {
+      "case": "b_isolation_orphan",
+      "memory_mib": 128,
+      "passed": true
+    },
+    {
+      "case": "b_execfail",
+      "memory_mib": 128,
+      "passed": true
+    },
+    {
+      "case": "b_execsuccess",
+      "memory_mib": 128,
+      "passed": true
+    },
+    {
+      "case": "cowtest",
+      "memory_mib": 128,
+      "passed": true
+    },
+    {
+      "case": "c_syscalls",
+      "memory_mib": 128,
+      "passed": true
+    },
+    {
+      "case": "c_cow",
+      "memory_mib": 128,
+      "passed": true
+    },
+    {
+      "case": "forktree",
+      "memory_mib": 128,
+      "passed": true
+    },
+    {
+      "case": "waitkill",
+      "memory_mib": 128,
+      "passed": true
+    },
+    {
+      "case": "abc_exec_edges",
+      "memory_mib": 128,
+      "passed": true
+    },
+    {
+      "case": "cowtest",
+      "memory_mib": 64,
+      "passed": true
+    },
+    {
+      "case": "cowtest",
+      "memory_mib": 256,
+      "passed": true
+    },
+    {
+      "case": "dirtymodel",
+      "memory_mib": 128,
+      "passed": true
+    }
+  ],
+  "dual_gdb": {
+    "ecall_pc": "0x800092",
+    "sret_pc": "0xffffffffc0200d40",
+    "returned_pc": "0x800096",
+    "returned_pid": 2,
+    "ecall_privilege": "U -> S",
+    "sret_privilege": "S -> U",
+    "passed": true
+  },
+  "initial_user_sstatus": "SPP=0 SPIE=1 SIE=0; interrupts disabled before forkrets",
+  "teacher_checkers": {
+    "tools/grade.sh": "a23381232a8231db5974a3d3b6910da912c2a21cb508019476e06534cef38ee9",
+    "tools/inject.py": "6ff9a71187a3167880201a416c4c0ec59a91f696d5e1827f86c195087fd4b893",
+    "tools/test_lab5.c": "c2893891c97e5ef0995c8cead8d15885975e677b8e2e290e4f700b14541de4c7",
+    "tools/test_lab5.h": "2ba6e78271d2badb8721c9706eaca2410b828086f02a5c29388ac5104bea0c1c"
+  },
+  "source_sha256": {
+    "CMakeLists.txt": "09d755b03d0a548bca497064ab2b4a36863d6b6df126fcb68197ec7ae471a845",
+    "kern/debug/assert.h": "e7d710ecef4024fb9c5851bf587eed83990d8b591c3ba4de0409680153e52062",
+    "kern/debug/kdebug.c": "2e647a9fe174bf9602f680653175199c82a8004294338c249d674a46890fbd27",
+    "kern/debug/kdebug.h": "629b2ac24b4acc582f331fe22f50d435d4f4d48622120223912fd43f176d80bd",
+    "kern/debug/kmonitor.c": "a2912dcfa2bb020a966ede184400756965e5b118c8c486b16ba4344e23579b44",
+    "kern/debug/kmonitor.h": "b279bf8fdc0e67871932b5bea2f3c21613c580269d6ff2246dafd117f2916208",
+    "kern/debug/panic.c": "cbd4b6737e98f73c14d78edb9600982f050bdef5ae0e17d2b1597cd8d5a4b337",
+    "kern/debug/stab.h": "63baaf09c001bfaab5a909db39627ae44c467ec7f86d2095945de8f533c5e6ca",
+    "kern/driver/clock.c": "56d92c15188de28ec7855e2d9c28e103abda2604a9b008c6e9ccfe35e40bf32b",
+    "kern/driver/clock.h": "31af7008999b4a938f29150a1097ef0e347b716d09dd20f89bf080413d51d7ee",
+    "kern/driver/console.c": "fde1e21f57c65ecd5f31713608fa27731500231c01bdb94d10409afd943c5c38",
+    "kern/driver/console.h": "0d1b4c3cec6e990ea5c85e7ad0db73f1bb8c1f3dea723baa1475fd5e145c284b",
+    "kern/driver/dtb.c": "0e2bb4f1683b79291abf4db996aa8259f78ed614077c6019387609b4f54bd52a",
+    "kern/driver/dtb.h": "e9f1784e4934e2969964156203700fd119acc6e2f7a71d4e3c18d473fe5d51dd",
+    "kern/driver/intr.c": "f9319a63bdc6fc89bf908bb0547055f742e04b8b584e197f67d73d26916d379a",
+    "kern/driver/intr.h": "1284e10d0f23d42d88f4314e40cd630a73aadec46407ce179b7e1b253f962083",
+    "kern/driver/kbdreg.h": "36391fe4414ab73ba31550824667afd66467a9ba9cbffe09d32ff8fdbaf809a0",
+    "kern/driver/picirq.c": "811e06df8fa8fb707dcef6a8232c04c872df17c55fe8205748216742750a5fe3",
+    "kern/driver/picirq.h": "0ac1711cfde712d10081b8157a5d7a2f7959a915ee33a9903fbdcfb03aef73f4",
+    "kern/init/entry.S": "9b5204243375916253fa2a66a66c3361c364b915b45cc9325595460060953194",
+    "kern/init/init.c": "107317e95f025b2aa96897dace421842549f7af409e4e514fa648e61123e7f27",
+    "kern/libs/readline.c": "bcfaa72c02f5f131f0e24d6516b12e6190d79468d384d9f7f03b71df75b08dd3",
+    "kern/libs/stdio.c": "7236f93e8ecb66b5ea7ebdeb0e0678233572e53696add2819335f0713280aae7",
+    "kern/mm/default_pmm.c": "fe66cc5c579ed51aaf26397de89c78386a5c9af5e882f8695ecf7c33f66f2fa7",
+    "kern/mm/default_pmm.h": "e811b6a142e73cf3cde0c9bffb06ff47980b822653a34ec038f94eeac95c10ea",
+    "kern/mm/kmalloc.c": "24c45650eb11fd28ee005f2c0ca64df39c1005d142b1aba5f1b1c5b4b3e473ac",
+    "kern/mm/kmalloc.h": "454d5c22253be760053ceb7272d45332dee551a5739e3deb56a15bfb91eee476",
+    "kern/mm/memlayout.h": "b2b8673b34a8a821067af0adb3bd62713aae1b154bfd75397b99f6d831cadcb3",
+    "kern/mm/mmu.h": "49366461d8d2047e36d134be3e035cfa79c40233b6a9125bb328149f416cc8f9",
+    "kern/mm/pmm.c": "3f9f1fa6c10702051d48744cd641c321db790ff11b298377e25840bf75e79566",
+    "kern/mm/pmm.h": "fedf31e63173f2fed24ca145fb4ead62e80fa55030f2246967935aa0d281b8e3",
+    "kern/mm/vmm.c": "900ac0b21927c895b2c5e30a0aea60a1dab6be23e601522d748a6d4a15429ca5",
+    "kern/mm/vmm.h": "fb8435dd3e8da6c93724a6256eff8cf4bd002b1ab4906807bdba8fac51cf4b17",
+    "kern/process/entry.S": "953cb8177ee9503c3c27a77998c3bb8adf986472b78f050eab1ae76cb6eb3430",
+    "kern/process/proc.c": "a0a00823a14a3eba709b942d402050ab483a6fb0e0c449151a2abb7270a5b98a",
+    "kern/process/proc.h": "76516a3540d1d8c9a71a46444b0cdbbb6946c484a00d95b33d9df3f03d044015",
+    "kern/process/switch.S": "0ce5ab843ecaf394e02aa4b6fe41d98240d5ab8c0aeaef80df293be3c97cc798",
+    "kern/schedule/sched.c": "d8486d62c8b2a1b5976ec90a9521f8254a8ce9a6a8037d0199907f8f31582ee1",
+    "kern/schedule/sched.h": "ec231ba8a6f54586e721ff77ccaefe9fd13e20d110bdf123d821dc7dff923331",
+    "kern/sync/sync.h": "64256a54c8f736715980eaa7aedcf904ced8ecbe6364aa3d44aa718dbfaf0b64",
+    "kern/syscall/syscall.c": "26e20a7bfcdfc46aa54ffc7901920c2586db549fb4506ce5efd16804e8f4469a",
+    "kern/syscall/syscall.h": "0434ca25aa19b983ff633e93fb8168b04a32d4704f3cb56890571a26534b2c2a",
+    "kern/trap/trap.c": "c9244106223b47a5c8e9db6c72d0fe1098668728b3140eea7227ac24574c9f5d",
+    "kern/trap/trap.h": "c7f89185f88eca22392407846977457c18b7b872fe5c6e99dc53cee9d14adbea",
+    "kern/trap/trapentry.S": "c8b6899167fbe70f0d78987b6e6abcdb057d99069f6135f67eaff3af958860af",
+    "libs/atomic.h": "c12d8e35e5c8366f32712363d5bb601728f421918da64cec8b46cb75c94384dc",
+    "libs/defs.h": "21d655810e9cd6c8bc749f07bf6cf92b887219d24b2394665a1a99c9e1fcfb8c",
+    "libs/elf.h": "6a462d564eb987d37cba9aa0adf536d47d11a13c632141ccb912cf2a3a0a33c6",
+    "libs/error.h": "c73d2bae7dc3e6c2eb341aafe6dd0780de34eaa54dd8ed3dd10dfa31963448c3",
+    "libs/hash.c": "47141ee1a1a05df3232cf584dcf79a5a710d2c1da52a762db5bc1d31a3797e82",
+    "libs/list.h": "c9abf4ab67008f6b4c81a8a585b066e5420b7dc044ef57353fc2cb7c2180d049",
+    "libs/printfmt.c": "ce27519fad9f81072b0db9b87a64a236bd02ec0e943ef6bf445ba90212392f99",
+    "libs/rand.c": "5bff1909b6037bc101ab83ca62efda384a6bfec07d15bda3fa3b38d18b396f10",
+    "libs/riscv.h": "171427354a9f5abd2d2c1f55082be3a0e065bbc4ec4aa531623bed4b6e076b5e",
+    "libs/sbi.h": "d454c5adb1745a69b18b2ba90ed7478c21c1c8440b0c5dfd61834761e5dd0f77",
+    "libs/stdarg.h": "25768e5826aeeab95413549f90b91c4e3108d40459a0647699686e773337db36",
+    "libs/stdio.h": "99294dc42fb021bc2f828c22895ee7a28301a8fa22f8ca17c3937ed57fd1b050",
+    "libs/stdlib.h": "3ac5dc860333a53980c49760c507afe002bff4b95b83347ea42dc999810bd789",
+    "libs/string.c": "7870cfea55cd38606311ecfb74da1a0dc33d1a925e1b415efe8d84df89778c89",
+    "libs/string.h": "9bdfa46f85b9a53eb918b99de4a8d0f9b1b77408489d5970b2ae69d234474968",
+    "libs/unistd.h": "da316d815634edb9ae068505fea7afd3e488c62bdcac35ed5a6e95da3d20ecde",
+    "Makefile": "0b6f1303835555b03432c6d6a8a3c84de96e1431fff762b9e21a283dede478a1",
+    "README.md": "6f219b25f62c2a7bfa790f0eb9204045648a8b93a85900b505e2c0d9ca4cf757",
+    "tests/a/run.py": "bff7731027ca1c04b1c9ea2d53902e0b5247d24166fcaf5cf96f0b75cfc2f466",
+    "tests/a/store_trap.S": "adf893bf688ea13437b62643a7107fd71df2bfd55a9d08f06bbeaae5eef363b7",
+    "tests/a/test_a.c": "9aff65f81a6ff205bc41e5be1d3186c7e55536d424c44d2f38755d5beacf3e44",
+    "tests/c/c_cow.c": "9e496879ab3fecc5648e96cb9c195946ba962202bd5bdc907fb109cb6fbb9c34",
+    "tests/c/c_syscalls.c": "9acdd897ced1955b2fa6e3251c37a16ac4605330053abcc65a222774dae95e7c",
+    "tests/c/dual_gdb.py": "1ce608664ffec936cc31ec34d3a8f8a6731ffbaf8e70c7badcde39c9d699565e",
+    "tests/c/kernel_cow_model.c": "14d8fd8757547be51aa5d0442b7acb8e066cb861fc1aec9cfd4dfdc608b1950c",
+    "tests/c/register_probe.S": "08c745a444e2147d4ac327883cc010fa7ed0874a2cf466ebf8cf203b856a8495",
+    "tests/integration/abc_exec_edges.c": "fa03577c78791f5019feade30a5beb00ab2644bdf9d8d696788cac2983974594",
+    "tests/integration/run.py": "00cc92149ac826d355ca4c4dd776e17ecf9f3e4b2ed5d0a32058501cb4a2cf91",
+    "tools/boot.ld": "d42ba7abd94e9bd67879fe6d25165a39b829594d9fe74cadedce359bf4fe2474",
+    "tools/function.mk": "9ad77549eddd0e758d25c6ae79ad70aec6a374526548eee0bbbb2f4586bdf8c6",
+    "tools/gdbinit": "a0825abc90b386b28e27268558f5be6c66ec8c35a54ab83b538ad0cb7154262e",
+    "tools/grade.sh": "a23381232a8231db5974a3d3b6910da912c2a21cb508019476e06534cef38ee9",
+    "tools/inject.py": "6ff9a71187a3167880201a416c4c0ec59a91f696d5e1827f86c195087fd4b893",
+    "tools/kernel.ld": "28269eb67ed1fd58b333e5f56d5de927b86903b3364f549f097b780710cac6c8",
+    "tools/qemu_lab.py": "fac600751b022fa3c82e14a8595a283976a8f410a8bbc2809c9899ce85ba019d",
+    "tools/sign.c": "e0224260adec04f09820909279c9c60299220778f27355113cab862f0a370544",
+    "tools/test_lab5.c": "c2893891c97e5ef0995c8cead8d15885975e677b8e2e290e4f700b14541de4c7",
+    "tools/test_lab5.h": "2ba6e78271d2badb8721c9706eaca2410b828086f02a5c29388ac5104bea0c1c",
+    "tools/user.ld": "246a8109687dd4e4f0bafb1015443b97d44e771a7203903f92aff95dc59e9ef3",
+    "tools/vector.c": "0dca823bd9922bfb98b64dce4b6f157ec881b62c545f152c0e5ec1dbd86e26dc",
+    "user/b_execfail.c": "5762cce487d3e87c1b3f32fe7aa2c4faee4b6e27523d5cc81b7be402782122ac",
+    "user/b_execsuccess.c": "6e72ce7224d8def642da88b5be2d0d89a9845a3b929a8bfa422ff55277044bce",
+    "user/b_isolation_orphan.c": "3c58f7123f23b2b741bfb2061cd2822c2d05c38629471b676070828288df9af9",
+    "user/b_lifecycle.c": "2f0e15310cf47d237b0c573d076adac28198032bebcb56580112795efcfc0a0d",
+    "user/badarg.c": "cf709d554aaecd51ae3f9ae0eb9ebb2d0f89c7025ff75d2d392651cc45252349",
+    "user/badsegment.c": "d8b8f82e6d91c4937b1fe8679709673ce4f3b738068e8e327aa465f137e4e5a4",
+    "user/cowtest.c": "472b5187cfaf72b6e9067766a55e8a293d8ef98789dc735e42611bba900a15cd",
+    "user/divzero.c": "fb2c3a5a9e065288f8880c55e2cb4a13f7b132127ad112cf4e2b5692a44513a4",
+    "user/exit.c": "28c9ba9dd92d60475ff21e3e364054b7adaa3df75738a7a10d5158e65a6619d2",
+    "user/faultread.c": "eea91ffd40b8a0973e63f13e97761881c5f4fb5af6b956c9e464dc3ce9e27b2d",
+    "user/faultreadkernel.c": "74a0d2d884ec594515bc06111e5696668f1e64f72f373b904fc32c98a5aa9794",
+    "user/forktest.c": "c6a3e179f6e540d871c4918f50df7eef7068a6c337550fc947d9f19b9db56fd6",
+    "user/forktree.c": "333c216baab96efe906ddbf4b4ba10c398a45a28cd27d6358031c1e0804e2a01",
+    "user/hello.c": "0c6cc7d63fa1078166d18944a8ea26942e2e9819a02135367e6707387ccccdef",
+    "user/libs/initcode.S": "05c3c1235bd1bcdba78dd82402469483048cb62c29e93a22154b2fb4426f89bb",
+    "user/libs/panic.c": "9746cfbf48a856ba00335441f8b8ead01406e78f4a1c102d9ebca8520bcf6182",
+    "user/libs/stdio.c": "3f6cf460e048ac1ed554d7eb0d7bf1292374056edb67777e0d554aff5c8fb358",
+    "user/libs/syscall.c": "d513ba0c7491c7fa99fb3bb54f54eddc9759fcc5aa639448bebbc7f6dce47c67",
+    "user/libs/syscall.h": "8301272e0699fe6d71a4b451cece8315e4e4dcf3e72ade82c4264df20c1d8cba",
+    "user/libs/ulib.c": "9e3f1dac78f5995f44ee49ee5ffeb1e60bc915a557132e16ba5dbbfc755f19df",
+    "user/libs/ulib.h": "0b0d97a484c8b50978e62abee4ed99a12bb41d2784befbf2a3e453188a993eb1",
+    "user/libs/umain.c": "a9341909f73e3db4208478bb5bb3e4ee5b8fe3c2db994114baf32682325d607c",
+    "user/pgdir.c": "7fffb42058a72b158db0e518f8cc40cbe5277a007cbd31e5b3942c84872772f0",
+    "user/softint.c": "1574e4f290cd560a5ebd8ff802afa62f7b2685d2a61dd8214fca1817661ee2ea",
+    "user/spin.c": "ad9efcebbc45839283227597e2f87b25cade034fa840fee17bf6796e935338d1",
+    "user/testbss.c": "12280ebf77388cb4d2d47d913d5132c5bbacad0ab70bbc60f4ce0d84f3a1bd11",
+    "user/waitkill.c": "42c3b409a5e1fcca988fc345c8896c1fa321342447607e65ae42cd7a16ac46d9",
+    "user/yield.c": "29b9dd6349845b9e50280b3932f6c4f30cd266c37fdc0a5d3016cfe40f026bde"
+  },
+  "images": {
+    "00_build.png": {
+      "size": [
+        1008,
+        1171
+      ],
+      "sha256": "ef009abaee073155e1e0896525f91f53caa60484001af8140bfe3d6dc0528330"
+    },
+    "01_qemu.png": {
+      "size": [
+        1303,
+        687
+      ],
+      "sha256": "231de06d47c61d4889c0b126b45bf4b67f836ecd6818059f25bb7edd75732196"
+    },
+    "02_grade.png": {
+      "size": [
+        644,
+        1115
+      ],
+      "sha256": "7b6f6f90cea680d44ddc237e383b2b84375495b057cab6c2c17c9257091a6ea9"
+    },
+    "03_a.png": {
+      "size": [
+        1021,
+        860
+      ],
+      "sha256": "6cd2f4657268c3f7516344fd9bfdea78d56ca506a1b2105a92f89f870f9fcbfa"
+    },
+    "04_integration.png": {
+      "size": [
+        1060,
+        1174
+      ],
+      "sha256": "3f9dc88900376dc1a9c7f093d4834e59d590cb12a07ef1b3ba7d88d6bf977545"
+    },
+    "05_dual.png": {
+      "size": [
+        1670,
+        1145
+      ],
+      "sha256": "fc51dbdd144063fa4708baf6e93571699c3d63f01a3225a5c83eb2faa31fe10e"
+    }
+  },
+  "template_structure": "PASS",
+  "report_style": "PASS",
+  "links": "PASS",
+  "submission_review": {
+    "directory_structure": [
+      "code",
+      "report"
+    ],
+    "source_matches_tested_version": true,
+    "ai_tool_all_members": "ChatGPT",
+    "ai_model_all_members": "GPT-6.1-sol",
+    "template_sections": true,
+    "image_count": 6,
+    "image_integrity": true,
+    "markdown_links": true,
+    "report_sha256": "41f61458d2221141a5e7e446e3439510d35f040137b72ee2cc2204cf78b19bf9",
+    "prompt_sha256": "34b2e2a7d1957ddfcf01c45488cfb322bfbfdcb2f9fc26d08ffe196f1f4697f8"
+  }
+}

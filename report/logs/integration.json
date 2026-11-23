@@ -1,0 +1,67 @@
+[
+  {
+    "case": "b_lifecycle",
+    "memory_mib": 128,
+    "passed": true
+  },
+  {
+    "case": "b_isolation_orphan",
+    "memory_mib": 128,
+    "passed": true
+  },
+  {
+    "case": "b_execfail",
+    "memory_mib": 128,
+    "passed": true
+  },
+  {
+    "case": "b_execsuccess",
+    "memory_mib": 128,
+    "passed": true
+  },
+  {
+    "case": "cowtest",
+    "memory_mib": 128,
+    "passed": true
+  },
+  {
+    "case": "c_syscalls",
+    "memory_mib": 128,
+    "passed": true
+  },
+  {
+    "case": "c_cow",
+    "memory_mib": 128,
+    "passed": true
+  },
+  {
+    "case": "forktree",
+    "memory_mib": 128,
+    "passed": true
+  },
+  {
+    "case": "waitkill",
+    "memory_mib": 128,
+    "passed": true
+  },
+  {
+    "case": "abc_exec_edges",
+    "memory_mib": 128,
+    "passed": true
+  },
+  {
+    "case": "cowtest",
+    "memory_mib": 64,
+    "passed": true
+  },
+  {
+    "case": "cowtest",
+    "memory_mib": 256,
+    "passed": true
+  },
+  {
+    "case": "dirtymodel",
+    "memory_mib": 128,
+    "passed": true
+  }
+]

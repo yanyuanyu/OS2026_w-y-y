@@ -1,0 +1,90 @@
+Reading symbols from bin/kernel...
+(gdb) 
+>>> set pagination off
+(gdb) 
+>>> set confirm off
+(gdb) 
+>>> set remotetimeout 20
+(gdb) 
+>>> target remote 127.0.0.1:1248
+Remote debugging using 127.0.0.1:1248
+0x0000000000001000 in ?? ()
+(gdb) 
+>>> add-symbol-file obj/__user_hello.out
+add symbol table from file "obj/__user_hello.out"
+Reading symbols from obj/__user_hello.out...
+(gdb) 
+>>> hbreak *0x800092
+Hardware assisted breakpoint 1 at 0x800092: file user/libs/syscall.c, line 13.
+(gdb) 
+>>> continue
+Continuing.
+
+Breakpoint 1, syscall (num=18, p1=0, p2=0, p3=0, p4=0, p5=0)
+    at user/libs/syscall.c:13
+13	    asm volatile("ecall" : "+r"(a0) : "r"(a1),"r"(a2),"r"(a3),"r"(a4),"r"(a5) : "memory");
+(gdb) 
+>>> x/i $pc
+=> 0x800092 <sys_getpid+12>:	ecall
+(gdb) 
+>>> info registers pc sp a0 a1 sstatus sepc scause
+pc             0x800092	0x800092 <sys_getpid+12>
+sp             0x7fffffe0	0x7fffffe0
+a0             0x12	18
+a1             0x0	0
+sstatus        0x8000000200046022	-9223372028264554462
+sepc           0x8000aa	8388778
+scause         0x8	8
+(gdb) 
+>>> stepi
+__alltraps () at kern/trap/trapentry.S:119
+119	    SAVE_ALL
+(gdb) 
+>>> info registers pc sstatus sepc scause
+pc             0xffffffffc0200c74	0xffffffffc0200c74 <__alltraps>
+sstatus        0x8000000200046020	-9223372028264554464
+sepc           0x800092	8388754
+scause         0x8	8
+(gdb) 
+>>> hbreak *0xffffffffc0200d40
+Hardware assisted breakpoint 2 at 0xffffffffc0200d40: file kern/trap/trapentry.S, line 130.
+(gdb) 
+>>> continue
+Continuing.
+
+Breakpoint 2, __trapret () at kern/trap/trapentry.S:130
+130	    sret
+(gdb) 
+>>> x/i $pc
+=> 0xffffffffc0200d40 <__trapret+92>:	sret
+(gdb) 
+>>> info registers pc sp a0 sstatus sepc
+pc             0xffffffffc0200d40	0xffffffffc0200d40 <__trapret+92>
+sp             0x7fffffe0	0x7fffffe0
+a0             0x2	2
+sstatus        0x8000000200046020	-9223372028264554464
+sepc           0x800096	8388758
+(gdb) 
+>>> stepi
+sys_getpid () at user/libs/syscall.c:14
+14	    return (int)a0;
+(gdb) 
+>>> info registers pc sp a0 sstatus sepc
+pc             0x800096	0x800096 <sys_getpid+16>
+sp             0x7fffffe0	0x7fffffe0
+a0             0x2	2
+sstatus        0x8000000200046022	-9223372028264554462
+sepc           0x800096	8388758
+(gdb) 
+>>> p/x $pc
+$1 = 0x800096
+(gdb) 
+>>> p/d $a0
+$2 = 2
+(gdb) 
+>>> detach
+Detaching from program: /tmp/lab5-c-dual-ftgvakrk/code/bin/kernel, process 1
+Ending remote debugging.
+[Inferior 1 (process 1) detached]
+(gdb) 
+>>> quit

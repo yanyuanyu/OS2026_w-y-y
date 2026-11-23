@@ -8,9 +8,10 @@ void
 wakeup_proc(struct proc_struct *proc) {
     assert(proc->state != PROC_ZOMBIE && proc->state != PROC_RUNNABLE);
     proc->state = PROC_RUNNABLE;
+    proc->wait_state = 0; // 清除旧等待原因，防止多个孩子退出时重复唤醒
 }
 
-//LAB4 function3 2413682
+//lab4 / lab5 C 2413682：迁移调度与上下文切换
 void schedule(void)
 {
     bool intr_flag;

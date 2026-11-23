@@ -1,15 +1,20 @@
-#include <assert.h>
-#include <clock.h>
-#include <console.h>
 #include <defs.h>
-#include <clock.h>
-#include <kdebug.h>
-#include <memlayout.h>
 #include <mmu.h>
+#include <memlayout.h>
+#include <clock.h>
+#include <trap.h>
 #include <riscv.h>
 #include <stdio.h>
-#include <trap.h>
+#include <assert.h>
+#include <console.h>
 #include <vmm.h>
+#include <kdebug.h>
+#include <unistd.h>
+#include <syscall.h>
+#include <error.h>
+#include <sched.h>
+#include <sync.h>
+#include <sbi.h>
 
 #define TICK_NUM 100
 
@@ -22,8 +27,7 @@ static void print_ticks()
 #endif
 }
 
-/* idt_init - initialize IDT to each of the entry points in kern/trap/vectors.S
- */
+/* idt_init - initialize IDT to each of the entry points in kern/trap/vectors.S */
 void idt_init(void)
 {
     extern void __alltraps(void);
@@ -36,13 +40,20 @@ void idt_init(void)
     set_csr(sstatus, SSTATUS_SUM);
 }
 
+/* trap_in_kernel - test if trap happened in kernel */
+bool trap_in_kernel(struct trapframe *tf)
+{
+    return (tf->status & SSTATUS_SPP) != 0;
+}
+
 void print_trapframe(struct trapframe *tf)
 {
     cprintf("trapframe at %p\n", tf);
+    // cprintf("trapframe at 0x%x\n", tf);
     print_regs(&tf->gpr);
     cprintf("  status   0x%08x\n", tf->status);
     cprintf("  epc      0x%08x\n", tf->epc);
-    cprintf("  badvaddr 0x%08x\n", tf->badvaddr);
+    cprintf("  tval 0x%08x\n", tf->tval);
     cprintf("  cause    0x%08x\n", tf->cause);
 }
 
@@ -84,105 +95,51 @@ void print_regs(struct pushregs *gpr)
 
 extern struct mm_struct *check_mm_struct;
 
-//lab3 迁移依赖：保持时钟持续工作，不沿用 Lab3 限次关机策略。
+//lab3 / lab5 C 2413682：保持时钟运行，不使用旧实验的限次关机逻辑。
 void interrupt_handler(struct trapframe *tf) {
-    // scause's top bit marks an interrupt; the remaining bits hold its code.
-    uintptr_t cause = tf->cause & ~((uintptr_t)1 << (sizeof(uintptr_t) * 8 - 1));
-
-    switch (cause) {
-    case IRQ_U_SOFT:
-        cprintf("User software interrupt\n");
-        break;
-    case IRQ_S_SOFT:
-        cprintf("Supervisor software interrupt\n");
-        break;
-    case IRQ_H_SOFT:
-        cprintf("Hypervisor software interrupt\n");
-        break;
-    case IRQ_M_SOFT:
-        cprintf("Machine software interrupt\n");
-        break;
-    case IRQ_U_TIMER:
-        cprintf("User timer interrupt\n");
-        break;
+    switch (tf->cause & ~(1UL << 63)) {
     case IRQ_S_TIMER:
-        // SBI arms one event at a time: re-arm before returning from the trap.
         clock_set_next_event();
-        ticks++;
-        if (ticks % TICK_NUM == 0) {
-            cprintf("100 ticks\n");
+        if (++ticks % TICK_NUM == 0) {
+            // 时间片到期只请求调度，由 trap 的用户态返回路径统一执行。
+            if (current != NULL) current->need_resched=1;
         }
         break;
-    case IRQ_H_TIMER:
-        cprintf("Hypervisor timer interrupt\n");
-        break;
-    case IRQ_M_TIMER:
-        cprintf("Machine timer interrupt\n");
-        break;
-    case IRQ_U_EXT:
-        cprintf("User external interrupt\n");
-        break;
-    case IRQ_S_EXT:
-        cprintf("Supervisor external interrupt\n");
-        break;
-    case IRQ_H_EXT:
-        cprintf("Hypervisor external interrupt\n");
-        break;
-    case IRQ_M_EXT:
-        cprintf("Machine external interrupt\n");
-        break;
     default:
-        cprintf("Unknown interrupt: cause %lu\n", (unsigned long)cause);
         print_trapframe(tf);
-        break;
+        panic("unexpected interrupt");
     }
 }
 
-//lab3 function2 C 2413681
-/* 王优负责异常策略。这里对断点/非法指令按编码推进 tf->epc。
- * 因为 tf 指向 SAVE_ALL 创建的原 frame，RESTORE_ALL 能读到更新后的地址。
- * 不要在 A 的返回汇编中给所有 Trap 统一加2或加4。 */
+//lab5 function1 2413682
 void exception_handler(struct trapframe *tf) {
-    switch (tf->cause) {
-    case CAUSE_ILLEGAL_INSTRUCTION:
-    case CAUSE_BREAKPOINT: {
-        /* Lab 3 executes kernel instructions in directly readable memory. */
-        uint16_t instruction = *(const uint16_t *)tf->epc;
-        if (tf->cause == CAUSE_ILLEGAL_INSTRUCTION) {
-            cprintf("Illegal instruction at 0x%lx\n", tf->epc);
-        } else {
-            cprintf("Breakpoint at 0x%lx\n", tf->epc);
-        }
-        if ((instruction & 3) != 3) {
-            tf->epc += 2;
-        } else if ((instruction & 0x1f) != 0x1f) {
-            tf->epc += 4;
-        } else {
-            /* Longer encodings are outside this lab; do not guess their size. */
-            print_trapframe(tf);
-        }
-        break;
+    if (tf->cause == CAUSE_USER_ECALL) {
+        tf->epc += 4;  // 必须在 syscall 前推进；exec 成功会重建这个现场。
+        syscall();
+        return;
     }
-    default:
-        print_trapframe(tf);
-        break;
+    // COW 核心由 A 提供：只允许有效、可写 VMA 的 COW 叶子页被修复。
+    if (tf->cause == CAUSE_STORE_PAGE_FAULT && current != NULL &&
+        current->mm != NULL && cow_pgfault(current->mm, tf->tval) == 0) {
+        return;         // 不推进 epc，重试刚才发生缺页的写指令。
     }
+    // 用户程序非法访问只终止该进程；内核错误保留现场并停止。
+    if (!trap_in_kernel(tf) && current != NULL) {
+        cprintf("user exception: pid=%d cause=%ld epc=%p address=%p\n",
+                current->pid, tf->cause, tf->epc, tf->tval);
+        do_exit(-E_KILLED);
+        return;
+    }
+    print_trapframe(tf);
+    panic("unhandled kernel exception");
 }
 
 
 
 
 
-
-/* *
- * trap - handles or dispatches an exception/interrupt. if and when trap()
- * returns,
- * the code in kern/trap/trapentry.S restores the old CPU state saved in the
- * trapframe and then uses the iret instruction to return from the exception.
- * */
-void trap(struct trapframe *tf)
+static inline void trap_dispatch(struct trapframe *tf)
 {
-    // dispatch based on what type of trap occurred
     if ((intptr_t)tf->cause < 0)
     {
         // interrupts
@@ -192,5 +149,42 @@ void trap(struct trapframe *tf)
     {
         // exceptions
         exception_handler(tf);
+    }
+}
+
+/* *
+ * trap - handles or dispatches an exception/interrupt. if and when trap() returns,
+ * the code in kern/trap/trapentry.S restores the old CPU state saved in the
+ * trapframe and then uses the iret instruction to return from the exception.
+ * */
+void trap(struct trapframe *tf)
+{
+    // dispatch based on what type of trap occurred
+    //    cputs("some trap");
+    if (current == NULL)
+    {
+        trap_dispatch(tf);
+    }
+    else
+    {
+        struct trapframe *otf = current->tf;
+        current->tf = tf;
+
+        bool in_kernel = trap_in_kernel(tf);
+
+        trap_dispatch(tf);
+
+        current->tf = otf;
+        if (!in_kernel)
+        {
+            if (current->flags & PF_EXITING)
+            {
+                do_exit(-E_KILLED);
+            }
+            if (current->need_resched)
+            {
+                schedule();
+            }
+        }
     }
 }

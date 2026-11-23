@@ -1,0 +1,9 @@
+{
+  "ecall_pc": "0x800092",
+  "sret_pc": "0xffffffffc0200d40",
+  "returned_pc": "0x800096",
+  "returned_pid": 2,
+  "ecall_privilege": "U -> S",
+  "sret_privilege": "S -> U",
+  "passed": true
+}

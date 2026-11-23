@@ -1,0 +1,127 @@
+Reading symbols from /opt/qemu/bin/qemu-system-riscv64...
+(gdb) 
+>>> set pagination off
+(gdb) 
+>>> set confirm off
+(gdb) 
+>>> set print pretty on
+(gdb) 
+>>> set debuginfod enabled off
+(gdb) 
+>>> set args -machine virt -m 128 -bios default -kernel bin/ucore.img -display none -serial file:/mnt/c/Users/13789/Desktop/操作系统/实验/lab5/ABC完整提交/report/logs/dual_qemu.log -monitor none -S -gdb tcp:127.0.0.1:1248
+(gdb) 
+>>> run
+Starting program: /opt/qemu/bin/qemu-system-riscv64 -machine virt -m 128 -bios default -kernel bin/ucore.img -display none -serial file:/mnt/c/Users/13789/Desktop/操作系统/实验/lab5/ABC完整提交/report/logs/dual_qemu.log -monitor none -S -gdb tcp:127.0.0.1:1248
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+[New Thread 0x7ffff7568640 (LWP 2124)]
+[New Thread 0x7ffff6a72640 (LWP 2125)]
+
+Thread 1 "qemu-system-ris" received signal SIGINT, Interrupt.
+0x00007ffff7718d9e in __ppoll (fds=0x555556be13e0, nfds=5, timeout=<optimized out>, timeout@entry=0x7fffffffe560, sigmask=sigmask@entry=0x0) at ../sysdeps/unix/sysv/linux/ppoll.c:42
+42	../sysdeps/unix/sysv/linux/ppoll.c: No such file or directory.
+(gdb) 
+>>> break helper_raise_exception if exception == 8
+Breakpoint 1 at 0x555555a16000: file ../target/riscv/op_helper.c, line 36.
+(gdb) 
+>>> continue
+Continuing.
+[Switching to Thread 0x7ffff6a72640 (LWP 2125)]
+
+Thread 3 "qemu-system-ris" hit Breakpoint 1, helper_raise_exception (env=0x5555566c14a0, exception=8) at ../target/riscv/op_helper.c:36
+36	{
+(gdb) 
+>>> set $saved_env = env
+(gdb) 
+>>> printf "ECALL before: priv=%ld pc=%#lx a0=%ld\n", env->priv, env->pc, env->gpr[10]
+ECALL before: priv=0 pc=0x800092 a0=18
+(gdb) 
+>>> bt 5
+#0  helper_raise_exception (env=0x5555566c14a0, exception=8) at ../target/riscv/op_helper.c:36
+#1  0x00007fffb0000124 in code_gen_buffer ()
+#2  0x0000555555b5eefe in cpu_tb_exec (cpu=cpu@entry=0x5555566b8320, itb=itb@entry=0x7fffb0000040 <code_gen_buffer+19>, tb_exit=tb_exit@entry=0x7ffff6a71824) at ../accel/tcg/cpu-exec.c:357
+#3  0x0000555555b600a8 in cpu_loop_exec_tb (tb_exit=0x7ffff6a71824, last_tb=<synthetic pointer>, tb=0x7fffb0000040 <code_gen_buffer+19>, cpu=0x5555566b8320) at ../accel/tcg/cpu-exec.c:847
+#4  cpu_exec (cpu=cpu@entry=0x5555566b8320) at ../accel/tcg/cpu-exec.c:1006
+(More stack frames follow...)
+(gdb) 
+>>> disable 1
+(gdb) 
+>>> break riscv_cpu_do_interrupt if cs->exception_index == 8
+Breakpoint 2 at 0x555555a0da40: file ../target/riscv/cpu_helper.c, line 1328.
+(gdb) 
+>>> continue
+Continuing.
+
+Thread 3 "qemu-system-ris" hit Breakpoint 2, riscv_cpu_do_interrupt (cs=0x5555566b8320) at ../target/riscv/cpu_helper.c:1328
+1328	{
+(gdb) 
+>>> bt 4
+#0  riscv_cpu_do_interrupt (cs=0x5555566b8320) at ../target/riscv/cpu_helper.c:1328
+#1  0x0000555555b5fdda in cpu_handle_exception (ret=<synthetic pointer>, cpu=0x5555566b8320) at ../accel/tcg/cpu-exec.c:681
+#2  cpu_exec (cpu=cpu@entry=0x5555566b8320) at ../accel/tcg/cpu-exec.c:949
+#3  0x0000555555b798a4 in tcg_cpus_exec (cpu=cpu@entry=0x5555566b8320) at ../accel/tcg/tcg-accel-ops.c:68
+(More stack frames follow...)
+(gdb) 
+>>> finish
+Run till exit from #0  riscv_cpu_do_interrupt (cs=0x5555566b8320) at ../target/riscv/cpu_helper.c:1328
+cpu_handle_exception (ret=<synthetic pointer>, cpu=0x5555566b8320) at ../accel/tcg/cpu-exec.c:682
+682	            qemu_mutex_unlock_iothread();
+(gdb) 
+>>> printf "ECALL after: priv=%ld pc=%#lx sepc=%#lx scause=%ld\n", $saved_env->priv, $saved_env->pc, $saved_env->sepc, $saved_env->scause
+ECALL after: priv=1 pc=0xffffffffc0200c74 sepc=0x800092 scause=8
+(gdb) 
+>>> disable 2
+(gdb) 
+>>> continue
+Continuing.
+
+Thread 1 "qemu-system-ris" received signal SIGINT, Interrupt.
+[Switching to Thread 0x7ffff7898bc0 (LWP 2096)]
+0x00007ffff7718d9e in __ppoll (fds=0x555556be13e0, nfds=5, timeout=<optimized out>, timeout@entry=0x7fffffffe560, sigmask=sigmask@entry=0x0) at ../sysdeps/unix/sysv/linux/ppoll.c:42
+42	../sysdeps/unix/sysv/linux/ppoll.c: No such file or directory.
+(gdb) 
+>>> break helper_sret
+Breakpoint 3 at 0x555555a162a0: file ../target/riscv/op_helper.c, line 120.
+(gdb) 
+>>> continue
+Continuing.
+[Switching to Thread 0x7ffff6a72640 (LWP 2125)]
+
+Thread 3 "qemu-system-ris" hit Breakpoint 3, helper_sret (env=0x5555566c14a0) at ../target/riscv/op_helper.c:120
+120	{
+(gdb) 
+>>> set $saved_env = env
+(gdb) 
+>>> printf "SRET before: priv=%ld pc=%#lx sepc=%#lx\n", env->priv,env->pc,env->sepc
+SRET before: priv=1 pc=0xffffffffc0200d40 sepc=0x800096
+(gdb) 
+>>> bt 5
+#0  helper_sret (env=0x5555566c14a0) at ../target/riscv/op_helper.c:120
+#1  0x00007fffb0000114 in code_gen_buffer ()
+#2  0x0000555555b5eefe in cpu_tb_exec (cpu=cpu@entry=0x5555566b8320, itb=itb@entry=0x7fffb0000040 <code_gen_buffer+19>, tb_exit=tb_exit@entry=0x7ffff6a71824) at ../accel/tcg/cpu-exec.c:357
+#3  0x0000555555b600a8 in cpu_loop_exec_tb (tb_exit=0x7ffff6a71824, last_tb=<synthetic pointer>, tb=0x7fffb0000040 <code_gen_buffer+19>, cpu=0x5555566b8320) at ../accel/tcg/cpu-exec.c:847
+#4  cpu_exec (cpu=cpu@entry=0x5555566b8320) at ../accel/tcg/cpu-exec.c:1006
+(More stack frames follow...)
+(gdb) 
+>>> finish
+Run till exit from #0  helper_sret (env=0x5555566c14a0) at ../target/riscv/op_helper.c:120
+0x00007fffb0000114 in code_gen_buffer ()
+Value returned is $1 = 8388758
+(gdb) 
+>>> printf "SRET after: priv=%ld return_pc=%#lx\n", $saved_env->priv, $saved_env->sepc
+SRET after: priv=0 return_pc=0x800096
+(gdb) 
+>>> disable 3
+(gdb) 
+>>> continue
+Continuing.
+
+Thread 1 "qemu-system-ris" received signal SIGINT, Interrupt.
+[Switching to Thread 0x7ffff7898bc0 (LWP 2096)]
+0x00007ffff7718d9e in __ppoll (fds=0x555556be13e0, nfds=5, timeout=<optimized out>, timeout@entry=0x7fffffffe560, sigmask=sigmask@entry=0x0) at ../sysdeps/unix/sysv/linux/ppoll.c:42
+42	../sysdeps/unix/sysv/linux/ppoll.c: No such file or directory.
+(gdb) 
+>>> kill
+[Inferior 1 (process 2096) killed]
+(gdb) 
+>>> quit

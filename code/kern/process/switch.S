@@ -3,7 +3,7 @@
 .align 2
 .globl switch_to
 .type switch_to, @function
-//LAB4 function3 2413682
+//lab4 / lab5 C 2413682：迁移调度与上下文切换
 # a0 = &旧 context，a1 = &新 context；布局必须与 proc.h 保持一致。
 switch_to:
     STORE ra, 0*REGBYTES(a0)

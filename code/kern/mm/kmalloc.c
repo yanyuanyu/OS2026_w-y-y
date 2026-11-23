@@ -89,7 +89,7 @@ static void *__slob_get_free_pages(gfp_t gfp, int order)
 
 static inline void __slob_free_pages(unsigned long kva, int order)
 {
-	free_pages(kva2page(kva), 1 << order);
+	free_pages(kva2page((void *)kva), 1 << order);
 }
 
 static void slob_free(void *b, int size);
@@ -217,12 +217,10 @@ kallocated(void)
 	return slob_allocated();
 }
 
-static int find_order(int size)
-{
-	int order = 0;
-	for (; size > 4096; size >>= 1)
-		order++;
-	return order;
+static int find_order(int size) {
+    int order=0;
+    while (((size_t)PAGE_SIZE << order) < (size_t)size) order++;
+    return order;
 }
 
 static void *__kmalloc(size_t size, gfp_t gfp)
@@ -314,4 +312,26 @@ unsigned int ksize(const void *block)
 	}
 
 	return ((slob_t *)block - 1)->units * SLOB_UNIT;
+}
+
+size_t slob_reclaim(void) {
+    bool flag;local_intr_save(flag);
+    size_t reclaimed=0;
+    slob_t *prev=&arena,*b=arena.next;
+    while(b!=&arena) {
+        slob_t *next=b->next;
+        uintptr_t begin=(uintptr_t)b,end=begin+b->units*SLOB_UNIT;
+        uintptr_t a=ROUNDUP(begin,PGSIZE),z=ROUNDDOWN(end,PGSIZE);
+        if(a<z) {
+            slob_t *right=NULL;
+            if(z<end){right=(slob_t *)z;right->units=(end-z)/SLOB_UNIT;right->next=next;}
+            if(begin<a){b->units=(a-begin)/SLOB_UNIT;b->next=right?right:next;prev=b;}
+            else prev->next=right?right:next;
+            if(right)prev=right;
+            reclaimed+=(z-a)/PGSIZE;
+            free_pages(kva2page((void *)a),(z-a)/PGSIZE);
+        } else prev=b;
+        b=next;
+    }
+    slobfree=&arena;local_intr_restore(flag);return reclaimed;
 }

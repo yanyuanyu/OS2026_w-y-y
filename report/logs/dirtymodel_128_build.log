@@ -1,0 +1,6 @@
+make[1]: Entering directory '/tmp/lab5-abc-integration-2n3e9pd6/code'
++ cc kern/mm/dirty_model.c
++ cc kern/process/proc.c
++ cc user/dirtymodel.c
++ ld bin/kernel
+make[1]: Leaving directory '/tmp/lab5-abc-integration-2n3e9pd6/code'

@@ -1,0 +1,47 @@
+COMMAND: bash run_grade.sh
+rm: cannot remove 'obj': Directory not empty
+tar: ./obj/kern: file changed as we read it
+lab5 injection complete
+gmake[1]: Entering directory '/tmp/lab5-abc-capture-grade' + cc kern/init/entry.S + cc kern/init/init.c + cc kern/libs/readline.c + cc kern/libs/stdio.c + cc kern/debug/kdebug.c + cc kern/debug/kmonitor.c + cc kern/debug/panic.c + cc kern/driver/clock.c + cc kern/driver/console.c + cc kern/driver/dtb.c + cc kern/driver/intr.c + cc kern/driver/picirq.c + cc kern/trap/trap.c + cc kern/trap/trapentry.S + cc kern/mm/default_pmm.c + cc kern/mm/kmalloc.c + cc kern/mm/pmm.c + cc kern/mm/vmm.c + cc kern/process/entry.S + cc kern/process/proc.c + cc kern/process/switch.S + cc kern/schedule/sched.c + cc kern/syscall/syscall.c + cc kern/test/test_lab5.c + cc libs/hash.c + cc libs/printfmt.c + cc libs/rand.c + cc libs/string.c + cc user/b_execfail.c + cc user/libs/initcode.S + cc user/libs/panic.c + cc user/libs/stdio.c + cc user/libs/syscall.c + cc user/libs/ulib.c + cc user/libs/umain.c + cc user/b_execsuccess.c + cc user/b_isolation_orphan.c + cc user/b_lifecycle.c + cc user/badarg.c + cc user/badsegment.c + cc user/cowtest.c + cc user/divzero.c + cc user/exit.c + cc user/faultread.c + cc user/faultreadkernel.c + cc user/forktest.c + cc user/forktree.c + cc user/hello.c + cc user/pgdir.c + cc user/softint.c + cc user/spin.c + cc user/testbss.c + cc user/waitkill.c + cc user/yield.c + ld bin/kernel riscv64-unknown-elf-objcopy bin/kernel --strip-all -O binary bin/ucore.img gmake[1]: Leaving directory '/tmp/lab5-abc-capture-grade'
+badsegment:              (1.0s)
+  -check result:                             OK
+  -check output:                             OK
+divzero:                 (1.0s)
+  -check result:                             OK
+  -check output:                             OK
+softint:                 (1.0s)
+  -check result:                             OK
+  -check output:                             OK
+faultread:               (1.0s)
+  -check result:                             OK
+  -check output:                             OK
+faultreadkernel:         (1.0s)
+  -check result:                             OK
+  -check output:                             OK
+hello:                   (1.0s)
+  -check result:                             OK
+  -check output:                             OK
+testbss:                 (1.0s)
+  -check result:                             OK
+  -check output:                             OK
+pgdir:                   (1.0s)
+  -check result:                             OK
+  -check output:                             OK
+yield:                   (1.0s)
+  -check result:                             OK
+  -check output:                             OK
+badarg:                  (1.0s)
+  -check result:                             OK
+  -check output:                             OK
+exit:                    (1.0s)
+  -check result:                             OK
+  -check output:                             OK
+spin:                    (6.0s)
+  -check result:                             OK
+  -check output:                             OK
+forktest:                (1.0s)
+  -check result:                             OK
+  -check output:                             OK
+Total Score: 130/130
+
+HOST_EXIT=0

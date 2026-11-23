@@ -1,0 +1,41 @@
+COMMAND: bash run_integration.sh
+python3 tests/integration/run.py
+[ABC] b_lifecycle            128 MiB PASS
+  memory balance: before=31430 after=31430
+[ABC] b_isolation_orphan     128 MiB PASS
+  memory balance: before=31430 after=31430
+[ABC] b_execfail             128 MiB PASS
+  memory balance: before=31430 after=31430
+[ABC] b_execsuccess          128 MiB PASS
+  memory balance: before=31430 after=31430
+[ABC] cowtest                128 MiB PASS
+  memory balance: before=31430 after=31430
+[ABC] c_syscalls             128 MiB PASS
+  [C] invalid/sparse/64-bit syscall numbers PASS
+  [C] register restoration and 1000 ecall/yield rounds PASS
+  [C] kill, interrupted wait and child collection PASS
+  memory balance: before=31430 after=31430
+[ABC] c_cow                  128 MiB PASS
+  [COW] user store fault retried, parent/child isolation PASS
+  [COW] read-only text write rejected, parent survives PASS
+  [COW] unmapped write rejected PASS
+  memory balance: before=31430 after=31430
+[ABC] forktree               128 MiB PASS
+  memory balance: before=31430 after=31430
+[ABC] waitkill               128 MiB PASS
+  memory balance: before=31430 after=31430
+[ABC] abc_exec_edges         128 MiB PASS
+  ABC_EXEC_EDGES_PASS: cross-page image, entry, overlap, unmapped buffer
+  memory balance: before=31430 after=31430
+[ABC] cowtest                 64 MiB PASS
+  memory balance: before=15334 after=15334
+[ABC] cowtest                256 MiB PASS
+  memory balance: before=63622 after=63622
+[ABC] dirtymodel             128 MiB PASS
+  [DirtyCOW model] vulnerable stale alias corrupts sibling (expected) PASS
+  [DirtyCOW model] fixed re-resolution preserves sibling PASS
+  DIRTYCOW_MODEL_ALL_PASS (controlled ucore model, not Linux CVE reproduction)
+  memory balance: before=31420 after=31420
+ABC_INTEGRATION_ALL_PASS (13 cases)
+
+HOST_EXIT=0

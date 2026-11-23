@@ -1,0 +1,79 @@
+COMMAND: bash run_qemu.sh
++ cc kern/init/entry.S
++ cc kern/init/init.c
++ cc kern/libs/readline.c
++ cc kern/libs/stdio.c
++ cc kern/debug/kdebug.c
++ cc kern/debug/kmonitor.c
++ cc kern/debug/panic.c
++ cc kern/driver/clock.c
++ cc kern/driver/console.c
++ cc kern/driver/dtb.c
++ cc kern/driver/intr.c
++ cc kern/driver/picirq.c
++ cc kern/trap/trap.c
++ cc kern/trap/trapentry.S
++ cc kern/mm/default_pmm.c
++ cc kern/mm/kmalloc.c
++ cc kern/mm/pmm.c
++ cc kern/mm/vmm.c
++ cc kern/process/entry.S
++ cc kern/process/proc.c
++ cc kern/process/switch.S
++ cc kern/schedule/sched.c
++ cc kern/syscall/syscall.c
++ cc libs/hash.c
++ cc libs/printfmt.c
++ cc libs/rand.c
++ cc libs/string.c
++ cc user/b_execfail.c
++ cc user/libs/initcode.S
++ cc user/libs/panic.c
++ cc user/libs/stdio.c
++ cc user/libs/syscall.c
++ cc user/libs/ulib.c
++ cc user/libs/umain.c
++ cc user/b_execsuccess.c
++ cc user/b_isolation_orphan.c
++ cc user/b_lifecycle.c
++ cc user/badarg.c
++ cc user/badsegment.c
++ cc user/cowtest.c
++ cc user/divzero.c
++ cc user/exit.c
++ cc user/faultread.c
++ cc user/faultreadkernel.c
++ cc user/forktest.c
++ cc user/forktree.c
++ cc user/hello.c
++ cc user/pgdir.c
++ cc user/softint.c
++ cc user/spin.c
++ cc user/testbss.c
++ cc user/waitkill.c
++ cc user/yield.c
++ ld bin/kernel
+memory management: default_pmm_manager
+Physical memory: [0x0000000080000000, 0x0000000088000000)
+Page descriptors: 32768 pages at 0xffffffffc02d6000 (virtual)
+Free physical memory begins at 0x00000000804d6000
+check_alloc_page() succeeded!
+check_pgdir() succeeded!
+check_boot_pgdir() succeeded!
+use SLOB allocator
+kmalloc_init() succeeded!
+check_vma_struct() succeeded!
+check_vmm() succeeded.
+++ setup timer interrupts
+kernel_execve: pid = 2, name = "hello".
+Hello world!!.
+I am process 2.
+hello pass.
+all user-mode processes have quit.
+memory balance: before=31461 after=31461
+init check memory pass.
+Welcome to the kernel debugqemu-system-riscv64: terminating on signal 15 from pid 1145 (python3)
+
+ABC_HELLO_RUN_PASS
+
+HOST_EXIT=0
