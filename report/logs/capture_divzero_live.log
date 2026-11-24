@@ -1,0 +1,10 @@
+COMMAND: bash run_divzero.sh
+riscv64-unknown-elf-gcc (g1b306039ac4) 15.1.0
+QEMU emulator version 7.0.0
+[DIVZERO] -O0: DIVW present; value is -1.; PASS
+[DIVZERO] -O1: DIVW present; value is -1.; PASS
+[DIVZERO] -O2: DIVW present; value is -1.; PASS
+[DIVZERO] -Os: DIVW present; value is -1.; PASS
+DIVZERO_MATRIX_ALL_PASS (4 cases)
+
+HOST_EXIT=0

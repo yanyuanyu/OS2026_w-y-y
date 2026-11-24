@@ -151,7 +151,7 @@
     "libs/string.h": "9bdfa46f85b9a53eb918b99de4a8d0f9b1b77408489d5970b2ae69d234474968",
     "libs/unistd.h": "da316d815634edb9ae068505fea7afd3e488c62bdcac35ed5a6e95da3d20ecde",
     "Makefile": "0b6f1303835555b03432c6d6a8a3c84de96e1431fff762b9e21a283dede478a1",
-    "README.md": "6f219b25f62c2a7bfa790f0eb9204045648a8b93a85900b505e2c0d9ca4cf757",
+    "README.md": "3d7cfa90c894d917be1fc1f3644ae76cf0018c0d3fd7d6023343c409e6bf5197",
     "tests/a/run.py": "bff7731027ca1c04b1c9ea2d53902e0b5247d24166fcaf5cf96f0b75cfc2f466",
     "tests/a/store_trap.S": "adf893bf688ea13437b62643a7107fd71df2bfd55a9d08f06bbeaae5eef363b7",
     "tests/a/test_a.c": "9aff65f81a6ff205bc41e5be1d3186c7e55536d424c44d2f38755d5beacf3e44",
@@ -160,6 +160,7 @@
     "tests/c/dual_gdb.py": "1ce608664ffec936cc31ec34d3a8f8a6731ffbaf8e70c7badcde39c9d699565e",
     "tests/c/kernel_cow_model.c": "14d8fd8757547be51aa5d0442b7acb8e066cb861fc1aec9cfd4dfdc608b1950c",
     "tests/c/register_probe.S": "08c745a444e2147d4ac327883cc010fa7ed0874a2cf466ebf8cf203b856a8495",
+    "tests/divzero/run.py": "d5f82fee9969b4150d4025e9510a41c64197da564be22ae46e9c1cca5ba7e0a2",
     "tests/integration/abc_exec_edges.c": "fa03577c78791f5019feade30a5beb00ab2644bdf9d8d696788cac2983974594",
     "tests/integration/run.py": "00cc92149ac826d355ca4c4dd776e17ecf9f3e4b2ed5d0a32058501cb4a2cf91",
     "tools/boot.ld": "d42ba7abd94e9bd67879fe6d25165a39b829594d9fe74cadedce359bf4fe2474",
@@ -181,7 +182,7 @@
     "user/badarg.c": "cf709d554aaecd51ae3f9ae0eb9ebb2d0f89c7025ff75d2d392651cc45252349",
     "user/badsegment.c": "d8b8f82e6d91c4937b1fe8679709673ce4f3b738068e8e327aa465f137e4e5a4",
     "user/cowtest.c": "472b5187cfaf72b6e9067766a55e8a293d8ef98789dc735e42611bba900a15cd",
-    "user/divzero.c": "fb2c3a5a9e065288f8880c55e2cb4a13f7b132127ad112cf4e2b5692a44513a4",
+    "user/divzero.c": "a4df6ecb9625d4bf7424cce43ab50f6bbd3b5fafdb1c4baa40435e2b8737460b",
     "user/exit.c": "28c9ba9dd92d60475ff21e3e364054b7adaa3df75738a7a10d5158e65a6619d2",
     "user/faultread.c": "eea91ffd40b8a0973e63f13e97761881c5f4fb5af6b956c9e464dc3ce9e27b2d",
     "user/faultreadkernel.c": "74a0d2d884ec594515bc06111e5696668f1e64f72f373b904fc32c98a5aa9794",
@@ -220,10 +221,10 @@
     },
     "02_grade.png": {
       "size": [
-        644,
-        1115
+        592,
+        1137
       ],
-      "sha256": "7b6f6f90cea680d44ddc237e383b2b84375495b057cab6c2c17c9257091a6ea9"
+      "sha256": "86d98fc3e11f6724ad0775157a2dc2613ec6bb1ee4c419b0d82bc5cc416fe080"
     },
     "03_a.png": {
       "size": [
@@ -245,6 +246,13 @@
         1145
       ],
       "sha256": "fc51dbdd144063fa4708baf6e93571699c3d63f01a3225a5c83eb2faa31fe10e"
+    },
+    "06_divzero.png": {
+      "size": [
+        672,
+        297
+      ],
+      "sha256": "8b5c9574d3b183a1df33eaed0c1326823f907512155d5bac6dfeb75673ac67ea"
     }
   },
   "template_structure": "PASS",
@@ -259,10 +267,52 @@
     "ai_tool_all_members": "ChatGPT",
     "ai_model_all_members": "GPT-6.1-sol",
     "template_sections": true,
-    "image_count": 6,
+    "image_count": 7,
     "image_integrity": true,
     "markdown_links": true,
-    "report_sha256": "41f61458d2221141a5e7e446e3439510d35f040137b72ee2cc2204cf78b19bf9",
-    "prompt_sha256": "34b2e2a7d1957ddfcf01c45488cfb322bfbfdcb2f9fc26d08ffe196f1f4697f8"
+    "report_sha256": "98ce505ad5e8f3f7b8c1d449bd194b22841f8e9bf587f89748f925cc1d3c4d06",
+    "prompt_sha256": "d40807c8727fdc5ca02f9b2f67ca18c9bd93d868a5a3eb4cfbd46c2c457b84cb"
+  },
+  "divzero_matrix": {
+    "compiler": "riscv64-unknown-elf-gcc (g1b306039ac4) 15.1.0",
+    "qemu": "QEMU emulator version 7.0.0",
+    "cases": [
+      {
+        "optimization": "-O0",
+        "divw_in_main": true,
+        "value": -1,
+        "passed": true
+      },
+      {
+        "optimization": "-O1",
+        "divw_in_main": true,
+        "value": -1,
+        "passed": true
+      },
+      {
+        "optimization": "-O2",
+        "divw_in_main": true,
+        "value": -1,
+        "passed": true
+      },
+      {
+        "optimization": "-Os",
+        "divw_in_main": true,
+        "value": -1,
+        "passed": true
+      }
+    ]
+  },
+  "divzero_verification": {
+    "grade": "130/130",
+    "runtime_source_change": "user/divzero.c",
+    "core_source_unchanged": true,
+    "teacher_checkers_unchanged": true,
+    "toolchains_executed": [
+      "riscv64-unknown-elf-gcc (g1b306039ac4) 15.1.0"
+    ],
+    "qemu_executed": [
+      "QEMU emulator version 7.0.0"
+    ]
   }
 }

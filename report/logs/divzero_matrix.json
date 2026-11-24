@@ -1,0 +1,30 @@
+{
+  "compiler": "riscv64-unknown-elf-gcc (g1b306039ac4) 15.1.0",
+  "qemu": "QEMU emulator version 7.0.0",
+  "cases": [
+    {
+      "optimization": "-O0",
+      "divw_in_main": true,
+      "value": -1,
+      "passed": true
+    },
+    {
+      "optimization": "-O1",
+      "divw_in_main": true,
+      "value": -1,
+      "passed": true
+    },
+    {
+      "optimization": "-O2",
+      "divw_in_main": true,
+      "value": -1,
+      "passed": true
+    },
+    {
+      "optimization": "-Os",
+      "divw_in_main": true,
+      "value": -1,
+      "passed": true
+    }
+  ]
+}

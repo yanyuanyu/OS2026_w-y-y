@@ -7,9 +7,9 @@ mode=sys.argv[1]
 r=Path(__file__).resolve().parents[2]
 q=queue.Queue()
 w=tk.Tk();w.title('Lab5 ABC Live Console - '+mode);w.geometry('1320x820+30+30')
-t=ScrolledText(w,bg='#0c0c0c',fg='#eeeeee',font=('Consolas',12),wrap='char',padx=10,pady=6,insertwidth=0)
+t=ScrolledText(w,bg='#0c0c0c',fg='#eeeeee',font=('Consolas',11 if mode=='grade' else 12),wrap='char',padx=10,pady=6,insertwidth=0)
 t.pack(fill='both',expand=True)
-script=Path(__file__).with_name('run_'+mode+'.sh')
+script=Path(__file__).resolve().with_name('run_'+mode+'.sh')
 linux='/mnt/'+script.drive[0].lower()+script.as_posix()[2:]
 command='bash run_'+mode+'.sh'
 t.insert('end','$ '+command+'\n')
